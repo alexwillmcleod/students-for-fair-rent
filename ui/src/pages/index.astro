@@ -1,0 +1,72 @@
+---
+import InfoCard from "../components/info-card.astro";
+import Layout from "../layout.astro";
+import ExamStudyImage from "/exam-study.svg";
+import HouseLocationImage from "/house-location.svg";
+import SignPetitionImage from "/sign-petition.svg";
+import LoveImage from "/love.svg";
+import InstagramLogoImage from "/instagram.png";
+import TwitterLogoImage from "/twitter.png";
+---
+
+<Layout>
+  <div class="hero py-24 bg-base-100">
+    <div class="hero-content flex-col lg:flex-row gap-8 justify-evenly w-full">
+      <img src={HouseLocationImage} class="max-w-md"/>
+      <div>
+        <h1 class="text-5xl font-bold max-w-md">Every student deserves <span class="text-accent">affordable</span> shelter</h1>
+      </div>
+    </div>
+  </div>
+  <div class="hero py-24 bg-base-200">
+    <div class="hero-content flex-col xl:flex-row-reverse gap-8 justify-evenly w-full">
+      <img src={ExamStudyImage} class="max-w-md"/>
+      <div class="flex flex-col gap-12 lg:flex-row">
+        <InfoCard title="64% of students can't afford rent" buttonText="Learn More" /> 
+        <InfoCard title="Rents have increased by 400% in the last year" buttonText="Learn More" /> 
+        <InfoCard title="Rent is a made up concept" buttonText="Learn More" /> 
+      </div>
+    </div>
+  </div>
+  <div id="why" class="hero py-24 bg-base-100">
+    <div class="hero-content flex-col gap-8 items-start w-full">
+      <h2  class="font-bold text-2xl">Our Why</h2>
+      <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim cras tincidunt lobortis feugiat. Ornare arcu odio ut sem nulla pharetra diam sit. Sollicitudin tempor id eu nisl nunc mi ipsum. Amet justo donec enim diam vulputate ut pharetra sit amet. Urna condimentum mattis pellentesque id nibh tortor id aliquet. In hac habitasse platea dictumst quisque. Condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus. Magnis dis parturient montes nascetur ridiculus mus mauris. Commodo odio aenean sed adipiscing.
+
+  Elit at imperdiet dui accumsan sit amet nulla. Feugiat nisl pretium fusce id velit ut tortor. Enim lobortis scelerisque fermentum dui. Sed risus pretium quam vulputate dignissim. Sit amet est placerat in egestas. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. At risus viverra adipiscing at in tellus integer. Consectetur adipiscing elit duis tristique.</p>
+    </div>
+  </div>
+  <div id="team" class="hero py-24 bg-base-200">
+    <div class="hero-content flex-col gap-8 items-start w-full">
+      <h2 id="team" class="font-bold text-2xl">Our Team</h2>
+      <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim cras tincidunt lobortis feugiat. Ornare arcu odio ut sem nulla pharetra diam sit. Sollicitudin tempor id eu nisl nunc mi ipsum. Amet justo donec enim diam vulputate ut pharetra sit amet. Urna condimentum mattis pellentesque id nibh tortor id aliquet. In hac habitasse platea dictumst quisque. Condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus. Magnis dis parturient montes nascetur ridiculus mus mauris. Commodo odio aenean sed adipiscing.
+
+  Elit at imperdiet dui accumsan sit amet nulla. Feugiat nisl pretium fusce id velit ut tortor. Enim lobortis scelerisque fermentum dui. Sed risus pretium quam vulputate dignissim. Sit amet est placerat in egestas. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. At risus viverra adipiscing at in tellus integer. Consectetur adipiscing elit duis tristique.</p>
+    </div>
+  </div>
+  <div class="hero py-24 bg-base-100">
+    <div class="hero-content flex-col lg:flex-row gap-8 justify-evenly w-full">
+      <img src={SignPetitionImage} class="max-w-md"/>
+      <div class="flex flex-col justify-center gap-4">
+        <h1 class="text-5xl font-bold max-w-md">Sign our <br><span class="text-accent">Petition</span></h1>
+        <button class="btn btn-accent btn-lg text-white">Let's Go</button>
+      </div>
+    </div>
+  </div>
+  <div class="hero py-24 bg-base-200">
+    <div class="hero-content flex-col lg:flex-row-reverse gap-8 justify-evenly w-full">
+      <img src={LoveImage} class="w-48"/>
+      <div class="flex flex-col justify-center gap-4">
+        <h1 class="text-5xl font-bold max-w-md">Follow Us</h1>
+        <span class="flex flex-row gap-4 justify-center">
+          <a target="_blank" href="https://www.instagram.com/studentsforfairrent/" class="btn w-28 h-28 btn-ghost text-white"><img src={InstagramLogoImage} class=""/></a>
+          <!-- <button class="btn w-28 h-28 btn-ghost text-white"><img src={TwitterLogoImage} class=""/></button> -->
+        </span>
+      </div>
+    </div>
+  </div>
+ 
+
+</Layout>
+
+
