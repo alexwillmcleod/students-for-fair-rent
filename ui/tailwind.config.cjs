@@ -13,9 +13,9 @@ module.exports = {
         "sfr-light": {
           ...require("daisyui/src/theming/themes")["[data-theme=light]"],
           "primary": "#1B1B25",
-          "base-100": "#C2C2D8",
-          "base-200": "#9B9BC7",
-          "accent": "#6C63FF"
+          "base-200": "#39A8C1",
+          "base-100": "#BFE5EE",
+          "accent": "#19697B"
         }
       }
     ]

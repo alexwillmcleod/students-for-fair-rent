@@ -5,6 +5,7 @@ import Footer from "./components/footer.astro";
 
 <html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>Students for Fair Rent</title>
     <script is:inline>
       // ☝️ This script prevent the FART effect.
@@ -24,11 +25,15 @@ import Footer from "./components/footer.astro";
       // 👆 you could import the CDN directly instead of these two lines
     </script>
   </head>
-  <body>
-    <Navbar />
+  <body class="flex flex-col justify-center items-center h-screen w-screen">
+    <!-- <Navbar />
     <article>
       <slot />
     </article>
-    <Footer />
+    <Footer /> -->
+    <p class="text-2xl font-bold flex flex-col justify-left">
+    Hi 👋 University of Auckland Accommodation Rents are too high! Let's lower them together.
+    <a href="https://www.instagram.com/studentsforfairrent/">https://www.instagram.com/studentsforfairrent/</a>
+    </p>
   </body>
 </html>
