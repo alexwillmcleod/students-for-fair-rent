@@ -7,18 +7,21 @@ import SignPetitionImage from "/sign-petition.svg";
 import LoveImage from "/love.svg";
 import InstagramLogoImage from "/instagram.png";
 import TwitterLogoImage from "/twitter.png";
+import { Image } from "astro:assets";
+import Graph from '/images/graph.svg'
 ---
 
 <Layout>
-  <div class="hero py-24 bg-base-100">
-    <div class="hero-content flex-col lg:flex-row gap-8 justify-evenly w-full">
-      <img src={HouseLocationImage} class="max-w-md"/>
-      <div>
-        <h1 class="text-5xl font-bold max-w-md">Every student deserves <span class="text-accent">affordable</span> shelter</h1>
+  <div class="hero py-24">
+    <div class="hero-content flex-col justify-center xl:flex-row gap-8 xl:justify-evenly w-full">
+      <img class="min-w-0 w-full max-w-screen-md" src="/images/graph.svg"  alt="Graph of Waiparuru rent prices (lowest option). 2022 was $435, 2023 was $470 and 2024 will be $510"/>
+      <div class="flex flex-col gap-4 justify-center items-center text-center">
+        <h1 class="text-7xl font-bold font-display">Accommodation is unaffordable</h1>
+        <h4 class="text-3xl font-italic font-display">Let's change that</h4>
       </div>
     </div>
   </div>
-  <div class="hero py-24 bg-base-200">
+  <!-- <div class="hero py-24 bg-base-200">
     <div class="hero-content flex-col xl:flex-row-reverse gap-8 justify-evenly w-full">
       <img src={ExamStudyImage} class="max-w-md"/>
       <div class="flex flex-col gap-12 lg:flex-row">
@@ -60,11 +63,11 @@ import TwitterLogoImage from "/twitter.png";
         <h1 class="text-5xl font-bold max-w-md">Follow Us</h1>
         <span class="flex flex-row gap-4 justify-center">
           <a target="_blank" href="https://www.instagram.com/studentsforfairrent/" class="btn w-28 h-28 btn-ghost text-white"><img src={InstagramLogoImage} class=""/></a>
-          <!-- <button class="btn w-28 h-28 btn-ghost text-white"><img src={TwitterLogoImage} class=""/></button> -->
+          <button class="btn w-28 h-28 btn-ghost text-white"><img src={TwitterLogoImage} class=""/></button>
         </span>
       </div>
     </div>
-  </div>
+  </div> -->
  
 
 </Layout>

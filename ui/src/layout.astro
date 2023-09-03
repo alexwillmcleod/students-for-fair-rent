@@ -2,6 +2,7 @@
 import Navbar from "./components/navbar.astro"
 import Footer from "./components/footer.astro";
 import PressRelease from '/Press release 31_08_23.pdf';
+import { Image } from 'astro:assets';
 ---
 
 <html lang="en">
@@ -23,23 +24,16 @@ import PressRelease from '/Press release 31_08_23.pdf';
         );
       // "theme" LocalStorage value is set by the package to remember user preference.
       // The value is checked and applyed before rendering anything.
-    </script>
-    <script>
       import { themeChange } from 'theme-change';
       themeChange();
       // 👆 you could import the CDN directly instead of these two lines
     </script>
   </head>
-  <body class="md:flex flex-col justify-center items-center md:h-screen md:w-screen p-10">
-    <!-- <Navbar />
+  <body class="bg-cover bg-no-repeat" style="background-image: url('/images/sfr-background.png')">
+    <Navbar />
     <article>
       <slot />
     </article>
-    <Footer /> -->
-    <p class="text-2xl font-bold flex flex-col justify-left">
-    Hi 👋 University of Auckland Accommodation Rents are too high! Let's lower them together.
-    <a class="link" href="https://www.instagram.com/studentsforfairrent/">View our Instagram</a>
-    <a class="link" href={PressRelease}>Read our press release</a>
-    </p>
+    <Footer />
   </body>
 </html>
