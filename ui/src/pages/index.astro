@@ -1,76 +1,44 @@
 ---
-import InfoCard from "../components/info-card.astro";
 import Layout from "../layout.astro";
-import ExamStudyImage from "/exam-study.svg";
-import HouseLocationImage from "/house-location.svg";
-import SignPetitionImage from "/sign-petition.svg";
-import LoveImage from "/love.svg";
-import InstagramLogoImage from "/instagram.png";
-import TwitterLogoImage from "/twitter.png";
-import { Image } from "astro:assets";
-import Graph from '/images/graph.svg'
 ---
 
 <Layout>
-  <div class="hero py-10 lg:py-24">
-    <div class="hero-content flex-col justify-center lg:flex-row gap-8 lg:justify-evenly w-full">
-      <!-- <img class="hidden md:flex min-w-0 w-full max-w-screen-md" src="/images/graph.svg"  alt="Graph of Waiparuru rent prices (lowest option). 2022 was $435, 2023 was $470 and 2024 will be $510"/> -->
-      <img class="min-w-0 w-full max-w-md" src="/images/graph-mobile.svg"  alt="Graph of Waiparuru rent prices (lowest option). 2022 was $435, 2023 was $470 and 2024 will be $510"/>
-      <div class="flex flex-col gap-4 justify-center items-center text-center">
-        <h1 class="text-4xl text-wrap lg:text-7xl font-bold font-display">Accommodation is unaffordable</h1>
-        <h4 class="text-2xl lg:text-3xl font-display">Let's change that</h4>
+  <div class="flex flex-col gap-4 py-12">
+    <div class="hero">
+      <div class="hero-content flex-col justify-center lg:flex-row gap-10 lg:gap-12  w-full">
+        <img class="min-w-0 w-full max-w-sm" src="/images/graph-mobile.svg"  alt="Graph of Waiparuru rent prices (lowest option in Waiparuru. Waiparuru is the most expensive hall). 2022 was $435, 2023 was $470 and 2024 will be $510"/>
+        <div class="flex flex-col gap-4 justify-center items-center text-center">
+          <h1 class="text-4xl text-wrap sm:text-5xl font-bold font-display">Accommodation is unaffordable</h1>
+          <h4 class="text-2xl sm:text-2xl font-display">Let's change that</h4>
+        </div>
+      </div>
+    </div>
+    <div id="why" class="hero">
+      <div class="hero-content flex-col justify-center items-start text-left w-full p-8">
+        <h3 class="text-lg sm:text-3xl font-bold">Our Why</h3>
+        <p class="text-lg sm:text-2xl">We strongly oppose the University's unfair and disproportionate rent increases and urge them to stop exploiting their students by decreasing their rent. The University is a tertiary education institution, not a business, and its students are not consumers or customers. They must prioritise student wellbeing and make the students their focus. We demand that the University of Auckland lower the rent at their student accommodation to ease the cost of living pressures on students. </p>
+      </div>
+    </div> 
+    <div class="hero">
+      <div class="hero-content relative w-full justify-center items-center">
+        <img class=" min-w-0 w-full max-w-5xl" src="/images/signature.svg"  alt="Graphic of a signature"/>
+        <a href="https://chng.it/pTSGNWQGDT"  class="absolute font-bold font-display bg-accent bg-opacity-80 px-12 py-6 shadow-lg text-2xl sm:text-3xl rounded-full" target="_blank">Sign our Petition</a>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="hero-content flex flex-col w-full justify-center items-start text-left p-8">
+        <h3 class="text-lg sm:text-3xl font-bold">Students Thoughts</h3>
+        <ul class="flex flex-col gap-6 list-disc">
+          <li>
+            <p class="text-xl">“It has made me need to overwork and miss classes just to pay bills by working weekends (10 hours) and weekdays (10 pm - 2 am, 4 nights a week).” - First Year Student</p>
+          </li>
+          <li>
+            <p class="text-xl">“Alongside feeling as though the price I am paying is not properly justified for a self-catered accommodation, I also have an internal feeling of guilt that my parents have to help. I work 21 hours a week while studying full-time to ensure that I can keep up with other additional expenses. The price for a safe place (particularly as a young woman) should not be this expensive.” - Second-year student</p>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-  <!-- <div class="hero py-24 bg-base-200">
-    <div class="hero-content flex-col xl:flex-row-reverse gap-8 justify-evenly w-full">
-      <img src={ExamStudyImage} class="max-w-md"/>
-      <div class="flex flex-col gap-12 lg:flex-row">
-        <InfoCard title="64% of students can't afford rent" buttonText="Learn More" /> 
-        <InfoCard title="Rents have increased by 400% in the last year" buttonText="Learn More" /> 
-        <InfoCard title="Rent is a made up concept" buttonText="Learn More" /> 
-      </div>
-    </div>
-  </div>
-  <div id="why" class="hero py-24 bg-base-100">
-    <div class="hero-content flex-col gap-8 items-start w-full">
-      <h2  class="font-bold text-2xl">Our Why</h2>
-      <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim cras tincidunt lobortis feugiat. Ornare arcu odio ut sem nulla pharetra diam sit. Sollicitudin tempor id eu nisl nunc mi ipsum. Amet justo donec enim diam vulputate ut pharetra sit amet. Urna condimentum mattis pellentesque id nibh tortor id aliquet. In hac habitasse platea dictumst quisque. Condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus. Magnis dis parturient montes nascetur ridiculus mus mauris. Commodo odio aenean sed adipiscing.
-
-  Elit at imperdiet dui accumsan sit amet nulla. Feugiat nisl pretium fusce id velit ut tortor. Enim lobortis scelerisque fermentum dui. Sed risus pretium quam vulputate dignissim. Sit amet est placerat in egestas. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. At risus viverra adipiscing at in tellus integer. Consectetur adipiscing elit duis tristique.</p>
-    </div>
-  </div>
-  <div id="team" class="hero py-24 bg-base-200">
-    <div class="hero-content flex-col gap-8 items-start w-full">
-      <h2 id="team" class="font-bold text-2xl">Our Team</h2>
-      <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim cras tincidunt lobortis feugiat. Ornare arcu odio ut sem nulla pharetra diam sit. Sollicitudin tempor id eu nisl nunc mi ipsum. Amet justo donec enim diam vulputate ut pharetra sit amet. Urna condimentum mattis pellentesque id nibh tortor id aliquet. In hac habitasse platea dictumst quisque. Condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus. Magnis dis parturient montes nascetur ridiculus mus mauris. Commodo odio aenean sed adipiscing.
-
-  Elit at imperdiet dui accumsan sit amet nulla. Feugiat nisl pretium fusce id velit ut tortor. Enim lobortis scelerisque fermentum dui. Sed risus pretium quam vulputate dignissim. Sit amet est placerat in egestas. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. At risus viverra adipiscing at in tellus integer. Consectetur adipiscing elit duis tristique.</p>
-    </div>
-  </div>
-  <div class="hero py-24 bg-base-100">
-    <div class="hero-content flex-col lg:flex-row gap-8 justify-evenly w-full">
-      <img src={SignPetitionImage} class="max-w-md"/>
-      <div class="flex flex-col justify-center gap-4">
-        <h1 class="text-5xl font-bold max-w-md">Sign our <br><span class="text-accent">Petition</span></h1>
-        <button class="btn btn-accent btn-lg text-white">Let's Go</button>
-      </div>
-    </div>
-  </div>
-  <div class="hero py-24 bg-base-200">
-    <div class="hero-content flex-col lg:flex-row-reverse gap-8 justify-evenly w-full">
-      <img src={LoveImage} class="w-48"/>
-      <div class="flex flex-col justify-center gap-4">
-        <h1 class="text-5xl font-bold max-w-md">Follow Us</h1>
-        <span class="flex flex-row gap-4 justify-center">
-          <a target="_blank" href="https://www.instagram.com/studentsforfairrent/" class="btn w-28 h-28 btn-ghost text-white"><img src={InstagramLogoImage} class=""/></a>
-          <button class="btn w-28 h-28 btn-ghost text-white"><img src={TwitterLogoImage} class=""/></button>
-        </span>
-      </div>
-    </div>
-  </div> -->
- 
-
 </Layout>
 
 

@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       display: ['Omnes', 'Omnes-Bold'],
-      sans: ['Atkinson Hyperlegible'],
+      sans: ['Omnes'],
     },
   },
   plugins: [require('daisyui')],
