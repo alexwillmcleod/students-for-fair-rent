@@ -1,9 +1,11 @@
 ---
 import Layout from '../layout.astro';
+import CostCalculator from '../components/calc/calculator';
 ---
 
 <Layout>
   <div class="flex flex-col gap-4 px-12">
     <h2 class="font-bold text-xl">Calculator</h2>
+    <CostCalculator client:load/>
   </div>
-</Layout>
+</Layout>../components/calc/calculator
