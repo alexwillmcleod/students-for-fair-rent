@@ -52,11 +52,13 @@ import { Image } from 'astro:assets';
       // 👆 you could import the CDN directly instead of these two lines
     </script>
   </head>
-  <body class="bg-cover bg-no-repeat overflow-x-hidden" style="background-image: url('/images/sfr-background.png')">
+  <body class="flex flex-col bg-cover bg-no-repeat overflow-x-hidden min-h-screen" style="background-image: url('/images/sfr-background.png')">
     <Navbar />
-    <article>
+    <article class="flex-1">
       <slot />
     </article>
-    <Footer />
+    <div class="min-w-full">
+      <Footer/>
+    </div>
   </body>
 </html>
