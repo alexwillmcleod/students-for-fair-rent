@@ -2,10 +2,13 @@ import { createSignal } from 'solid-js';
 import SelectYear from './SelectYear';
 import Introduction from './Introduction';
 import EnterWeeklyIncome  from './EnterWeeklyIncome';
+import StudentFinance from './StudentFinance';
 
 interface CalculatorInformation {
   isFirstYear: boolean,
   weeklyIncome: number
+  weeklyAllowanceIncome: number,
+  weeklyLoanIncome: number
 }
 
 export default function Calculator() {
@@ -17,7 +20,9 @@ export default function Calculator() {
     setCalculatorInformation
   ] = createSignal<CalculatorInformation>({
     isFirstYear: false,
-    weeklyIncome: 0 
+    weeklyIncome: 0,
+    weeklyLoanIncome: 0,
+    weeklyAllowanceIncome: 0
   });
 
 
@@ -29,23 +34,36 @@ export default function Calculator() {
   } 
   
   const setWeeklyIncome = (newValue: number) => {
-    
     setCalculatorInformation({
       ...calculatorInformation(),
       weeklyIncome: newValue
     })
   }
 
+  const setWeeklyAllowanceIncome = (newValue: number) => {
+    setCalculatorInformation({
+      ...calculatorInformation(),
+      weeklyAllowanceIncome: newValue
+    })
+  }
+
+  const setWeeklyLoanIncome = (newValue: number) => {
+    setCalculatorInformation({
+      ...calculatorInformation(),
+      weeklyLoanIncome: newValue
+    })
+  }
   const stepArray = [
     <Introduction />,
     <SelectYear setIsFirstYear={setIsFirstYear}/>,
     <EnterWeeklyIncome setWeeklyIncome={setWeeklyIncome} weeklyIncome={calculatorInformation().weeklyIncome}/>,
+    <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} />
   ];
   const stepTitles = [
     'Introduction',
     'Year',
     'Income',
-    'Hours'
+    'StudyLink'
   ];
 
   const isNextStep = (): boolean => {
@@ -68,7 +86,7 @@ export default function Calculator() {
 
   return (
     <div>
-      <div class="flex flex-col w-full h-96 bg-white/40 rounded-xl p-4">
+      <div class="flex flex-col w-full min-h-[24rem] bg-white/40 rounded-xl p-4">
         <div class="w-full">
         {
           stepArray[step()]
@@ -102,7 +120,7 @@ interface StepIndicatorProps {
 function StepIndicator(props: StepIndicatorProps) {
 
   return (
-    <ul class="steps">
+    <ul class="steps hidden md:flex">
       {
         props.stepTitles.map(
           (title: string, index: number) => (

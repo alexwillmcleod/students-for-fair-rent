@@ -16,11 +16,11 @@ export default function SelectYear(props: SelectYearProps) {
       <p class="font-bold text-5xl">What Year will you be in 2024?</p>
       <div class="flex flex-col gap-4">
         <span class="flex flex-row gap-4 items-center">
-          <label class="text-3xl" for='first-year'>First Year</label>
+          <label class="text-xl" for='first-year'>First Year</label>
           <input onChange={handleSelectYear} class="radio radio-primary" type='radio' id='first-year' name='year' value='first'/>
         </span>
         <span class="flex flex-row gap-4 items-center">
-          <label class="text-3xl" for='second-year-plus'>Second Year +</label>
+          <label class="text-xl" for='second-year-plus'>Second Year +</label>
           <input onChange={handleSelectYear} class="radio radio-primary" type='radio' id='second-year-plus' name='year' value='later'/>
         </span>
       </div>
