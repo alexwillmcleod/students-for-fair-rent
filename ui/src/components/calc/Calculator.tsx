@@ -3,10 +3,23 @@ import SelectYear from './SelectYear';
 import Introduction from './Introduction';
 import EnterWeeklyIncome  from './EnterWeeklyIncome';
 import StudentFinance from './StudentFinance';
+import Results from './Results';
+import SelectResidence from './SelectResidence';
+
+export type Residence = 
+  'O\'Rorke' |
+  'Waipārūrū' |
+  'University Hall Towers' |
+  'Grafton' |
+  'Carlaw Park Stuart McCutcheon House' | 
+  'Carlaw Park Nichols' |
+  'Te Tirohanga o te Tōangaroa' | 
+  '55 Symonds';
 
 interface CalculatorInformation {
-  isFirstYear: boolean,
-  weeklyIncome: number
+  isFirstYear: boolean | undefined,
+  residence: Residence | undefined,
+  weeklyIncome: number,
   weeklyAllowanceIncome: number,
   weeklyLoanIncome: number
 }
@@ -19,16 +32,18 @@ export default function Calculator() {
     calculatorInformation,
     setCalculatorInformation
   ] = createSignal<CalculatorInformation>({
-    isFirstYear: false,
+    isFirstYear: undefined,
     weeklyIncome: 0,
     weeklyLoanIncome: 0,
-    weeklyAllowanceIncome: 0
+    weeklyAllowanceIncome: 0,
+    residence: undefined
   });
 
 
   const setIsFirstYear = (newValue: boolean) => {
     setCalculatorInformation({
       ...calculatorInformation(),
+      residence: undefined,
       isFirstYear: newValue
     })
   } 
@@ -53,22 +68,41 @@ export default function Calculator() {
       weeklyLoanIncome: newValue
     })
   }
+  const setResidence = (newValue: Residence) => {
+    setCalculatorInformation({
+      ...calculatorInformation(),
+      residence: newValue
+    })
+  }
   const stepArray = [
     <Introduction />,
-    <SelectYear setIsFirstYear={setIsFirstYear}/>,
+    <SelectYear setIsFirstYear={setIsFirstYear} isFirstYear={calculatorInformation().isFirstYear}/>,
+    <SelectResidence isFirstYear={calculatorInformation().isFirstYear!} setResidence={setResidence} residence={calculatorInformation().residence}/>,
     <EnterWeeklyIncome setWeeklyIncome={setWeeklyIncome} weeklyIncome={calculatorInformation().weeklyIncome}/>,
-    <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} />
+    <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} />,
+    <Results />
   ];
   const stepTitles = [
     'Introduction',
     'Year',
+    'Residence',
     'Income',
-    'StudyLink'
+    'StudyLink',
+    'Results'
   ];
 
   const isNextStep = (): boolean => {
+    if (!isFinishedStep()) return false;
     return step() + 1 < stepArray.length;
   }  
+
+  const isFinishedStep = (): boolean => {
+    switch (stepTitles[step()]) {
+      case 'Year': return calculatorInformation().isFirstYear != undefined
+      case 'Residence': return calculatorInformation().residence != undefined 
+      default: return true
+    }
+  }
 
   const isPreviousStep = (): boolean => {
     return step() > 0;
@@ -80,7 +114,7 @@ export default function Calculator() {
   }
 
   const handlePreviousStep = () => {
-    if (!isPreviousStep) return;
+    if (!isPreviousStep()) return;
     setStep(step() - 1);
   }
 

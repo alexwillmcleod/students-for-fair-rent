@@ -6,7 +6,17 @@ module.exports = {
       display: ['Omnes', 'Omnes-Bold'],
       sans: ['Omnes'],
     },
+    extend: {
+      colors: {
+        'ororke-blue': '#0090C4'
+      }
+    }
   },
+  variants: {
+    extend: {
+      backgroundColor: ['hover'],
+    },
+  }, 
   plugins: [require('daisyui')],
   daisyui: {
     themes: [
@@ -17,6 +27,7 @@ module.exports = {
           'base-200': '#39A8C1',
           'base-100': '#BFE5EE',
           accent: '#96CDA9',
+          'ororke-blue': '#0090C4'
         },
       },
     ],
