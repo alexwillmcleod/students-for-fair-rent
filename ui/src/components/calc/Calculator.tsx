@@ -16,9 +16,9 @@ export type Residence =
   'Te Tirohanga o te Tōangaroa' | 
   '55 Symonds';
 
-interface CalculatorInformation {
-  isFirstYear: boolean | undefined,
-  residence: Residence | undefined,
+export interface CalculatorInformation {
+  isFirstYear?: boolean ,
+  residence?: Residence,
   weeklyIncome: number,
   weeklyAllowanceIncome: number,
   weeklyLoanIncome: number
@@ -79,8 +79,8 @@ export default function Calculator() {
     <SelectYear setIsFirstYear={setIsFirstYear} isFirstYear={calculatorInformation().isFirstYear}/>,
     <SelectResidence isFirstYear={calculatorInformation().isFirstYear!} setResidence={setResidence} residence={calculatorInformation().residence}/>,
     <EnterWeeklyIncome setWeeklyIncome={setWeeklyIncome} weeklyIncome={calculatorInformation().weeklyIncome}/>,
-    <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} />,
-    <Results />
+    <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} weeklyAllowanceIncome={calculatorInformation().weeklyAllowanceIncome} weeklyLoanIncome={calculatorInformation().weeklyLoanIncome}/>,
+    <Results {...calculatorInformation()}/>
   ];
   const stepTitles = [
     'Introduction',

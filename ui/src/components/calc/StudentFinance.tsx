@@ -2,6 +2,8 @@
 interface StudentFinanceProps {
   setWeeklyAllowanceIncome: (newValue: number) => void;
   setWeeklyLoanIncome: (newValue: number) => void;
+  weeklyAllowanceIncome: number,
+  weeklyLoanIncome: number,
 }
 
 export default function StudentFinance(props: StudentFinanceProps) {
@@ -39,15 +41,16 @@ export default function StudentFinance(props: StudentFinanceProps) {
           <p>How much Student Allowance do you receive</p>
           <div class="flex flex-row gap-4">
             <p>None</p>
-            <input type="range" min={0} max={300} value={60} class="range range-md md:w-96" onChange={handleChangeStudentAllowance}/> 
+            <input type="range" min={0} max={300} value={props.weeklyAllowanceIncome} class="range range-md md:w-96" onChange={handleChangeStudentAllowance}/> 
             <p>Maximum</p>
           </div>
         </span>
         <span class="flex flex-col gap-4 items-center">
           <p>How much Student Loan do you take out</p>
+          <p>{}</p>
           <div class="flex flex-row gap-4">
             <p>None</p>
-            <input type="range" min={0} max={300} value={60} class="range range-md md:w-96" onChange={handleChangeStudentLoan}/> 
+            <input type="range" min={0} max={300} value={props.weeklyLoanIncome} class="range range-md md:w-96" onChange={handleChangeStudentLoan}/> 
             <p>Maximum</p>
           </div>
         </span>

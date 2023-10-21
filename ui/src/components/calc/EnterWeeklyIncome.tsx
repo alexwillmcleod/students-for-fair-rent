@@ -31,6 +31,7 @@ export default function EnterWeeklyIncome(props: EnterWeeklyIncomeProps) {
             onChange={handleSetWeeklyIncome} value={props.weeklyIncome} />
           <label class="label">
             <span class="label-text-alt text-lg">In NZD</span>
+            <span class="label-text-alt text-xs">Excluding StudyLink</span>
           </label>
         </div>
       </div>
