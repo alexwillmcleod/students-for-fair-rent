@@ -39,7 +39,7 @@ export default function Calculator() {
     weeklyIncome: undefined,
     weeklyLoanIncome: 0,
     weeklyAllowanceIncome: 0,
-    weeklyWorkingHours: 0,
+    weeklyWorkingHours: undefined,
     residence: undefined
   });
 
@@ -110,7 +110,7 @@ export default function Calculator() {
     switch (stepTitles[step()]) {
       case 'Year': return calculatorInformation().isFirstYear != undefined
       case 'Residence': return calculatorInformation().residence != undefined 
-      case 'Income': return calculatorInformation().weeklyIncome != undefined 
+      case 'Income': return calculatorInformation().weeklyIncome != undefined && calculatorInformation().weeklyWorkingHours != undefined
       default: return true
     }
   }

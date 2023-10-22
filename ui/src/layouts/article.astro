@@ -1,9 +1,26 @@
 ---
 import Layout from "./layout.astro";
 const { frontmatter } = Astro.props;
+
+let imageUrl = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.tsamgt.com%2Fwp-content%2Fuploads%2FWPH_AKL_Waiparuru-Hall.jpg&f=1&nofb=1&ipt=f655de7e029eb381f77be73739ea8308d1bb237058cd1e363be2e1647f658f59&ipo=images';
+if (frontmatter.image != undefined && frontmatter.image.url != undefined) {
+  imageUrl = frontmatter.image.url;
+}
 ---
 <Layout >
-  <h1>{frontmatter.title}</h1>
-  <p>Written by {frontmatter.author}</p>
-  <slot />
+  <div class="p-12 flex flex-col gap-12">
+    <div class="flex flex-col justify-center items-center gap-2">
+      <img src={imageUrl} class="w-full h-64 object-cover rounded-xl"/>
+      <h1 class="text-7xl font-bold text-center">{frontmatter.title}</h1>
+      <h2 class="text-2xl text-center">{frontmatter.subtitle}</h2>
+      <h3 class="text-2xl text-center">Article by <b>{frontmatter.author}</b></h3>
+      <p class="text-2xl text-center">Published on <b>{new Date(frontmatter.pubDate!).toDateString()}</b></p>
+      <button>
+        <img src="/images/share.svg" />
+      </button>
+    </div>
+    <div class="flex flex-col text-lg gap-4 leading-relaxed text-balanced">
+      <slot />
+    </div>
+  </div>
 </Layout>

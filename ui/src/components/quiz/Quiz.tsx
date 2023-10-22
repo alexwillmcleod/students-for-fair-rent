@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 import DawnIncomeTrivia from "./DawnIncomeTrivia";
 import DawnIncomeAnswer from "./DawnIncomeAnswer";
+import Introduction from "./Introduction";
 
 export interface TriviaInformation {
   dawnIncomeSelected: number
@@ -27,11 +28,13 @@ export default function Quiz() {
   }
 
   const stepArray = [
+    <Introduction />,
     <DawnIncomeTrivia setSelectedValue={setDawnIncomeSelect} selectedValue={triviaInformation().dawnIncomeSelected}/>,
     <DawnIncomeAnswer selectedValue={triviaInformation().dawnIncomeSelected}/>
   ]
 
   const stepTitles = [
+    'Introduction',
     'DawnIncomeQuestion',
     'DawnIncomeAnswer'
   ]

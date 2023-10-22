@@ -1,0 +1,21 @@
+---
+let imageUrl = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.tsamgt.com%2Fwp-content%2Fuploads%2FWPH_AKL_Waiparuru-Hall.jpg&f=1&nofb=1&ipt=f655de7e029eb381f77be73739ea8308d1bb237058cd1e363be2e1647f658f59&ipo=images';
+if (Astro.props.element.frontmatter.image != undefined && Astro.props.element.frontmatter.image.url != undefined) {
+  imageUrl = Astro.props.element.frontmatter.image.url;
+}
+---
+<!-- <a class="w-64" href={Astro.props.element.url} style={{
+  
+}}>
+  <img class="w-64 object-cover" src={imageUrl} width="64px"/>
+</a> -->
+<div class="card w-96 glass">
+  <figure><img src={imageUrl} alt="Article Cover Photo"/></figure>
+  <div class="card-body">
+    <h2 class="card-title">{Astro.props.element.frontmatter.title}</h2>
+    <p>{Astro.props.element.frontmatter.subtitle}</p>
+    <div class="card-actions justify-end">
+      <a class="btn btn-primary" href={Astro.props.element.url}>Read</a>
+    </div>
+  </div>
+</div>

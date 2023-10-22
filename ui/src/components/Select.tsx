@@ -15,7 +15,6 @@ export default function Select<T extends string>(props: SelectProps<T>) {
   const handleSelect = (element: T) => {
     if (!props.onChange) return;
     props.onChange!(element)
-    console.log(`Selecting ${element}`)
     setIsOpen(false);
   }
 

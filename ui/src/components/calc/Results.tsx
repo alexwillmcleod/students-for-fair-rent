@@ -65,15 +65,17 @@ export default function Results(props: CalculatorInformation) {
       <div class="grid md:grid-cols-3 flex flex-col gap-2 list-disc ">
         {/* <ResultCard value={`You will be in $${debt()} in debt`} color="red-500"/> */}
         {/* <ResultCard value={`You will have paid a total of $${totalCost()} in rent`}/> */}
-        <ResultCard color="red-400">
-          You will be <b>${debt()}</b> in debt
-        </ResultCard>
+        <Show when={debt() != 0}>
+          <ResultCard color="red-400">
+            You will be <b>${debt()}</b> in debt
+          </ResultCard>
+        </Show>
         <ResultCard color="red-300">
           You will have a paid a total of <b>${totalCost()}</b> in rent alone
         </ResultCard>
         <Show when={props.weeklyIncome}>
           <ResultCard color="red-200">
-            <b>{100 * (weeklyRent(props.residence!)/props.weeklyIncome!)}%</b> of your earned income will be spent on rent 
+            <b>{100 * (Math.round(weeklyRent(props.residence!)/props.weeklyIncome!))}%</b> of your earned income will be spent on rent 
           </ResultCard>
         </Show>
      </div>

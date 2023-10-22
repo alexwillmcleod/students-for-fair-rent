@@ -10,7 +10,6 @@ interface DawnIncomeTriviaProps {
 export default function DawnIncomeTrivia(props: DawnIncomeTriviaProps) {
 
   const handleSelectValue = (newValue: string) => {
-    console.log(`Selecting ${newValue}`)
     try {
       props.setSelectedValue(parseInt(newValue.replace(",", "")));
     } catch (err) {
