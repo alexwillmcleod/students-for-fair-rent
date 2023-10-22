@@ -1,4 +1,4 @@
-import type { CalculatorInformation, Residence } from './Calculator';
+import type { CalculatorInformation, Residence } from '../calc/Calculator';
 import { createEffect, createSignal } from 'solid-js';
 import TriviaCard from './TriviaCard';
 
@@ -20,7 +20,7 @@ export default function DawnIncomeTrivia(props: DawnIncomeTriviaProps) {
   }
 
   return (
-    <div class="flex flex-col justify-center items-center gap-8 p-10">
+    <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl">Trivia Question</p>
       <div class="flex flex-col gap-2 items-center">
         <h2 class="text-2xl text-primary">University Vice-Chancellor Dawn Freshwater has a weekly income of?</h2>

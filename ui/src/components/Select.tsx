@@ -35,7 +35,7 @@ export default function Select<T extends string>(props: SelectProps<T>) {
         <img class="w-4" src="/images/down-dropdown.svg" />
       </button>
       <Show when={isOpen()}>
-        <ul class="transition-all bg-slate-100/80 shadow-xl rounded-xl flex flex-col justify-center items-center absolute top-full">
+        <ul class="transition-all bg-white/50 backdrop-blur-lg shadow-xl rounded-xl flex flex-col justify-center items-center absolute top-full">
           {
             props.options?.map((element: T) => {
               return (<li class="w-full">

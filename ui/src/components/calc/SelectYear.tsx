@@ -13,7 +13,7 @@ export default function SelectYear(props: SelectYearProps) {
   }
 
   return (
-    <div class="flex flex-col justify-center items-center gap-8 p-10">
+    <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl">Will 2024 be you First Year?</p>
       <div class="flex flex-col gap-4">
         <span class="flex flex-row gap-4 items-center">

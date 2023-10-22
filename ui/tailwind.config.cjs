@@ -20,7 +20,7 @@ module.exports = {
   plugins: [require('daisyui')],
   safelist: [
     {
-      "pattern": /(bg|text|border)-(ororke|grafton|waiparuru|towers|blue|green|red)-(blue|green|red|orange|100|200|300|400|500|600|700)/
+      "pattern": /(bg|text|border)-(ororke|grafton|waiparuru|towers|blue|green|red|slate)-(blue|green|red|orange|100|200|300|400|500|600|700|800)/
     }
   ],
   daisyui: {

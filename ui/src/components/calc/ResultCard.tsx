@@ -1,9 +1,11 @@
+interface ResultCardProps {
+  value?: string;
+}
 
-
-export default function ResultCard() {
+export default function ResultCard(props: ResultCardProps) {
   return (
     <div>
-      Result Card
+      
     </div>
   )
 }

@@ -52,7 +52,7 @@ export default function Results(props: CalculatorInformation) {
   })
 
   return (
-    <div class="flex flex-col justify-center items-center gap-8 p-10">
+    <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl">Results</p>
       <ul class="flex flex-col gap-2 list-disc ">
         <li>You will be in ${debt()} in debt</li>

@@ -26,7 +26,7 @@ export default function SelectResidence(props: SelectResidenceProps) {
   ];
 
   return (
-    <div class="flex flex-col justify-center items-center gap-8 p-10">
+    <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl">Select Residence</p>
       <div class="flex flex-col gap-4">
       <Show when={props.isFirstYear}>

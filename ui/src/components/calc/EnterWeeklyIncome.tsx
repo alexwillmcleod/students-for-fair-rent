@@ -20,7 +20,7 @@ export default function EnterWeeklyIncome(props: EnterWeeklyIncomeProps) {
   }
 
   return (
-    <div class="flex flex-col justify-center items-center gap-8 p-10">
+    <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl">What is your Weekly Income</p>
       <div class="flex flex-col gap-4">
         <div class="form-control w-full max-w-xs">
