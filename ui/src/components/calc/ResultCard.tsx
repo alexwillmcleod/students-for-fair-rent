@@ -1,11 +1,17 @@
-interface ResultCardProps {
-  value?: string;
+import type { JSXElement } from "solid-js";
+
+interface TriviaCardProps {
+  children?: JSXElement;
+  color?: string;
 }
 
-export default function ResultCard(props: ResultCardProps) {
+export default function TriviaCard(props: TriviaCardProps) {
+  const color = props.color || 'accent';
   return (
-    <div>
-      
+    <div 
+    class={`w-full md:w-48 md:aspect-square transition-all rounded-xl p-4 backdrop-blur-xl text-2xl bg-accent/40 bg-${color}/30`} 
+    >
+      {props.children} 
     </div>
   )
 }
