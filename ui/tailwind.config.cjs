@@ -18,6 +18,11 @@ module.exports = {
     },
   }, 
   plugins: [require('daisyui')],
+  safelist: [
+    {
+      "pattern": /(bg|text|border)-(ororke|grafton|waiparuru|towers|blue|green|red)-(blue|green|red|orange|100|200|300|400|500|600|700)/
+    }
+  ],
   daisyui: {
     themes: [
       {
@@ -27,7 +32,7 @@ module.exports = {
           'base-200': '#39A8C1',
           'base-100': '#BFE5EE',
           accent: '#96CDA9',
-          'ororke-blue': '#0090C4'
+          'ororke-blue': '#0090C4',
         },
       },
     ],

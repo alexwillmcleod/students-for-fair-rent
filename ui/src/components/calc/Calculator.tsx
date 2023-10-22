@@ -1,4 +1,6 @@
 import { createSignal } from 'solid-js';
+import DawnIncomeTrivia from './DawnIncomeTrivia';
+import DawnIncomeAnswer from './DawnIncomeAnswer';
 import SelectYear from './SelectYear';
 import Introduction from './Introduction';
 import EnterWeeklyIncome  from './EnterWeeklyIncome';
@@ -24,6 +26,10 @@ export interface CalculatorInformation {
   weeklyLoanIncome: number
 }
 
+export interface TriviaInformation {
+  dawnIncomeSelected: number
+}
+
 export default function Calculator() {
 
   const [step, setStep] = createSignal<number>(0);
@@ -38,6 +44,20 @@ export default function Calculator() {
     weeklyAllowanceIncome: 0,
     residence: undefined
   });
+
+  const [
+    triviaInformation,
+    setTriviaInformation
+  ] = createSignal<TriviaInformation>({
+    dawnIncomeSelected: 0
+  });
+
+  const setDawnIncomeSelect = (newValue: number) => {
+    setTriviaInformation({
+      ...triviaInformation(),
+      dawnIncomeSelected: newValue
+    });
+  }
 
 
   const setIsFirstYear = (newValue: boolean) => {
@@ -79,6 +99,8 @@ export default function Calculator() {
     <SelectYear setIsFirstYear={setIsFirstYear} isFirstYear={calculatorInformation().isFirstYear}/>,
     <SelectResidence isFirstYear={calculatorInformation().isFirstYear!} setResidence={setResidence} residence={calculatorInformation().residence}/>,
     <EnterWeeklyIncome setWeeklyIncome={setWeeklyIncome} weeklyIncome={calculatorInformation().weeklyIncome}/>,
+    <DawnIncomeTrivia selectedValue={triviaInformation().dawnIncomeSelected} setSelectedValue={setDawnIncomeSelect}/>,
+    <DawnIncomeAnswer selectedValue={triviaInformation().dawnIncomeSelected} />,
     <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} weeklyAllowanceIncome={calculatorInformation().weeklyAllowanceIncome} weeklyLoanIncome={calculatorInformation().weeklyLoanIncome}/>,
     <Results {...calculatorInformation()}/>
   ];
@@ -87,6 +109,7 @@ export default function Calculator() {
     'Year',
     'Residence',
     'Income',
+    'Trivia Question',
     'StudyLink',
     'Results'
   ];
@@ -120,7 +143,7 @@ export default function Calculator() {
 
   return (
     <div>
-      <div class="flex flex-col w-full min-h-[24rem] bg-white/40 rounded-xl p-4">
+      <div class="flex flex-col w-full md:min-h-[32rem] bg-white/40 rounded-xl p-4">
         <div class="w-full">
         {
           stepArray[step()]
