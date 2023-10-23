@@ -1,0 +1,69 @@
+---
+import Navbar from "../components/navbar.astro"
+import Footer from "../components/footer.astro";
+import NotificationTray from '../components/NotificationTray';
+import PressRelease from '/Press release 31_08_23.pdf';
+import { Image } from 'astro:assets';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fighting to ensure safe, secure, and affordable accommodation for students at UoA">
+    <meta name="theme-color" content="#1B1B25">
+    <title>Students for Fair Rent</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+      @font-face {
+        font-family: 'Omnes';
+        src: url('/fonts/Omnes.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Omnes';
+        src: url('/fonts/Omnes Bold.otf') format('opentype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+    <script is:inline>
+      // ☝️ This script prevent the FART effect.
+      if (localStorage.getItem("theme") === null) {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else
+        document.documentElement.setAttribute(
+          "data-theme",
+          localStorage.getItem("theme")
+        );
+      // "theme" LocalStorage value is set by the package to remember user preference.
+      // The value is checked and applyed before rendering anything.
+      import { themeChange } from 'theme-change';
+      themeChange();
+      // 👆 you could import the CDN directly instead of these two lines
+    </script>
+  </head>
+  <body class="relative flex flex-col bg-cover bg-no-repeat overflow-x-hidden min-h-screen" style="background-image: url('/images/sfr-background.png')">
+    <Navbar />
+    <article class="flex-1">
+      <slot />
+    </article>
+    <div class="min-w-full">
+      <Footer/>
+    </div>
+    <NotificationTray client:only/>
+  </body>
+</html>

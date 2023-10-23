@@ -10,9 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/solid-js": "^3.0.2",
     "@astrojs/tailwind": "^5.0.0",
+    "@nanostores/solid": "^0.4.2",
     "astro": "^3.0.7",
     "daisyui": "^3.5.1",
+    "nanostores": "^0.9.4",
+    "solid-js": "^1.4.3",
     "tailwindcss": "^3.0.24",
     "theme-change": "^2.5.0"
   }

@@ -1,5 +1,8 @@
 ---
-import Layout from "../layout.astro";
+import { Show } from "solid-js";
+import ArticleCard from './article-card.astro';
+import Layout from "../layouts/layout.astro";
+const allPosts = await Astro.glob('../pages/posts/*.md');
 ---
 
 <Layout>
@@ -36,6 +39,16 @@ import Layout from "../layout.astro";
             <p class="text-xl">“Alongside feeling as though the price I am paying is not properly justified for a self-catered accommodation, I also have an internal feeling of guilt that my parents have to help. I work 21 hours a week while studying full-time to ensure that I can keep up with other additional expenses. The price for a safe place (particularly as a young woman) should not be this expensive.” - Second-year student</p>
           </li>
         </ul>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="hero-content flex flex-col w-full justify-center items-start text-left p-8">
+        <h3 class="text-lg sm:text-3xl font-bold">Articles</h3>
+        <div class="flex flex-row gap-4 overflow-x-auto">
+          {
+            allPosts.map((element) => <ArticleCard element={element}/>)
+          }
+        </div>
       </div>
     </div>
   </div>
