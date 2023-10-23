@@ -41,10 +41,15 @@ const allPosts = await Astro.glob('../pages/posts/*.md');
         </ul>
       </div>
     </div>
-    <div class="p-4 flex flex-row gap-4 overflow-x-auto">
-      {
-        allPosts.map((element) => <ArticleCard element={element}/>)
-      }
+    <div class="hero">
+      <div class="hero-content flex flex-col w-full justify-center items-start text-left p-8">
+        <h3 class="text-lg sm:text-3xl font-bold">Articles</h3>
+        <div class="flex flex-row gap-4 overflow-x-auto">
+          {
+            allPosts.map((element) => <ArticleCard element={element}/>)
+          }
+        </div>
+      </div>
     </div>
   </div>
 </Layout>

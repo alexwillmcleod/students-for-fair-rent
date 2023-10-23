@@ -4,18 +4,15 @@ if (Astro.props.element.frontmatter.image != undefined && Astro.props.element.fr
   imageUrl = Astro.props.element.frontmatter.image.url;
 }
 ---
-<!-- <a class="w-64" href={Astro.props.element.url} style={{
-  
-}}>
-  <img class="w-64 object-cover" src={imageUrl} width="64px"/>
-</a> -->
-<div class="card w-96 glass">
-  <figure><img src={imageUrl} alt="Article Cover Photo"/></figure>
-  <div class="card-body">
-    <h2 class="card-title">{Astro.props.element.frontmatter.title}</h2>
-    <p>{Astro.props.element.frontmatter.subtitle}</p>
-    <div class="card-actions justify-end">
-      <a class="btn btn-primary" href={Astro.props.element.url}>Read</a>
-    </div>
-  </div>
-</div>
+
+<a href={Astro.props.element.url} class="relative flex flex-col justify-end w-96 h-64 rounded-xl shadow-xl backdrop-blur-xs p-4">
+  <!-- Background Image -->
+  <div class="absolute rounded-xl inset-0 bg-cover bg-center" style={`background-image: url(${imageUrl})`} ></div>
+
+  <!-- Gradient Overlay -->
+  <div class="absolute rounded-xl inset-0 bg-gradient-to-b from-transparent to-gray-900"></div>
+
+  <h2 class="relative text-xl text-white font-bold">{Astro.props.element.frontmatter.title}</h2>
+  <p class="relative text-white">{Astro.props.element.frontmatter.subtitle}</p>
+  <p class="relative text-white ">{new Date(Astro.props.element.frontmatter.pubDate).toDateString()}</p>
+</a>

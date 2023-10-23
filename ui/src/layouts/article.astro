@@ -7,7 +7,22 @@ if (frontmatter.image != undefined && frontmatter.image.url != undefined) {
   imageUrl = frontmatter.image.url;
 }
 ---
-<Layout >
+<Layout>
+  <script>
+    import { addNotification } from "../store/notifications";
+    function copyLink() {
+      console.log("Copying Link")
+      navigator.clipboard.writeText(
+        window.location.href
+      )
+      addNotification(
+        {
+          value: 'Copied Link'
+        }
+      ) 
+    }
+    document.querySelector("#shareButton").addEventListener('click', copyLink);
+  </script>
   <div class="p-12 flex flex-col gap-12">
     <div class="flex flex-col justify-center items-center gap-2">
       <img src={imageUrl} class="w-full h-64 object-cover rounded-xl"/>
@@ -15,7 +30,7 @@ if (frontmatter.image != undefined && frontmatter.image.url != undefined) {
       <h2 class="text-2xl text-center">{frontmatter.subtitle}</h2>
       <h3 class="text-2xl text-center">Article by <b>{frontmatter.author}</b></h3>
       <p class="text-2xl text-center">Published on <b>{new Date(frontmatter.pubDate!).toDateString()}</b></p>
-      <button>
+      <button id="shareButton">
         <img src="/images/share.svg" />
       </button>
     </div>

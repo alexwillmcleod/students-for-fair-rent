@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/navbar.astro"
 import Footer from "../components/footer.astro";
+import NotificationTray from '../components/NotificationTray';
 import PressRelease from '/Press release 31_08_23.pdf';
 import { Image } from 'astro:assets';
 ---
@@ -55,7 +56,7 @@ import { Image } from 'astro:assets';
       // 👆 you could import the CDN directly instead of these two lines
     </script>
   </head>
-  <body class="flex flex-col bg-cover bg-no-repeat overflow-x-hidden min-h-screen" style="background-image: url('/images/sfr-background.png')">
+  <body class="relative flex flex-col bg-cover bg-no-repeat overflow-x-hidden min-h-screen" style="background-image: url('/images/sfr-background.png')">
     <Navbar />
     <article class="flex-1">
       <slot />
@@ -63,5 +64,6 @@ import { Image } from 'astro:assets';
     <div class="min-w-full">
       <Footer/>
     </div>
+    <NotificationTray client:only/>
   </body>
 </html>
