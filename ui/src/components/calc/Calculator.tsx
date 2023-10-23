@@ -20,7 +20,6 @@ export interface CalculatorInformation {
   isFirstYear?: boolean ,
   residence?: Residence,
   weeklyIncome?: number,
-  weeklyWorkingHours?: number,
   weeklyAllowanceIncome: number,
   weeklyLoanIncome: number
 }
@@ -39,7 +38,6 @@ export default function Calculator() {
     weeklyIncome: undefined,
     weeklyLoanIncome: 0,
     weeklyAllowanceIncome: 0,
-    weeklyWorkingHours: undefined,
     residence: undefined
   });
 
@@ -88,7 +86,7 @@ export default function Calculator() {
     <Introduction />,
     <SelectYear setIsFirstYear={setIsFirstYear} isFirstYear={calculatorInformation().isFirstYear}/>,
     <SelectResidence isFirstYear={calculatorInformation().isFirstYear!} setResidence={setResidence} residence={calculatorInformation().residence}/>,
-    <EnterWeeklyIncome setWeeklyIncome={setWeeklyIncome} weeklyIncome={calculatorInformation().weeklyIncome} weeklyWorkingHours={calculatorInformation().weeklyWorkingHours} setWeeklyWorkingHours={setWeeklyWorkingHours}/>,
+    <EnterWeeklyIncome setWeeklyIncome={setWeeklyIncome} weeklyIncome={calculatorInformation().weeklyIncome} />,
     <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} weeklyAllowanceIncome={calculatorInformation().weeklyAllowanceIncome} weeklyLoanIncome={calculatorInformation().weeklyLoanIncome}/>,
     <Results {...calculatorInformation()}/>
   ];
@@ -110,7 +108,7 @@ export default function Calculator() {
     switch (stepTitles[step()]) {
       case 'Year': return calculatorInformation().isFirstYear != undefined
       case 'Residence': return calculatorInformation().residence != undefined 
-      case 'Income': return calculatorInformation().weeklyIncome != undefined && calculatorInformation().weeklyWorkingHours != undefined
+      case 'Income': return calculatorInformation().weeklyIncome != undefined
       default: return true
     }
   }
