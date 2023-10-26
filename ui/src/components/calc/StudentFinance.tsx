@@ -35,7 +35,7 @@ export default function StudentFinance(props: StudentFinanceProps) {
   }
   return (
     <div class="flex flex-col justify-center items-center gap-8">
-      <p class="font-bold text-5xl">How much StudyLink assistance do you get?</p>
+      <p class="font-bold text-5xl text-display">How much StudyLink assistance do you get?</p>
       <div class="flex flex-col gap-4">
         <span class="flex flex-col gap-4 items-center">
           <p>How much weekly Student Allowance do you receive for living costs?</p>
