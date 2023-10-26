@@ -2,7 +2,7 @@
 import { Show } from "solid-js";
 import ArticleCard from './article-card.astro';
 import Layout from "../layouts/layout.astro";
-const allPosts = await Astro.glob('../pages/posts/*.md');
+const allPosts = await Astro.glob('../pages/posts/*.md*');
 ---
 
 <Layout>
@@ -41,18 +41,15 @@ const allPosts = await Astro.glob('../pages/posts/*.md');
         </ul>
       </div>
     </div>
-    <!-- <div class="hero">
+    <div class="hero">
       <div class="hero-content flex flex-col w-screen justify-center items-start text-left p-8">
         <h3 class="text-lg sm:text-3xl font-bold">Articles</h3>
-        <div class="flex flex-row gap-4 overflow-x-auto w-full">
+        <div class="flex flex-row gap-4 overflow-x-auto">
           {
-            allPosts.map((post) => {
-              console.log(JSON.stringify(post))
-              return <ArticleCard title={post.frontmatter.title} subtitle={post.frontmatter.subtitle} author={post.frontmatter.author} pubDate={post.frontmatter.pubDate} image={post.frontmatter.image} url={post.url}/>;
-            })
+            allPosts.map(post => <ArticleCard title={post.frontmatter.title} subtitle={post.frontmatter.subtitle} author={post.frontmatter.author} pubDate={post.frontmatter.pubDate} image={post.frontmatter.image} url={post.url}/>)
           }
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </Layout>
