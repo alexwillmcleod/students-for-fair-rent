@@ -61,7 +61,7 @@ export default function Results(props: CalculatorInformation) {
 
   return (
     <div class="flex flex-col justify-center items-center gap-8">
-      <p class="font-bold text-5xl text-display">Results</p>
+      <p class="font-bold text-5xl font-display">Results</p>
       <div class="md:grid md:grid-cols-3 flex flex-col gap-2 list-disc ">
         {/* <ResultCard value={`You will be in $${debt()} in debt`} color="red-500"/> */}
         {/* <ResultCard value={`You will have paid a total of $${totalCost()} in rent`}/> */}
