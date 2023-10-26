@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       display: ['Omnes', 'Omnes-Bold'],
-      sans: ['Omnes'],
+      sans: ['Omnes-Bold', 'Atkinson Hyperlegible'],
     },
     extend: {
       colors: {
