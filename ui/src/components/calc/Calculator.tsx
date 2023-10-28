@@ -5,6 +5,9 @@ import EnterWeeklyIncome  from './EnterWeeklyIncome';
 import StudentFinance from './StudentFinance';
 import Results from './Results';
 import SelectResidence from './SelectResidence';
+import EnterSavings from './Savings';
+import SelectFeesFree from './FeesFree';
+import SelectInternational from './InternationalStudent';
 
 export type Residence = 
   'O\'Rorke' |
@@ -21,7 +24,11 @@ export interface CalculatorInformation {
   residence?: Residence,
   weeklyIncome?: number,
   weeklyAllowanceIncome: number,
-  weeklyLoanIncome: number
+  weeklyLoanIncome: number,
+  isFeesFree?: boolean,
+  isInternationalStudent?: boolean,
+  weeklyCosts: Record<string, number>,
+  savings: number
 }
 
 
@@ -38,7 +45,11 @@ export default function Calculator() {
     weeklyIncome: undefined,
     weeklyLoanIncome: 0,
     weeklyAllowanceIncome: 0,
-    residence: undefined
+    weeklyCosts: {},
+    savings: 0,
+    residence: undefined,
+    isFeesFree: false,
+    isInternationalStudent: false
   });
 
   const setIsFirstYear = (newValue: boolean) => {
@@ -56,10 +67,10 @@ export default function Calculator() {
     })
   }
 
-  const setWeeklyWorkingHours = (newValue: number) => {
+  const setSavings = (newValue: number) => {
     setCalculatorInformation({
       ...calculatorInformation(),
-      weeklyWorkingHours: newValue
+      savings: newValue
     })
   }
 
@@ -82,19 +93,37 @@ export default function Calculator() {
       residence: newValue
     })
   }
+  const setIsFeesFree = (newValue: boolean) => {
+    setCalculatorInformation({
+      ...calculatorInformation(),
+      isFeesFree: newValue
+    })
+  }
+  const setIsInternationalStudent = (newValue: boolean) => {
+    setCalculatorInformation({
+      ...calculatorInformation(),
+      isInternationalStudent: newValue
+    })
+  }
   const stepArray = [
     <Introduction />,
     <SelectYear setIsFirstYear={setIsFirstYear} isFirstYear={calculatorInformation().isFirstYear}/>,
+    <SelectFeesFree setIsFeesFree={setIsFeesFree} isFeesFree={calculatorInformation().isFeesFree}/>,
+    <SelectInternational isInternational={calculatorInformation().isInternationalStudent} setIsInternational={setIsInternationalStudent}/>,
     <SelectResidence isFirstYear={calculatorInformation().isFirstYear!} setResidence={setResidence} residence={calculatorInformation().residence}/>,
     <EnterWeeklyIncome setWeeklyIncome={setWeeklyIncome} weeklyIncome={calculatorInformation().weeklyIncome} />,
+    <EnterSavings setSavings={setSavings} savings={calculatorInformation().savings} />,
     <StudentFinance setWeeklyAllowanceIncome={setWeeklyAllowanceIncome} setWeeklyLoanIncome={setWeeklyLoanIncome} weeklyAllowanceIncome={calculatorInformation().weeklyAllowanceIncome} weeklyLoanIncome={calculatorInformation().weeklyLoanIncome}/>,
     <Results {...calculatorInformation()}/>
   ];
   const stepTitles = [
     'Introduction',
     'Year',
+    'Fees',
+    'International',
     'Residence',
     'Income',
+    'Savings',
     'StudyLink',
     'Results'
   ];
@@ -163,7 +192,7 @@ interface StepIndicatorProps {
 function StepIndicator(props: StepIndicatorProps) {
 
   return (
-    <ul class="steps hidden md:flex">
+    <ul class="steps hidden lg:flex">
       {
         props.stepTitles.map(
           (title: string, index: number) => (
