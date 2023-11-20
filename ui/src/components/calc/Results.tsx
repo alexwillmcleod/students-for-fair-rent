@@ -3,61 +3,75 @@ import { createEffect, createSignal, Show } from 'solid-js';
 import ResultCard from './ResultCard';
 
 export default function Results(props: CalculatorInformation) {
-
   const [debt, setDebt] = createSignal<number>(0);
   const [totalCost, setTotalCost] = createSignal<number>(0);
   const [totalIncome, setTotalIncome] = createSignal<number>(0);
+  const [weeklyFinance, setWeeklyFinance] = createSignal<number>(0);
+
+  /* 
+    This is the total finance available to the tauira
+    Including income from loans, income from work, and loans
+  */
+  const [totalFinance, setTotalFinance] = createSignal<number>(0);
 
   const weeklyRent = (residence: Residence) => {
     switch (residence) {
       case 'Carlaw Park Stuart McCutcheon House': {
-        return 355
+        return 355;
       }
       case 'Carlaw Park Nichols': {
-        return 345
+        return 345;
       }
       case '55 Symonds': {
-        return 450
+        return 450;
       }
       case 'Te Tirohanga o te Tōangaroa': {
-        return 320
+        return 320;
       }
       case 'Waipārūrū': {
-        return 510
+        return 510;
       }
       case 'Grafton': {
-        return 490
+        return 490;
       }
       case 'University Hall Towers': {
-        return 490
+        return 490;
       }
-      case 'O\'Rorke': {
-        return 470
+      case "O'Rorke": {
+        return 470;
       }
     }
-  }
+  };
 
   const totalWeeks = (isFirstYear: boolean) => {
-    return isFirstYear ? 38 : 42
-  }
+    return isFirstYear ? 38 : 42;
+  };
 
   createEffect(() => {
-    setDebt(
-      props.weeklyLoanIncome * 38
-    )
+    // This is how many weeks the loan applies for
+    const academicWeeks = 38;
+    setDebt(props.weeklyLoanIncome * academicWeeks);
   });
-  
-  createEffect(() => {
-    setTotalCost(
-      weeklyRent(props.residence!) * totalWeeks(props.isFirstYear!)
-    )
-  })
 
   createEffect(() => {
-    setTotalIncome(
-      props.weeklyIncome! * totalWeeks(props.isFirstYear!)  
-    )
-  })
+    setTotalCost(weeklyRent(props.residence!) * totalWeeks(props.isFirstYear!));
+  });
+
+  createEffect(() => {
+    setTotalIncome(props.weeklyIncome! * totalWeeks(props.isFirstYear!));
+  });
+
+  createEffect(() => {
+    const totalWorkIncome =
+      props.weeklyIncome! * totalWeeks(props.isFirstYear!);
+    const academicWeeks = 38;
+    const totalLoanIncome = props.weeklyLoanIncome * academicWeeks;
+    setTotalFinance(totalWorkIncome + totalLoanIncome);
+  });
+
+  createEffect(() => {
+    setWeeklyFinance(props.weeklyIncome! + props.weeklyLoanIncome!);
+  });
 
   return (
     <div class="flex flex-col justify-center items-center gap-8">
@@ -65,6 +79,12 @@ export default function Results(props: CalculatorInformation) {
       <div class="md:grid md:grid-cols-3 flex flex-col gap-2 list-disc ">
         {/* <ResultCard value={`You will be in $${debt()} in debt`} color="red-500"/> */}
         {/* <ResultCard value={`You will have paid a total of $${totalCost()} in rent`}/> */}
+        <Show when={weeklyFinance() < weeklyRent(props.residence!)}>
+          <ResultCard>
+            You are <b>${weeklyRent(props.residence!) - weeklyFinance()}</b>{' '}
+            short of rent each week
+          </ResultCard>
+        </Show>
         <Show when={debt() != 0}>
           <ResultCard color="red-400">
             You will be <b>${debt()}</b> in debt
@@ -75,11 +95,15 @@ export default function Results(props: CalculatorInformation) {
         </ResultCard>
         <Show when={props.weeklyIncome}>
           <ResultCard color="red-200">
-            <b>{100 * (Math.round(weeklyRent(props.residence!)/props.weeklyIncome!))}%</b> of your earned income will be spent on rent 
+            <b>
+              {100 *
+                Math.round(weeklyRent(props.residence!) / props.weeklyIncome!)}
+              %
+            </b>{' '}
+            of your earned income will be spent on rent
           </ResultCard>
         </Show>
-     </div>
+      </div>
     </div>
-  )
+  );
 }
-
