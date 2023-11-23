@@ -93,7 +93,7 @@ export default function Results(props: CalculatorInformation) {
             when={totalLivingCostsDebt() - (totalFinance() - totalCost()) > 0}
           >
             {' '}
-            and after repaying you will have{' '}
+            and after repaying you will still owe{' '}
             <b>
               ${totalLivingCostsDebt() - (totalFinance() - totalCost())}
             </b>{' '}
