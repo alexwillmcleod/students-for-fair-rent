@@ -2,6 +2,7 @@
 import { Show } from "solid-js";
 import ArticleCard from '../components/article-card.astro';
 import Layout from "../layouts/layout.astro";
+import { Image } from "astro:assets";
 const allPosts = await Astro.glob('../pages/posts/*.md*');
 ---
 
@@ -18,7 +19,7 @@ const allPosts = await Astro.glob('../pages/posts/*.md*');
     </div> -->
     <div class="hero">
       <div class="hero-content flex-col justify-center lg:flex-row gap-10 lg:gap-12  w-full">
-        <img width={300} src="/images/calculators.png"  alt="Graph of Waiparuru rent prices (lowest option in Waiparuru. Waiparuru is the most expensive hall). 2022 was $435, 2023 was $470 and 2024 will be $510"/>
+        <Image width="300" height="100"  src="/images/calculators.png"  alt="Graph of Waiparuru rent prices (lowest option in Waiparuru. Waiparuru is the most expensive hall). 2022 was $435, 2023 was $470 and 2024 will be $510"/>
         <div class="flex flex-col gap-4 justify-center items-center text-center">
           <h1 class="text-4xl text-wrap sm:text-5xl font-bold font-display">Try our Calculator!</h1>
           <h4 class="text-2xl sm:text-2xl font-display">Find out how inaccessible education is to you</h4>
@@ -36,7 +37,7 @@ const allPosts = await Astro.glob('../pages/posts/*.md*');
     </div> 
     <div class="hero">
       <div class="hero-content relative w-full justify-center items-center">
-        <img class=" min-w-0 w-full max-w-5xl" src="/images/signature.svg"  alt="Graphic of a signature"/>
+        <Image width="1600" height="300" src="/images/signature.svg"  alt="Graphic of a signature"/>
         <a href="https://chng.it/pTSGNWQGDT"  class="absolute font-bold font-display bg-accent bg-opacity-80 px-12 py-6 shadow-lg text-2xl sm:text-3xl rounded-full" target="_blank">View our Petition</a>
       </div>
     </div>
