@@ -122,8 +122,9 @@ export default function Results(props: CalculatorInformation) {
           // when={props.weeklyIncome != undefined && props.weeklyIncome! > 0}
         >
           <b>
-            {100 *
-              Math.round(weeklyRent(props.residence!) / props.weeklyIncome!)}
+            {Math.round(
+              (100 * weeklyRent(props.residence!)) / props.weeklyIncome!
+            )}
             %
           </b>{' '}
           of your earned income will be spent on rent
