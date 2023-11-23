@@ -3,10 +3,11 @@ import { createEffect, createSignal, Show } from 'solid-js';
 import ResultCard from './ResultCard';
 
 export default function Results(props: CalculatorInformation) {
-  const [debt, setDebt] = createSignal<number>(0);
   const [totalCost, setTotalCost] = createSignal<number>(0);
   const [totalIncome, setTotalIncome] = createSignal<number>(0);
   const [weeklyFinance, setWeeklyFinance] = createSignal<number>(0);
+  const [totalLivingCostsDebt, setTotalLivingCostsDebt] =
+    createSignal<number>(0);
 
   /* 
     This is the total finance available to the tauira
@@ -48,12 +49,6 @@ export default function Results(props: CalculatorInformation) {
   };
 
   createEffect(() => {
-    // This is how many weeks the loan applies for
-    const academicWeeks = 38;
-    setDebt(props.weeklyLoanIncome * academicWeeks);
-  });
-
-  createEffect(() => {
     setTotalCost(weeklyRent(props.residence!) * totalWeeks(props.isFirstYear!));
   });
 
@@ -66,43 +61,73 @@ export default function Results(props: CalculatorInformation) {
       props.weeklyIncome! * totalWeeks(props.isFirstYear!);
     const academicWeeks = 38;
     const totalLoanIncome = props.weeklyLoanIncome * academicWeeks;
-    setTotalFinance(totalWorkIncome + totalLoanIncome);
+    const totalAllowanceIncome = props.weeklyAllowanceIncome * academicWeeks;
+    setTotalFinance(
+      totalWorkIncome + totalLoanIncome + props.savings! + totalAllowanceIncome
+    );
   });
 
   createEffect(() => {
-    setWeeklyFinance(props.weeklyIncome! + props.weeklyLoanIncome!);
+    setWeeklyFinance(
+      props.weeklyIncome! +
+        props.weeklyLoanIncome! +
+        props.weeklyAllowanceIncome!
+    );
+  });
+
+  createEffect(() => {
+    setTotalLivingCostsDebt(props.weeklyLoanIncome! * 38);
   });
 
   return (
     <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl font-display">Results</p>
       <div class="md:grid md:grid-cols-3 flex flex-col gap-2 list-disc ">
-        {/* <ResultCard value={`You will be in $${debt()} in debt`} color="red-500"/> */}
-        {/* <ResultCard value={`You will have paid a total of $${totalCost()} in rent`}/> */}
-        <Show when={weeklyFinance() < weeklyRent(props.residence!)}>
-          <ResultCard>
-            You are <b>${weeklyRent(props.residence!) - weeklyFinance()}</b>{' '}
-            short of rent each week
-          </ResultCard>
-        </Show>
-        <Show when={debt() != 0}>
-          <ResultCard color="red-400">
-            You will be <b>${debt()}</b> in debt
-          </ResultCard>
-        </Show>
+        <ResultCard
+          when={totalLivingCostsDebt() > 0}
+          color="red-600"
+        >
+          You will owe StudyLink <b>${totalLivingCostsDebt()}</b> (just for
+          living costs)
+          <Show
+            when={totalLivingCostsDebt() - (totalFinance() - totalCost()) > 0}
+          >
+            {' '}
+            and after repaying you will have{' '}
+            <b>
+              ${totalLivingCostsDebt() - (totalFinance() - totalCost())}
+            </b>{' '}
+          </Show>
+        </ResultCard>
+        <ResultCard
+          color="red-500"
+          when={weeklyFinance() < weeklyRent(props.residence!)}
+        >
+          You are <b>${weeklyRent(props.residence!) - weeklyFinance()}</b> short
+          of rent each week
+        </ResultCard>
+        <ResultCard
+          color="red-400"
+          when={totalFinance() < totalCost()}
+        >
+          You are <b>${totalCost() - totalFinance()}</b> short of rent and
+          cannot live in halls
+        </ResultCard>
         <ResultCard color="red-300">
           You will have a paid a total of <b>${totalCost()}</b> in rent alone
         </ResultCard>
-        <Show when={props.weeklyIncome}>
-          <ResultCard color="red-200">
-            <b>
-              {100 *
-                Math.round(weeklyRent(props.residence!) / props.weeklyIncome!)}
-              %
-            </b>{' '}
-            of your earned income will be spent on rent
-          </ResultCard>
-        </Show>
+        <ResultCard
+          color="red-200"
+          when={props.weeklyIncome}
+          // when={props.weeklyIncome != undefined && props.weeklyIncome! > 0}
+        >
+          <b>
+            {100 *
+              Math.round(weeklyRent(props.residence!) / props.weeklyIncome!)}
+            %
+          </b>{' '}
+          of your earned income will be spent on rent
+        </ResultCard>
       </div>
     </div>
   );
