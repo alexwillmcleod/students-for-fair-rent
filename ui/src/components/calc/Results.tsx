@@ -3,19 +3,6 @@ import { createEffect, createMemo, createSignal, Show } from 'solid-js';
 import ResultCard from './ResultCard';
 
 export default function Results(props: CalculatorInformation) {
-  const annualCost = createMemo(() => weeklyRent() * totalWeeks());
-  const weeklyIncome = createMemo(
-    () =>
-      props.weeklyIncome! + props.weeklyLoanIncome + props.weeklyAllowanceIncome
-  );
-  const annualIncome = createMemo(() => weeklyIncome() * totalWeeks());
-  const weeklyIncomeShort = createMemo(() => weeklyRent() - weeklyIncome());
-  const annualIncomeShort = createMemo(() => annualCost() - annualIncome());
-  const annualLivingCostsDebt = createMemo(() => {
-    const totalWeeks = 38;
-    return props.weeklyLoanIncome * totalWeeks;
-  });
-
   const weeklyRent = createMemo(() => {
     switch (props.residence!) {
       case 'Carlaw Park Stuart McCutcheon House': {
@@ -47,6 +34,18 @@ export default function Results(props: CalculatorInformation) {
 
   const totalWeeks = createMemo(() => (props.isFirstYear ? 38 : 42));
 
+  const annualCost = createMemo(() => weeklyRent() * totalWeeks());
+  const weeklyIncome = createMemo(
+    () =>
+      props.weeklyIncome! + props.weeklyLoanIncome + props.weeklyAllowanceIncome
+  );
+  const annualIncome = createMemo(() => weeklyIncome() * totalWeeks());
+  const weeklyIncomeShort = createMemo(() => weeklyRent() - weeklyIncome());
+  const annualIncomeShort = createMemo(() => annualCost() - annualIncome());
+  const annualLivingCostsDebt = createMemo(() => {
+    const totalWeeks = 38;
+    return props.weeklyLoanIncome * totalWeeks;
+  });
   return (
     <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl font-display">Results</p>
@@ -60,17 +59,16 @@ export default function Results(props: CalculatorInformation) {
         </ResultCard>
         <ResultCard
           color="red-500"
-          when={weeklyIncome() < weeklyRent()}
+          when={weeklyIncomeShort() > 0}
         >
-          You are <b>${weeklyRent() - weeklyIncome()}</b> short of rent each
-          week
+          You are <b>${weeklyIncomeShort()}</b> short of rent each week
         </ResultCard>
         <ResultCard
           color="red-400"
-          when={annualIncome() < annualCost()}
+          when={annualIncomeShort() > 0}
         >
-          You are <b>${annualCost() - annualIncome()}</b> short of rent and
-          cannot live in halls without intergenerational wealth
+          You are <b>${annualIncomeShort()}</b> short of rent and cannot live in
+          halls
         </ResultCard>
         <ResultCard color="red-300">
           You will have a paid a total of <b>${annualCost()}</b> in rent alone

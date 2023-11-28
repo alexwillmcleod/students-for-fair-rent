@@ -52,14 +52,6 @@ export default function Calculator() {
       weeklyIncome: newValue,
     });
   };
-
-  const setWeeklyWorkingHours = (newValue: number) => {
-    setCalculatorInformation({
-      ...calculatorInformation(),
-      weeklyWorkingHours: newValue,
-    });
-  };
-
   const setWeeklyAllowanceIncome = (newValue: number) => {
     setCalculatorInformation({
       ...calculatorInformation(),
@@ -79,12 +71,7 @@ export default function Calculator() {
       residence: newValue,
     });
   };
-  const setSavings = (newValue: number) => {
-    setCalculatorInformation({
-      ...calculatorInformation(),
-      savings: newValue,
-    });
-  };
+
   const stepArray = [
     <Introduction />,
     <SelectYear
@@ -100,10 +87,6 @@ export default function Calculator() {
       setWeeklyIncome={setWeeklyIncome}
       weeklyIncome={calculatorInformation().weeklyIncome}
     />,
-    <EnterSavings
-      setSavings={setSavings}
-      savings={calculatorInformation().savings}
-    />,
     <StudentFinance
       setWeeklyAllowanceIncome={setWeeklyAllowanceIncome}
       setWeeklyLoanIncome={setWeeklyLoanIncome}
@@ -117,7 +100,6 @@ export default function Calculator() {
     'Year',
     'Residence',
     'Income',
-    'Savings',
     'StudyLink',
     'Results',
   ];
