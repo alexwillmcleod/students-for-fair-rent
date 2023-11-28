@@ -1,22 +1,23 @@
 import type { CalculatorInformation, Residence } from './Calculator';
-import { createEffect, createSignal, Show } from 'solid-js';
+import { createEffect, createMemo, createSignal, Show } from 'solid-js';
 import ResultCard from './ResultCard';
 
 export default function Results(props: CalculatorInformation) {
-  const [totalCost, setTotalCost] = createSignal<number>(0);
-  const [totalIncome, setTotalIncome] = createSignal<number>(0);
-  const [weeklyFinance, setWeeklyFinance] = createSignal<number>(0);
-  const [totalLivingCostsDebt, setTotalLivingCostsDebt] =
-    createSignal<number>(0);
+  const annualCost = createMemo(() => weeklyRent() * totalWeeks());
+  const weeklyIncome = createMemo(
+    () =>
+      props.weeklyIncome! + props.weeklyLoanIncome + props.weeklyAllowanceIncome
+  );
+  const annualIncome = createMemo(() => weeklyIncome() * totalWeeks());
+  const weeklyIncomeShort = createMemo(() => weeklyRent() - weeklyIncome());
+  const annualIncomeShort = createMemo(() => annualCost() - annualIncome());
+  const annualLivingCostsDebt = createMemo(() => {
+    const totalWeeks = 38;
+    return props.weeklyLoanIncome * totalWeeks;
+  });
 
-  /* 
-    This is the total finance available to the tauira
-    Including income from loans, income from work, and loans
-  */
-  const [totalFinance, setTotalFinance] = createSignal<number>(0);
-
-  const weeklyRent = (residence: Residence) => {
-    switch (residence) {
+  const weeklyRent = createMemo(() => {
+    switch (props.residence!) {
       case 'Carlaw Park Stuart McCutcheon House': {
         return 355;
       }
@@ -42,92 +43,45 @@ export default function Results(props: CalculatorInformation) {
         return 470;
       }
     }
-  };
-
-  const totalWeeks = (isFirstYear: boolean) => {
-    return isFirstYear ? 38 : 42;
-  };
-
-  createEffect(() => {
-    setTotalCost(weeklyRent(props.residence!) * totalWeeks(props.isFirstYear!));
   });
 
-  createEffect(() => {
-    setTotalIncome(props.weeklyIncome! * totalWeeks(props.isFirstYear!));
-  });
-
-  createEffect(() => {
-    const totalWorkIncome =
-      props.weeklyIncome! * totalWeeks(props.isFirstYear!);
-    const academicWeeks = 38;
-    const totalLoanIncome = props.weeklyLoanIncome * academicWeeks;
-    const totalAllowanceIncome = props.weeklyAllowanceIncome * academicWeeks;
-    setTotalFinance(
-      totalWorkIncome + totalLoanIncome + props.savings! + totalAllowanceIncome
-    );
-  });
-
-  createEffect(() => {
-    setWeeklyFinance(
-      props.weeklyIncome! +
-        props.weeklyLoanIncome! +
-        props.weeklyAllowanceIncome!
-    );
-  });
-
-  createEffect(() => {
-    setTotalLivingCostsDebt(props.weeklyLoanIncome! * 38);
-  });
+  const totalWeeks = createMemo(() => (props.isFirstYear ? 38 : 42));
 
   return (
     <div class="flex flex-col justify-center items-center gap-8">
       <p class="font-bold text-5xl font-display">Results</p>
       <div class="md:grid md:grid-cols-3 flex flex-col gap-2 list-disc ">
         <ResultCard
-          when={totalLivingCostsDebt() > 0}
+          when={annualLivingCostsDebt() > 0}
           color="red-600"
         >
-          You will owe StudyLink <b>${totalLivingCostsDebt()}</b> (just for
-          living costs)
-          <Show
-            when={totalLivingCostsDebt() - (totalFinance() - totalCost()) > 0}
-          >
-            {' '}
-            and after repaying you will still owe{' '}
-            <b>
-              ${totalLivingCostsDebt() - (totalFinance() - totalCost())}
-            </b>{' '}
-          </Show>
+          You will owe StudyLink <b>${annualLivingCostsDebt()}</b> for living
+          costs
         </ResultCard>
         <ResultCard
           color="red-500"
-          when={weeklyFinance() < weeklyRent(props.residence!)}
+          when={weeklyIncome() < weeklyRent()}
         >
-          You are <b>${weeklyRent(props.residence!) - weeklyFinance()}</b> short
-          of rent each week
+          You are <b>${weeklyRent() - weeklyIncome()}</b> short of rent each
+          week
         </ResultCard>
         <ResultCard
           color="red-400"
-          when={totalFinance() < totalCost()}
+          when={annualIncome() < annualCost()}
         >
-          You are <b>${totalCost() - totalFinance()}</b> short of rent and
-          cannot live in halls
+          You are <b>${annualCost() - annualIncome()}</b> short of rent and
+          cannot live in halls without intergenerational wealth
         </ResultCard>
         <ResultCard color="red-300">
-          You will have a paid a total of <b>${totalCost()}</b> in rent alone
+          You will have a paid a total of <b>${annualCost()}</b> in rent alone
         </ResultCard>
         <ResultCard
           color="red-200"
           when={props.weeklyIncome}
           // when={props.weeklyIncome != undefined && props.weeklyIncome! > 0}
         >
-          <b>
-            {Math.round(
-              (100 * weeklyRent(props.residence!)) / props.weeklyIncome!
-            )}
-            %
-          </b>{' '}
-          of your earned income will be spent on rent
+          <b>{Math.round((100 * weeklyRent()) / props.weeklyIncome!)}%</b> of
+          your earned income will be spent on rent
         </ResultCard>
       </div>
     </div>
