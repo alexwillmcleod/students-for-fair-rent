@@ -8,7 +8,7 @@ export default function Results(props: CalculatorInformation) {
       case 'Carlaw Park Stuart McCutcheon House': {
         return 355;
       }
-      case 'Carlaw Park Nichols': {
+      case 'Carlaw Park Nicholls': {
         return 345;
       }
       case '55 Symonds': {

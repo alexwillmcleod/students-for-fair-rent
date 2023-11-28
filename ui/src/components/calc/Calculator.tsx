@@ -5,7 +5,6 @@ import EnterWeeklyIncome from './EnterWeeklyIncome';
 import StudentFinance from './StudentFinance';
 import Results from './Results';
 import SelectResidence from './SelectResidence';
-import EnterSavings from './EnterSavings';
 
 export type Residence =
   | "O'Rorke"
@@ -13,7 +12,7 @@ export type Residence =
   | 'University Hall Towers'
   | 'Grafton'
   | 'Carlaw Park Stuart McCutcheon House'
-  | 'Carlaw Park Nichols'
+  | 'Carlaw Park Nicholls'
   | 'Te Tirohanga o te Tōangaroa'
   | '55 Symonds';
 
@@ -21,7 +20,6 @@ export interface CalculatorInformation {
   isFirstYear?: boolean;
   residence?: Residence;
   weeklyIncome?: number;
-  savings?: number;
   weeklyAllowanceIncome: number;
   weeklyLoanIncome: number;
 }
