@@ -4,10 +4,12 @@ import Footer from "../components/footer.astro";
 import NotificationTray from '../components/NotificationTray';
 import PressRelease from '/Press release 31_08_23.pdf';
 import { Image } from 'astro:assets';
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <html lang="en">
   <head>
+    <ViewTransitions />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
