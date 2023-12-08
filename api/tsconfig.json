@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es2022", // or a higher version depending on your needs
+    "module": "es2022",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    // "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "outDir": "./dist",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    // "baseUrl": "./", // Set this to the root of your project
+    // "paths": {
+    //   "*": ["src/*"] // Adjust the "src" part based on your project structure
+    // },
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "lib": ["es2015", "es2017", "dom"],
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "downlevelIteration": true,
+    "declaration": true,
+    "allowJs": true
+  },
+  "include": ["src/**/*.ts"],
+  "allowSyntheticDefaultImports": true,
+  "extensions": [".ts", ".js", ".json"],
+  "exclude": ["node_modules"]
+}
