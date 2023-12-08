@@ -1,11 +1,11 @@
-import { Schema, Model, Types } from 'npm:mongoose';
+import { Schema, model, Types } from 'npm:mongoose';
 
 const TEN_MINUTES = 600000;
 
 const authSchema = new Schema({
   token: {
-    type: Number,
-    default: Math.round(Math.random() * 1_000_000),
+    type: String,
+    default: crypto.randomUUID(),
     unique: true,
     required: true,
   },
@@ -23,11 +23,6 @@ const authSchema = new Schema({
     required: true,
     default: Date.now() + TEN_MINUTES,
   },
-  used: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
 });
 
-export const Auth = new Model('Auth', authSchema);
+export const Auth = model('Auth', authSchema);

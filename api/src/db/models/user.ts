@@ -1,6 +1,26 @@
-import { Schema, model } from 'npm:mongoose';
+import { Schema, model, Document } from 'npm:mongoose';
 
-const userSchema = new Schema({
+export interface UserType extends Document {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  upi: string;
+  studentId: string;
+  isAnonymous: boolean;
+  isVerified: boolean;
+  createdAt: Date;
+  hallOfResidence:
+    | "O'Rorke"
+    | 'Grafton'
+    | 'University Hall Towers'
+    | 'Waiparuru'
+    | 'Carlaw Park Stuart McCutcheon'
+    | 'Carlaw Park Nicholls'
+    | '55 Symonds'
+    | 'Te Tirohanga o te Toangaroa';
+}
+
+const userSchema = new Schema<UserType>({
   firstName: {
     type: String,
     required: true,
@@ -53,6 +73,7 @@ const userSchema = new Schema({
   },
   hallOfResidence: {
     type: String,
+    required: true,
     enum: [
       "O'Rorke",
       'Grafton',
@@ -66,4 +87,4 @@ const userSchema = new Schema({
   },
 });
 
-export const User = model('User', userSchema);
+export const User = model<UserType>('User', userSchema);

@@ -3,7 +3,10 @@ import express, { Request, Response, Router, json } from 'npm:express';
 import mongoose, { connect } from 'npm:mongoose';
 import { User } from './db/models/user.ts';
 import userRoutes from './routes/users.ts';
+import authRoutes from './routes/auth.ts';
+import strikeRoutes from './routes/strike.ts';
 import { load } from 'https://deno.land/std@0.208.0/dotenv/mod.ts';
+import { maybeAuth } from './middleware/auth.ts';
 
 // Get environment variables from .env
 // config();
@@ -18,6 +21,15 @@ await connect(databaseUrl);
 
 const apiRouter = Router();
 apiRouter.use('/user', userRoutes);
+apiRouter.use('/auth', authRoutes);
+apiRouter.use('/strike', strikeRoutes);
+apiRouter.get('/', maybeAuth, async (req, res) => {
+  return res
+    .status(200)
+    .send(
+      `Hello, ${req.body.user?.firstName ? req.body.user.firstName : 'friend'}`
+    );
+});
 
 app.use('/api', apiRouter);
 

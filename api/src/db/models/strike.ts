@@ -1,4 +1,4 @@
-import { Schema, Model, Types } from 'npm:mongoose';
+import { Schema, model, Types } from 'npm:mongoose';
 
 const strikeSchema = new Schema({
   user: {
@@ -12,6 +12,7 @@ const strikeSchema = new Schema({
   },
   end: {
     type: Date,
+    required: false,
   },
   why: {
     type: String,
@@ -21,4 +22,4 @@ const strikeSchema = new Schema({
   },
 });
 
-export const Strike = new Model('Strike', strikeSchema);
+export const Strike = model('Strike', strikeSchema);
