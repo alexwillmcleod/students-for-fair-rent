@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/layout.astro";
+import StartStrikeForm from '@molecules/StartStrikeForm';
+---
+
+<Layout>
+  <div class="flex flex-col items-center w-full">
+    <StartStrikeForm client:only />
+  </div>
+</Layout>

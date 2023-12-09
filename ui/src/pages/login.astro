@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/layout.astro";
+import LoginForm from '@molecules/LoginForm';
+---
+
+<Layout>
+  <div class="flex flex-col items-center w-full">
+    <LoginForm client:only />
+  </div>
+</Layout>
+

@@ -1,0 +1,13 @@
+---
+import Layout from "layouts/layout.astro";
+const { code } = Astro.params;
+import VerifyStrike from '@molecules/VerifyStrike';
+---
+
+<Layout>
+  <div class="flex flex-col items-center h-full justify-center">
+    <div class="flex flex-col items-center p-4 gap-8 h-full justify-center">
+      <VerifyStrike client:only code={code!} />
+    </div>
+  </div>
+</Layout>

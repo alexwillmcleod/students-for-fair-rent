@@ -1,6 +1,6 @@
-import type { CalculatorInformation, Residence } from './Calculator';
+import type { CalculatorInformation, Residence } from '../organisms/Calculator';
 import { createEffect, createMemo, createSignal, Show } from 'solid-js';
-import ResultCard from './ResultCard';
+import ResultCard from '@molecules/CalculatorResultCard';
 
 export default function Results(props: CalculatorInformation) {
   const weeklyRent = createMemo(() => {

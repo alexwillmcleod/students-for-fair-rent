@@ -1,12 +1,12 @@
 import { Show, type JSXElement } from 'solid-js';
 
-interface TriviaCardProps {
+interface ResultCardProps {
   children?: JSXElement;
   color?: string;
   when?: any | boolean | null | undefined | false;
 }
 
-export default function TriviaCard(props: TriviaCardProps) {
+export default function ResultCard(props: ResultCardProps) {
   const color = props.color || 'accent';
   return (
     <Show when={props.when}>

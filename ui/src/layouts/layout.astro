@@ -1,10 +1,16 @@
 ---
-import Navbar from "../components/navbar.astro"
-import Footer from "../components/footer.astro";
-import NotificationTray from '../components/NotificationTray';
+import Navbar from "@organisms/navbar.astro"
+import Footer from "@organisms/footer.astro";
+import NotificationTray from '../components/organisms/NotificationTray';
 import PressRelease from '/Press release 31_08_23.pdf';
 import { Image } from 'astro:assets';
 import { ViewTransitions } from "astro:transitions";
+import { config } from 'dotenv';
+import axios from 'axios';
+
+config();
+axios.defaults.baseUrl = process.env.API_BASE_URL;
+
 ---
 
 <html lang="en">
@@ -61,7 +67,7 @@ import { ViewTransitions } from "astro:transitions";
   </head>
   <body class="flex flex-col bg-cover bg-no-repeat overflow-x-hidden min-h-screen" style="background-image: url('/images/sfr-background.png')">
     <Navbar />
-    <article class="flex-1">
+    <article class="flex-1 h-full">
       <slot />
     </article>
     <div class="min-w-full">

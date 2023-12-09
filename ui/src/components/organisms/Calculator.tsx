@@ -1,10 +1,10 @@
 import { createSignal } from 'solid-js';
-import SelectYear from './SelectYear';
-import Introduction from './Introduction';
-import EnterWeeklyIncome from './EnterWeeklyIncome';
-import StudentFinance from './StudentFinance';
-import Results from './Results';
-import SelectResidence from './SelectResidence';
+import SelectYear from '../molecules/CalculatorSelectYear';
+import Introduction from '../molecules/CalculatorIntroduction';
+import EnterWeeklyIncome from '@molecules/CalculatorEnterWeeklyIncome';
+import StudentFinance from '@molecules/CalculatorStudentFinance';
+import Results from '@molecules/CalculatorResults';
+import SelectResidence from '../molecules/CalculatorSelectResidence';
 
 export type Residence =
   | "O'Rorke"

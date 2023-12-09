@@ -1,7 +1,7 @@
 import { Show } from 'solid-js';
-import type { Residence } from './Calculator';
-import Select from '../Select';
-import type { SelectOption } from '../Select';
+import type { Residence } from '../organisms/Calculator';
+import Select from '../atoms/Select';
+import type { SelectOption } from '../atoms/Select';
 
 interface SelectResidenceProps {
   setResidence: (newResidence: Residence) => void;
