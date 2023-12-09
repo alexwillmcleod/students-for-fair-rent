@@ -1,5 +1,9 @@
 # Astro Starter Kit: Minimal
 
+Environment Variables:
+
+- PUBLIC_API_BASE_URL
+
 ```
 npm create astro@latest -- --template minimal
 ```
