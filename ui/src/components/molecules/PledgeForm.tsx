@@ -21,6 +21,7 @@ export default function PledgeForm() {
   const [isUntilFurtherNotice, setIsUntilFurtherNotice] =
     createSignal<boolean>(true);
   const [why, setWhy] = createSignal<string>('');
+  const [isAnonymous, setIsAnonymous] = createSignal<boolean>(false);
 
   const handleChangePledgeWeeks = (e: any) => {
     let parsedValue: number;
@@ -136,6 +137,17 @@ export default function PledgeForm() {
                 {/* <span class="label-text-alt">Alt label</span> */}
               </div>
             </label>
+            <div class="form-control">
+              <label class="label cursor-pointer">
+                <span class="label-text">I wish to stay anonymous</span>
+                <input
+                  type="checkbox"
+                  class="toggle toggle-accent"
+                  checked={isAnonymous()}
+                  onChange={() => setIsAnonymous(!isAnonymous())}
+                />
+              </label>
+            </div>
           </div>
         </div>
         <hr class="border-accent/40 border-solid border-3" />

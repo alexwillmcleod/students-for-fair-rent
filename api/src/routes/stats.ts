@@ -60,24 +60,20 @@ const getTotalCost = statsRoutes.get(
         },
       })
     ).length;
-    const totalDollars = (await Strike.find()).map(async (element) => {
-      let compDate = Date.now();
-      if (element.end && element.end.getTime() < compDate) {
-        compDate = element.end.getTime();
-      }
-      const numberOfMilliseconds = compDate - element.start.getTime();
-      const numberOfWeeks = numberOfMilliseconds / ONE_WEEK;
-      const user = await User.findById(element.user);
-      if (!user) return 0;
-      const weeklyRent = getWeeklyRent(user.hallOfResidence) || 0;
-      return weeklyRent * numberOfWeeks;
-    });
-    let totalDollarCount = 0;
-    for (const element of totalDollars) {
-      const value = await element;
-      totalDollarCount += value;
-    }
-    totalDollarCount = Math.round(totalDollarCount);
+    const totalDollarCount = Math.round(
+      (await Strike.find())
+        .map((element) => {
+          let compDate = Date.now();
+          if (element.end && element.end.getTime() < compDate) {
+            compDate = element.end.getTime();
+          }
+          const numberOfMilliseconds = compDate - element.start.getTime();
+          const numberOfWeeks = numberOfMilliseconds / ONE_WEEK;
+          const weeklyRent = getWeeklyRent(element.hallOfResidence) || 0;
+          return weeklyRent * numberOfWeeks;
+        })
+        .reduce((acc, x) => acc + x)
+    );
     return res
       .status(200)
       .send({ totalStrikerCount, concurrentStrikerCount, totalDollarCount });

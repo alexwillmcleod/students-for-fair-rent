@@ -2,8 +2,8 @@
 import { Router, Request, Response } from 'npm:express';
 import { User } from '../db/models/user.ts';
 import { Auth } from '../db/models/auth.ts';
-import { sendConfirmationEmail } from '../utils/email.ts';
-import { createJWT, verifyJWT } from '../utils/auth.ts';
+import { sendConfirmationEmail, sendLoginEmail } from '../utils/email.ts';
+import { createJWT } from '../utils/auth.ts';
 import mongoose from 'npm:mongoose';
 
 const ONE_WEEK = 3600000;
@@ -19,7 +19,11 @@ authRoutes.post('/send/:emailAddress', async (req: Request, res: Response) => {
     return res.status(400).send('could not find a user with that email');
   }
   try {
-    await sendConfirmationEmail(emailAddress);
+    if (!foundUser.isVerified) {
+      await sendConfirmationEmail(emailAddress);
+    } else {
+      await sendLoginEmail(emailAddress);
+    }
   } catch (err) {
     console.error(err);
     return res.status(500).send('failed to send email to that address');

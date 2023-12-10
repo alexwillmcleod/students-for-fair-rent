@@ -25,7 +25,6 @@ const getOverlappingStrike = async (
         end: { $exists: false },
       },
     ],
-
     start: {
       $lt: new Date(),
     },
@@ -33,11 +32,11 @@ const getOverlappingStrike = async (
 };
 
 strikeRoutes.post('/create', auth, async (req: Request, res: Response) => {
-  const { numberOfWeeks, why } = req.body;
+  const { numberWeeks, why, isAnonymous } = req.body;
 
   let newEnd: Date | undefined = undefined;
-  if (numberOfWeeks) {
-    const duration = numberOfWeeks * ONE_WEEK;
+  if (numberWeeks) {
+    const duration = numberWeeks * ONE_WEEK;
     newEnd = new Date(new Date().getTime() + duration);
   }
 
@@ -53,6 +52,7 @@ strikeRoutes.post('/create', auth, async (req: Request, res: Response) => {
       user: req.body.user._id,
       start: Date.now(),
       end: newEnd,
+      hallOfResidence: req.body.user.hallOfResidence,
       why,
     }).save();
   } catch (err) {
@@ -69,7 +69,7 @@ strikeRoutes.delete('/end', auth, async (req: Request, res: Response) => {
     console.log(ongoingStrike);
     if (ongoingStrike == null)
       return res.status(400).send('no strike is ongoing');
-    ongoingStrike.end = Date.now();
+    ongoingStrike.end = new Date();
     ongoingStrike.save();
   } catch (err) {
     console.error(err);
@@ -79,7 +79,7 @@ strikeRoutes.delete('/end', auth, async (req: Request, res: Response) => {
 });
 
 strikeRoutes.post('/extend', auth, async (req: Request, res: Response) => {
-  const { numberOfWeeks, why } = req.body;
+  const { numberWeeks } = req.body;
 
   // Check if the new start is after every ending
   const ongoingStrike = await getOverlappingStrike(req.body.user._id);
@@ -88,8 +88,12 @@ strikeRoutes.post('/extend', auth, async (req: Request, res: Response) => {
     return res.status(400).send('no strike to extend');
   }
 
-  ongoingStrike.end = new Date(
-    ongoingStrike.end.getTime() + ONE_WEEK * numberOfWeeks
+  if (!ongoingStrike.end) {
+    return res.status(400).send('strike is already going on indefinitely');
+  }
+
+  ongoingStrike.end! = new Date(
+    ongoingStrike.end.getTime() + ONE_WEEK * numberWeeks
   );
   try {
     ongoingStrike.save();

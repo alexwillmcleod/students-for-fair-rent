@@ -18,15 +18,28 @@ import {
 } from 'npm:@react-email/components';
 import * as React from 'npm:react';
 
-interface LoginEmailProps {
+interface ConfirmUserEmailProps {
   firstName?: string;
+  lastName?: string;
+  emailAddress: string;
+  upi?: string;
+  studentId?: string;
+  hallOfResidence: string;
   inviteLink: string;
 }
 
 const env = await load();
 const baseUrl = env['CLIENT_BASE_URL'];
 
-export const LoginEmail = ({ firstName, inviteLink }: LoginEmailProps) => {
+export const ConfirmUserEmail = ({
+  firstName,
+  lastName,
+  studentId,
+  upi,
+  emailAddress,
+  hallOfResidence,
+  inviteLink,
+}: ConfirmUserEmailProps) => {
   return (
     <Html lang="en">
       <Head />
@@ -44,20 +57,50 @@ export const LoginEmail = ({ firstName, inviteLink }: LoginEmailProps) => {
               />
             </Section>
             <Heading className="text-black text-2xl font-normal text-center p-0 my-[30px] mx-0">
-              Log in to <strong>Student Rent Strike</strong> 🤺
+              Join the <strong>Student Rent Strike</strong> 🤺
             </Heading>
             <Text className="text-black text-lg leading-lg">
-              Welcome Back {firstName || 'Anonymous'} 🥰,
+              Kia Ora {firstName || 'Anonymous'} 🥰,
             </Text>
             <Text className="text-black text-lg leading-lg">
-              It's great to have you back!
+              We're confirming
             </Text>
+            <table className="table-auto even:bg-blue-100 w-full mt-4 rounded-lg">
+              <tr>
+                <td className="p-2 rounded-sm">Email</td>
+                <td className="p-2 rounded-sm">{emailAddress}</td>
+              </tr>
+              {firstName && (
+                <tr>
+                  <td className="p-2 rounded-sm">Name</td>
+                  <td className="p-2 rounded-sm">
+                    {firstName} {lastName}
+                  </td>
+                </tr>
+              )}
+              {studentId && (
+                <tr>
+                  <td className="p-2 rounded-sm">Student ID</td>
+                  <td className="p-2 rounded-sm">{studentId}</td>
+                </tr>
+              )}
+              {upi && (
+                <tr>
+                  <td className="p-2 rounded-sm">Student UPI</td>
+                  <td className="p-2 rounded-sm">{upi}</td>
+                </tr>
+              )}
+              <tr>
+                <td className="p-2 rounded-sm">Hall of Residence</td>
+                <td className="p-2 rounded-sm">{hallOfResidence}</td>
+              </tr>
+            </table>
             <Section className="text-center mt-[32px] mb-[32px]">
               <Button
                 className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center py-3 px-5"
                 href={inviteLink}
               >
-                Log in
+                Let's Strike!
               </Button>
             </Section>
             <Text className="text-black text-[14px] leading-[24px]">
@@ -70,15 +113,13 @@ export const LoginEmail = ({ firstName, inviteLink }: LoginEmailProps) => {
               </Link>
             </Text>
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
-            {firstName && (
-              <Text className="text-[#666666] text-[12px] leading-[24px]">
-                This email was intended for{' '}
-                <span className="text-black">{firstName} </span>
-                If you were not expecting this, you can ignore this email. If
-                you are concerned about your account's safety, please reply to
-                this email to get in touch with us.
-              </Text>
-            )}
+            <Text className="text-[#666666] text-[12px] leading-[24px]">
+              This email was intended for{' '}
+              <span className="text-black">{firstName} </span>
+              If you were not expecting this, you can ignore this email. If you
+              are concerned about your account's safety, please reply to this
+              email to get in touch with us.
+            </Text>
           </Container>
         </Body>
       </Tailwind>
@@ -86,4 +127,4 @@ export const LoginEmail = ({ firstName, inviteLink }: LoginEmailProps) => {
   );
 };
 
-export default LoginEmail;
+export default ConfirmUserEmail;

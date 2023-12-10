@@ -6,6 +6,7 @@ import userRoutes from './routes/users.ts';
 import authRoutes from './routes/auth.ts';
 import strikeRoutes from './routes/strike.ts';
 import statsRoutes from './routes/stats.ts';
+import dashboardRoutes from './routes/dashboard.ts';
 import { load } from 'https://deno.land/std@0.208.0/dotenv/mod.ts';
 import { maybeAuth } from './middleware/auth.ts';
 import cors from 'npm:cors';
@@ -27,6 +28,7 @@ apiRouter.use('/user', userRoutes);
 apiRouter.use('/auth', authRoutes);
 apiRouter.use('/strike', strikeRoutes);
 apiRouter.use('/stats', statsRoutes);
+apiRouter.use('/dashboard', dashboardRoutes);
 apiRouter.get('/', maybeAuth, async (req, res) => {
   return res
     .status(200)
