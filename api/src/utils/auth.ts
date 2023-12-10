@@ -11,7 +11,7 @@ import { UserType } from '../db/models/user.ts';
 
 const env = await load();
 
-const jwtSecret = env['JWT_SECRET'];
+const jwtSecret = env['JWT_SECRET'] || 'test_jwt_secret';
 const ONE_WEEK = 3600000;
 
 const encoder = new TextEncoder();
