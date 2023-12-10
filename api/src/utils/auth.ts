@@ -1,4 +1,4 @@
-import { load } from 'https://deno.land/std@0.208.0/dotenv/mod.ts';
+import 'https://deno.land/std@0.208.0/dotenv/load.ts';
 import {
   Header,
   Payload,
@@ -9,9 +9,8 @@ import {
 import mongoose from 'npm:mongoose';
 import { UserType } from '../db/models/user.ts';
 
-const env = await load();
-
-const jwtSecret = env['JWT_SECRET'] || 'test_jwt_secret';
+const jwtSecret = Deno.env.get('JWT_SECRET');
+console.log(`jwtSecret = ${jwtSecret}`);
 const ONE_WEEK = 3600000;
 
 const encoder = new TextEncoder();

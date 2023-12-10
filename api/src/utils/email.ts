@@ -1,5 +1,5 @@
 import { SmtpClient, SendConfig } from 'https://deno.land/x/smtp/mod.ts';
-import { load } from 'https://deno.land/std@0.208.0/dotenv/mod.ts';
+import 'https://deno.land/std@0.208.0/dotenv/load.ts';
 import ConfirmUserEmail from './emails/confirm.tsx';
 import LoginUserEmail from './emails/login.tsx';
 import { render } from 'npm:@react-email/render';
@@ -7,13 +7,12 @@ import { Auth } from '../db/models/auth.ts';
 import { User } from '../db/models/user.ts';
 
 const TEN_MINUTES = 600000;
-const env = await load();
 
-const smtpUser: string = env['SMTP_USER'];
-const smtpPass: string = env['SMTP_PASS'];
-const smtpProvider: string = env['SMTP_PROVIDER'];
+const smtpUser: string = Deno.env.get('SMTP_USER')!;
+const smtpPass: string = Deno.env.get('SMTP_PASS')!;
+const smtpProvider: string = Deno.env.get('SMTP_PROVIDER')!;
 
-const baseUrl: string = env['CLIENT_BASE_URL'];
+const baseUrl: string = Deno.env.get('CLIENT_BASE_URL')!;
 const smtpClient = new SmtpClient();
 
 export class UserNotFoundError extends Error {}
@@ -41,7 +40,6 @@ export async function sendLoginEmail(emailAddress: string) {
   });
   const { token } = await authToken.save();
 
-  const baseUrl = env['CLIENT_BASE_URL'];
   const inviteLink = `${baseUrl}/verify/${token}`;
   const emailHtml = foundUser.isVerified
     ? render(
@@ -63,9 +61,9 @@ export async function sendLoginEmail(emailAddress: string) {
       );
   const mailOptions: SendConfig = {
     from: 'Alex from Students for Fair Rent <alexwillmcleod@gmail.com>',
-    to: [emailAddress],
+    to: emailAddress,
     subject: 'SFR Rent Strike! 🤺',
-    html: emailHtml,
+    content: emailHtml,
   };
   await smtpClient.send(mailOptions);
   smtpClient.close();

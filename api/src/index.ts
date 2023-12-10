@@ -7,20 +7,16 @@ import authRoutes from './routes/auth.ts';
 import strikeRoutes from './routes/strike.ts';
 import statsRoutes from './routes/stats.ts';
 import dashboardRoutes from './routes/dashboard.ts';
-import { load } from 'https://deno.land/std@0.208.0/dotenv/mod.ts';
+import 'https://deno.land/std@0.208.0/dotenv/load.ts';
 import { maybeAuth } from './middleware/auth.ts';
 import cors from 'npm:cors';
-
-// Get environment variables from .env
-// config();
-const env = await load();
 
 const app = express();
 app.use(json());
 app.use(cors());
 
 // Connect to mongodb database
-const databaseUrl: string = env['DATABASE_URL'];
+const databaseUrl: string = Deno.env.get('DATABASE_URL')!;
 await connect(databaseUrl);
 
 const apiRouter = Router();
@@ -39,7 +35,7 @@ apiRouter.get('/', maybeAuth, async (req, res) => {
 
 app.use('/api', apiRouter);
 
-const port = env['PORT'] || 3000;
+const port = Deno.env.get('PORT') || 3000;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });

@@ -1,4 +1,4 @@
-import { load } from 'https://deno.land/std@0.208.0/dotenv/mod.ts';
+import 'https://deno.land/std@0.208.0/dotenv/load.ts';
 import {
   Body,
   Button,
@@ -28,8 +28,7 @@ interface ConfirmUserEmailProps {
   inviteLink: string;
 }
 
-const env = await load();
-const baseUrl = env['CLIENT_BASE_URL'];
+const baseUrl = Deno.env.get('CLIENT_BASE_URL');
 
 export const ConfirmUserEmail = ({
   firstName,
