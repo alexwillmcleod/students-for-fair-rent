@@ -29,7 +29,7 @@ export default function StartStrikeForm() {
 
   onMount(() => {
     const cookies = new Cookies(null, { path: '/' });
-    if (cookies.get('authToken') != undefined) location.href = '/';
+    if (cookies.get('authToken') != undefined) location.href = '/dashboard';
   });
 
   const [error, setError] = createSignal<string | undefined>();

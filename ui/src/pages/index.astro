@@ -4,21 +4,13 @@ import ArticleCard from '@molecules/article-card.astro';
 import Layout from "../layouts/layout.astro";
 import { Image } from "astro:assets";
 import axios from 'axios';
+import StrikeStats from "@atoms/strike-stats.astro";
 const allPosts = await Astro.glob('../pages/posts/*.md*');
 
 // const baseUrl = import.meta.env.PUBLIC_API_BASE_URL;
 // axios.defaults.baseURL = baseUrl;
 // const { totalDollarCount, totalStrikerCount, concurrentStrikerCount } = (await axios.get('/api/stats/')).data;
-let totalDollarCount = '...';
-let totalStrikerCount = '...';
-let concurrentStrikerCount = '...';
-try {
-  const stats = (await axios.get('http://localhost:3000/api/stats/')).data;
-  totalDollarCount = stats.totalDollarCount;
-  totalStrikerCount = stats.totalStrikerCount;
-  concurrentStrikerCount = stats.concurrentStrikerCount;
-} catch {
-} 
+ 
 
 ---
 
@@ -32,35 +24,9 @@ try {
             <h1 class="text-4xl text-wrap sm:text-5xl font-bold font-display">Accommodation is unaffordable</h1>
             <h4 class="text-2xl sm:text-2xl font-display">It's time to strike!</h4>
           </div>
-          <div class="stats stats-vertical md:stats-horizontal shadow">
-            <div class="stat">
-              <div class="stat-figure text-primary">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg> -->
-                <p class="text-5xl">🤺</p>
-              </div>
-              <div class="stat-title">Total Strikers</div>
-              <div class="stat-value text-primary">{totalStrikerCount}</div>
-            </div>
-             <div class="stat">
-              <div class="stat-figure text-primary">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg> -->
-                <p class="text-5xl">🚀</p>
-              </div>
-              <div class="stat-title">Concurrent Strikers</div>
-              <div class="stat-value text-primary">{concurrentStrikerCount}</div>
-            </div>           
-            <div class="stat">
-              <div class="stat-figure text-secondary">
-                <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> -->
-                <p class="text-5xl">💰</p>
-              </div>
-              <div class="stat-title">Rent withheld</div>
-              <div class="stat-value">${totalDollarCount}</div>
-              <!-- <div class="stat-desc"></div> -->
-            </div>
-            
-
-          </div>
+          <a href="/dashboard">
+            <StrikeStats />
+          </a>
         </div>
       </div>
     </div>

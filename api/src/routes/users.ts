@@ -3,7 +3,6 @@ import { Router, Request, Response } from 'npm:express';
 import { User } from '../db/models/user.ts';
 import mongoose from 'npm:mongoose';
 
-const ONE_WEEK = 604800000;
 const userRoutes = Router();
 
 userRoutes.post('/create', async (req: Request, res: Response) => {

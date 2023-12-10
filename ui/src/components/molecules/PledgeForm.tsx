@@ -14,7 +14,7 @@ export default function PledgeForm() {
   const cookies = new Cookies(null, { path: '/' });
 
   onMount(() => {
-    if (!cookies.get('authToken')) location.href = '/';
+    if (!cookies.get('authToken')) location.href = '/dashboard';
   });
 
   const [numberWeeks, setNumberWeeks] = createSignal<number>(12);
@@ -168,7 +168,7 @@ export default function PledgeForm() {
         </p>
         <hr class="border-accent/40 border-solid border-3" />
         <a
-          href="/"
+          href="/dashboard"
           class="text-blue-700 text-center"
         >
           I won't pledge just yet

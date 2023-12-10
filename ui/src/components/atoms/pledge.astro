@@ -1,6 +1,7 @@
 ---
 
 ---
-<div>
-  <p>{Astro.props.fullName} pledges to withold rent {Astro.props.numberWeeks ? `for ${Astro.props.numberWeeks} weeks` : 'until further notice'}</p>
+<div class="form w-full max-w-screen-sm flex flex-col gap-4 bg-slate-50 bg-opacity-30 shadow-lg rounded-xl p-4 lg:p-8">
+  <p><strong>{Astro.props.fullName}</strong> pledges to withold rent <strong>{Astro.props.numberWeeks ? `for ${Astro.props.numberWeeks} weeks` : 'until further notice'}</strong></p>
+  {Astro.props.why?.substring(0, 500)}
 </div>

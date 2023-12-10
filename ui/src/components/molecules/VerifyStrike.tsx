@@ -43,36 +43,16 @@ export default function VerifyStrike({ code }: VerifyStrikeProps) {
         alt="404"
         height="10"
       />
-      <p class="font-bold text-3xl justify-center items-center text-center">
-        Great to see you!
-        <br />
-        Let's strike
-      </p>
+      <div>
+        <p class="font-bold text-3xl justify-center items-center text-center">
+          Great to see you!
+        </p>
+        <p class="text-xl justify-center items-center text-center">
+          Let's strike
+        </p>
+      </div>
       <button
         class="bg-accent/40 text-xl w-full px-6 py-4   rounded-2xl shadow-lg disabled:bg-white/10 disabled:text-black/40"
-        onClick={handleSubmit}
-      >
-        {isLoading() ? (
-          <span class="loading loading-spinner loading-xl" />
-        ) : (
-          'Continue'
-        )}
-      </button>
-      <p class={`text-lg ${error() ? 'text-red-500' : 'text-transparent'}`}>
-        {error() || 'No error'}
-      </p>
-    </div>
-  );
-
-  return (
-    <div class="flex flex-col gap-4 justify-center text-center w-1/2">
-      <h1 class="text-5xl font-semibold font-display">Kia Ora!</h1>
-      <p class="text-2xl text-center">
-        Striking is an effective way to fight for fair access to education and
-        accommodation
-      </p>
-      <button
-        class="bg-accent/40 text-xl w-full px-8 py-6   rounded-2xl shadow-lg disabled:bg-white/10 disabled:text-black/40"
         onClick={handleSubmit}
       >
         {isLoading() ? (
