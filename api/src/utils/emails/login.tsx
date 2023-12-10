@@ -65,26 +65,32 @@ export const ConfirmUserEmail = ({
             <Text className="text-black text-lg leading-lg">
               We're confirming
             </Text>
-            <table className="table-auto w-full mt-4 rounded-lg">
-              <tr className="bg-blue-100">
+            <table className="table-auto even:bg-blue-100 w-full mt-4 rounded-lg">
+              <tr>
                 <td className="p-2 rounded-sm">Email</td>
                 <td className="p-2 rounded-sm">{emailAddress}</td>
               </tr>
+              {firstName && (
+                <tr>
+                  <td className="p-2 rounded-sm">Name</td>
+                  <td className="p-2 rounded-sm">
+                    {firstName} {lastName}
+                  </td>
+                </tr>
+              )}
+              {studentId && (
+                <tr>
+                  <td className="p-2 rounded-sm">Student ID</td>
+                  <td className="p-2 rounded-sm">{studentId}</td>
+                </tr>
+              )}
+              {upi && (
+                <tr>
+                  <td className="p-2 rounded-sm">Student UPI</td>
+                  <td className="p-2 rounded-sm">{upi}</td>
+                </tr>
+              )}
               <tr>
-                <td className="p-2 rounded-sm">Name</td>
-                <td className="p-2 rounded-sm">
-                  {firstName} {lastName}
-                </td>
-              </tr>
-              <tr className="bg-blue-100">
-                <td className="p-2 rounded-sm">Student ID</td>
-                <td className="p-2 rounded-sm">{studentId}</td>
-              </tr>
-              <tr>
-                <td className="p-2 rounded-sm">Student UPI</td>
-                <td className="p-2 rounded-sm">{upi}</td>
-              </tr>
-              <tr className="bg-blue-100 p-2 rounded-lg">
                 <td className="p-2 rounded-sm">Hall of Residence</td>
                 <td className="p-2 rounded-sm">{hallOfResidence}</td>
               </tr>

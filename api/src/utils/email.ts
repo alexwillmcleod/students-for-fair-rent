@@ -5,6 +5,7 @@ import { render } from 'npm:@react-email/render';
 import { Auth } from '../db/models/auth.ts';
 import { User } from '../db/models/user.ts';
 
+const TEN_MINUTES = 600000;
 const env = await load();
 
 const smtpUser: string = env['SMTP_USER'];
@@ -34,8 +35,11 @@ export async function sendConfirmationEmail(emailAddress: string) {
   }
   const { _id, firstName, lastName, upi, studentId, hallOfResidence } =
     foundUser;
+  const randomValue = crypto.randomUUID();
   const authToken = new Auth({
     user: _id,
+    token: randomValue,
+    expiresAt: Date.now() + TEN_MINUTES,
   });
   const { token } = await authToken.save();
 

@@ -5,7 +5,6 @@ const TEN_MINUTES = 600000;
 const authSchema = new Schema({
   token: {
     type: String,
-    default: crypto.randomUUID(),
     unique: true,
     required: true,
   },

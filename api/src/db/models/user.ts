@@ -1,12 +1,11 @@
 import { Schema, model, Document } from 'npm:mongoose';
 
 export interface UserType extends Document {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   emailAddress: string;
-  upi: string;
-  studentId: string;
-  isAnonymous: boolean;
+  upi?: string;
+  studentId?: string;
   isVerified: boolean;
   createdAt: Date;
   hallOfResidence:
@@ -14,7 +13,7 @@ export interface UserType extends Document {
     | 'Grafton'
     | 'University Hall Towers'
     | 'Waiparuru'
-    | 'Carlaw Park Stuart McCutcheon'
+    | 'Carlaw Park Stuart McCutcheon House'
     | 'Carlaw Park Nicholls'
     | '55 Symonds'
     | 'Te Tirohanga o te Toangaroa';
@@ -23,13 +22,11 @@ export interface UserType extends Document {
 const userSchema = new Schema<UserType>({
   firstName: {
     type: String,
-    required: true,
     maxLength: 20,
     minLength: 2,
   },
   lastName: {
     type: String,
-    required: true,
     maxLength: 20,
     minLength: 2,
   },
@@ -46,21 +43,16 @@ const userSchema = new Schema<UserType>({
       'Please fill a valid email address',
     ],
   },
-  upi: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  studentId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  isAnonymous: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
+  // upi: {
+  //   type: String,
+  //   unique: true,
+  //   required: false,
+  // },
+  // studentId: {
+  //   type: String,
+  //   unique: true,
+  //   required: false,
+  // },
   isVerified: {
     type: Boolean,
     required: true,
@@ -79,7 +71,7 @@ const userSchema = new Schema<UserType>({
       'Grafton',
       'University Hall Towers',
       'Waiparuru',
-      'Carlaw Park Stuart McCutcheon',
+      'Carlaw Park Stuart McCutcheon House',
       'Carlaw Park Nicholls',
       '55 Symonds',
       'Te Tirohanga o te Toangaroa',

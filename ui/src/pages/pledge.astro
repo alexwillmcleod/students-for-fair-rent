@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/layout.astro";
+import PledgeForm from '@molecules/PledgeForm';
+---
+
+<Layout>
+  <div class="flex flex-col items-center w-full">
+    <PledgeForm client:only />
+  </div>
+</Layout>
+

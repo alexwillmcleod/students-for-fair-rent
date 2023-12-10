@@ -11,8 +11,8 @@ export default function StartStrikeForm() {
   const [firstName, setFirstName] = createSignal<string>('');
   const [lastName, setLastName] = createSignal<string>('');
   const [emailAddress, setEmailAddress] = createSignal<string>('');
-  const [upi, setUpi] = createSignal<string>('');
-  const [studentId, setStudentId] = createSignal<string>('');
+  // const [upi, setUpi] = createSignal<string>('');
+  // const [studentId, setStudentId] = createSignal<string>('');
   const halls: Residence[] = [
     "O'Rorke",
     'Waipārūrū',
@@ -47,11 +47,11 @@ export default function StartStrikeForm() {
     }
     try {
       const userCreateRes = await axios.post('/user/create', {
-        firstName: firstName(),
-        lastName: lastName(),
+        firstName: firstName() == '' ? undefined : firstName(),
+        lastName: lastName() == '' ? undefined : lastName(),
         emailAddress: emailAddress(),
-        upi: upi(),
-        studentId: studentId(),
+        // upi: upi(),
+        // studentId: studentId(),
         hallOfResidence: changedHallOfResidence,
       });
       await axios.post(`/auth/send/${emailAddress()}`);
@@ -63,7 +63,7 @@ export default function StartStrikeForm() {
         setError('Could not sign you up 🥺. Try again later');
       } else if (
         errorMessage ==
-        '`firstName`, `lastName`, `studentId`, `upi`, `emailAddress`, and `hallOfResidence` are required fields'
+        '`emailAddress`, and `hallOfResidence` are required fields'
       ) {
         setError('You are missing a field');
       } else if (errorMessage == 'user already exists') {
@@ -72,17 +72,6 @@ export default function StartStrikeForm() {
     }
     setIsLoading(false);
   };
-
-  if (isSuccess()) {
-    return (
-      <div class="p-4">
-        <div class="form w-fit flex flex-col gap-4 bg-slate-50 bg-opacity-30 shadow-lg rounded-xl p-4">
-          Why the fuck does this not work {emailAddress()}!
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div class="p-4">
       <div class="form w-fit flex flex-col gap-4 bg-slate-50 bg-opacity-30 shadow-lg rounded-xl p-4">
@@ -94,7 +83,7 @@ export default function StartStrikeForm() {
         <hr class="border-accent/40 border-solid border-3 " />
         <div class="form-control w-full">
           <label class="label">
-            <span class="label-text text-lg">First Name</span>
+            <span class="label-text text-lg">First Name (Optional)</span>
           </label>
           <input
             type="text"
@@ -106,7 +95,7 @@ export default function StartStrikeForm() {
         </div>
         <div class="form-control w-full">
           <label class="label">
-            <span class="label-text text-lg">Last Name</span>
+            <span class="label-text text-lg">Last Name (Optional)</span>
           </label>
           <input
             type="text"
@@ -128,7 +117,7 @@ export default function StartStrikeForm() {
             value={emailAddress()}
           />
         </div>
-        <div class="form-control w-full">
+        {/* <div class="form-control w-full">
           <label class="label">
             <span class="label-text text-lg">UPI</span>
             <span class="label-text text-md">(eg. amcl287)</span>
@@ -147,13 +136,13 @@ export default function StartStrikeForm() {
             <span class="label-text text-md">(eg. 567604513)</span>
           </label>
           <input
-            type="text"
+            type="number"
             placeholder="Enter your Student ID"
             class="input input-bordered w-full text-lg p-2"
             onChange={(e) => setStudentId(e.target.value)}
             value={studentId()}
           />
-        </div>
+        </div> */}
         <div class="form-control w-full">
           <label class="label">
             <span class="label-text text-lg">Hall of Residence</span>

@@ -3,7 +3,6 @@ import { createSignal, onMount } from 'solid-js';
 import type { Residence } from '@organisms/Calculator';
 import axios, { AxiosError } from 'axios';
 import { createSign } from 'crypto';
-import { createCookieStore } from '@solid-primitives/cookies-store';
 import Cookies from 'universal-cookie';
 
 const baseUrl = import.meta.env.PUBLIC_API_BASE_URL;
@@ -15,7 +14,6 @@ export default function LoginForm() {
   const [error, setError] = createSignal<string | undefined>();
   const [isLoading, setIsLoading] = createSignal<boolean>(false);
   const [isSuccess, setIsSuccess] = createSignal<boolean>(false);
-  const [cookies, setCookies] = createCookieStore<{ authToken: string }>();
 
   onMount(() => {
     const cookies = new Cookies(null, { path: '/' });

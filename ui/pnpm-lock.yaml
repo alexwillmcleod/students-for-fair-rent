@@ -17,9 +17,6 @@ dependencies:
   '@nanostores/solid':
     specifier: ^0.4.2
     version: 0.4.2(nanostores@0.9.4)(solid-js@1.8.3)
-  '@solid-primitives/cookies-store':
-    specifier: ^1.1.11
-    version: 1.1.11(solid-js@1.8.3)
   '@types/node':
     specifier: ^20.10.4
     version: 20.10.4
@@ -29,6 +26,9 @@ dependencies:
   axios:
     specifier: ^1.6.2
     version: 1.6.2
+  clsx:
+    specifier: ^2.0.0
+    version: 2.0.0
   daisyui:
     specifier: ^3.5.1
     version: 3.5.1
@@ -1490,23 +1490,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@solid-primitives/cookies-store@1.1.11(solid-js@1.8.3):
-    resolution: {integrity: sha512-M96jCW37yDgVOp2glcBZP7grYTqmZFqTyx3BRp1GZXJ/P97kWGMzjK7ZOCYD81OlVRHgxsP1mbTDsVekr4XkRw==}
-    peerDependencies:
-      solid-js: ^1.0.7
-    dependencies:
-      '@solid-primitives/local-store': 1.1.4(solid-js@1.8.3)
-      solid-js: 1.8.3
-    dev: false
-
-  /@solid-primitives/local-store@1.1.4(solid-js@1.8.3):
-    resolution: {integrity: sha512-sjje0IdTNZ4bKN9c16Rw03QOAbgkk2UVYcqyvyP52xyORvN9VSWXQxUY9nxnxlJR7GCn5VfDZWfXMrqexnix1Q==}
-    peerDependencies:
-      solid-js: ^1.0.7
-    dependencies:
-      solid-js: 1.8.3
-    dev: false
 
   /@types/acorn@4.0.6:
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}

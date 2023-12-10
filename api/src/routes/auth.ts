@@ -4,7 +4,9 @@ import { User } from '../db/models/user.ts';
 import { Auth } from '../db/models/auth.ts';
 import { sendConfirmationEmail } from '../utils/email.ts';
 import { createJWT, verifyJWT } from '../utils/auth.ts';
+import mongoose from 'npm:mongoose';
 
+const ONE_WEEK = 3600000;
 const authRoutes = Router();
 
 authRoutes.post('/send/:emailAddress', async (req: Request, res: Response) => {
@@ -18,15 +20,16 @@ authRoutes.post('/send/:emailAddress', async (req: Request, res: Response) => {
   }
   try {
     await sendConfirmationEmail(emailAddress);
-  } catch {
+  } catch (err) {
+    console.error(err);
     return res.status(500).send('failed to send email to that address');
   }
   return res.status(200).send('successfully sent email');
 });
 
-authRoutes.post('/verify/:token', async (req: Request, res: Response) => {
+authRoutes.post('/verify', async (req: Request, res: Response) => {
   // Extract token
-  const { token } = req.params;
+  const { token } = req.body;
   if (!token) {
     return res.status(400).send('missing verification');
   }
@@ -40,24 +43,27 @@ authRoutes.post('/verify/:token', async (req: Request, res: Response) => {
   });
 
   // Delete all expired users
-  const ONE_WEEK = 3600000;
   const expiryDate = Date.now() + ONE_WEEK;
   await User.deleteMany({
     isVerified: false,
     createdAt: {
-      $lt: expiryDate,
+      $gt: expiryDate,
     },
   });
 
   // Search for token
-  const foundToken = await Auth.findOne({ token });
+  const foundToken = await Auth.findOne({
+    token,
+  });
   if (!foundToken) {
     return res.status(400).send('invalid token');
   }
 
   // Search for user
   const { user } = foundToken;
-  const foundUser = await User.findById(user);
+
+  console.log(`user = ${user as mongoose.Types.ObjectId}`);
+  const foundUser = await User.findById(user as mongoose.Types.ObjectId);
   if (!foundUser) {
     return res.status(500).send('could not find associated user');
   }

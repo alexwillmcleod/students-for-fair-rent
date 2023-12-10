@@ -5,8 +5,10 @@ import { User } from './db/models/user.ts';
 import userRoutes from './routes/users.ts';
 import authRoutes from './routes/auth.ts';
 import strikeRoutes from './routes/strike.ts';
+import statsRoutes from './routes/stats.ts';
 import { load } from 'https://deno.land/std@0.208.0/dotenv/mod.ts';
 import { maybeAuth } from './middleware/auth.ts';
+import cors from 'npm:cors';
 
 // Get environment variables from .env
 // config();
@@ -14,6 +16,7 @@ const env = await load();
 
 const app = express();
 app.use(json());
+app.use(cors());
 
 // Connect to mongodb database
 const databaseUrl: string = env['DATABASE_URL'];
@@ -23,6 +26,7 @@ const apiRouter = Router();
 apiRouter.use('/user', userRoutes);
 apiRouter.use('/auth', authRoutes);
 apiRouter.use('/strike', strikeRoutes);
+apiRouter.use('/stats', statsRoutes);
 apiRouter.get('/', maybeAuth, async (req, res) => {
   return res
     .status(200)
