@@ -39,14 +39,6 @@ apiRouter.get('/', maybeAuth, async (req, res) => {
 
 app.use('/api', apiRouter);
 
-// await new User({
-//   firstName: 'Doy',
-//   lastName: 'Stoy',
-//   emailAddress: 'doy@gmail.com',
-//   upi: 'dsto145',
-//   studentId: '507036952',
-// }).save();
-
 const port = env['PORT'] || 3000;
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
