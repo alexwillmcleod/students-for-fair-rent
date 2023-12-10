@@ -46,8 +46,14 @@ export const ConfirmUserEmail = ({
       <Preview>Students for Fair Rent Strike! 🤺</Preview>
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans">
-          <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
-            <Section className="mt-[32px]">
+          <Container
+            key="container-1"
+            className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]"
+          >
+            <Section
+              key="section-1"
+              className="mt-[32px]"
+            >
               <Img
                 src={`${baseUrl}/images/navbar-logo-without-text.png`}
                 width="40"
