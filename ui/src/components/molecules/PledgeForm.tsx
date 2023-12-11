@@ -42,6 +42,7 @@ export default function PledgeForm() {
         {
           numberWeeks: isUntilFurtherNotice() ? undefined : numberWeeks(),
           why: why(),
+          isAnonymous: isAnonymous(),
         },
         {
           headers: {
