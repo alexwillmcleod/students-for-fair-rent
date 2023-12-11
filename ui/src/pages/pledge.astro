@@ -1,8 +1,8 @@
 ---
-import EndPledge from "@molecules/EndPledge";
 import Layout from "../layouts/layout.astro";
 import PledgeForm from '@molecules/PledgeForm';
 import axios from "axios";
+import PledgeStatus from "@molecules/PledgeStatus";
 const baseUrl = import.meta.env.PUBLIC_API_BASE_URL; 
 axios.defaults.baseURL = baseUrl;
 const authToken = Astro.cookies.get('authToken');
@@ -20,7 +20,6 @@ try {
 } catch (err) {
   console.error(err);
 }
-console.log(`isPledged = ${isPledged}`);
 ---
 
 <Layout>
@@ -30,8 +29,8 @@ console.log(`isPledged = ${isPledged}`);
       <div class="w-1/2 h-40 skeleton bg-primary/20" ></div> 
     : 
       (
-        isPledged ? 
-          <EndPledge client:only/> 
+        isPledged.isOngoing ? 
+          <PledgeStatus why={isPledged.why} client:only/> 
             : 
           <PledgeForm client:only />
       )  

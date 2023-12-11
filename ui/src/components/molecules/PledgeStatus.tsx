@@ -7,15 +7,15 @@ const baseUrl = import.meta.env.PUBLIC_API_BASE_URL;
 axios.defaults.baseURL = baseUrl;
 const MAX_WHY_LEN = 500;
 
-export default function PledgeForm() {
+interface PledgeStatusProps {
+  why?: string;
+}
+
+export default function PledgeStatus(props: PledgeStatusProps) {
   const [error, setError] = createSignal<string | undefined>();
   const [isLoading, setIsLoading] = createSignal<boolean>(false);
   const [isSuccess, setIsSuccess] = createSignal<boolean>(false);
   const cookies = new Cookies(null, { path: '/' });
-
-  onMount(() => {
-    if (!cookies.get('authToken')) location.href = '/dashboard';
-  });
 
   const [confirmationText, setConfirmationText] = createSignal<string>('');
 
@@ -54,6 +54,14 @@ export default function PledgeForm() {
           <h3 class="text-2xl">You're already pledged! Superstar 🎸</h3>
         </div>
         <hr class="border-accent/40 border-solid border-3 " />
+        <label class="form-control">
+          <div class="label">
+            <span class="label-text">Your Why:</span>
+          </div>
+          <p class="textarea textarea-bordered min-h-[6rem] min-w-full resize">
+            {props.why}
+          </p>
+        </label>
         <div class="form-control w-full flex flex-col gap-6">
           <div>
             <div class="form-control">

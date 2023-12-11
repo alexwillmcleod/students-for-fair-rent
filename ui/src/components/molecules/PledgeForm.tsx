@@ -13,10 +13,6 @@ export default function PledgeForm() {
   const [isSuccess, setIsSuccess] = createSignal<boolean>(false);
   const cookies = new Cookies(null, { path: '/' });
 
-  onMount(() => {
-    if (!cookies.get('authToken')) location.href = '/dashboard';
-  });
-
   const [numberWeeks, setNumberWeeks] = createSignal<number>(12);
   const [isUntilFurtherNotice, setIsUntilFurtherNotice] =
     createSignal<boolean>(true);
