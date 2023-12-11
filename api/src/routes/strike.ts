@@ -34,7 +34,10 @@ const getOverlappingStrike = async (
 strikeRoutes.get('/status', auth, async (req: Request, res: Response) => {
   try {
     const ongoingStrike = await getOverlappingStrike(req.body.user._id);
-    return res.status(200).send(ongoingStrike != undefined);
+    return res.status(200).send({
+      isOngoing: ongoingStrike != undefined,
+      why: ongoingStrike?.why,
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).send('failed to get status');
