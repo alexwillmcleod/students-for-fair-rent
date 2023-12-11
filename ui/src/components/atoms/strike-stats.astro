@@ -3,12 +3,15 @@ import axios from "axios";
 let totalDollarCount = '...';
 let totalStrikerCount = '...';
 let concurrentStrikerCount = '...';
+const baseUrl = import.meta.env.PUBLIC_API_BASE_URL;
+axios.defaults.baseURL = baseUrl;
 try {
-  const stats = (await axios.get('http://localhost:3000/api/stats/')).data;
+  const stats = (await axios.get('/stats/')).data;
   totalDollarCount = stats.totalDollarCount;
   totalStrikerCount = stats.totalStrikerCount;
   concurrentStrikerCount = stats.concurrentStrikerCount;
-} catch {
+} catch (err) {
+  console.error(err);
 }
 ---
 <div class="stats stats-vertical md:stats-horizontal shadow">
