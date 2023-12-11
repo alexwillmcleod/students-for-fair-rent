@@ -29,7 +29,7 @@ try {
                 <p class="text-5xl">🚀</p>
               </div>
               <div class="stat-title">Concurrent Strikers</div>
-              <div class="stat-value text-primary">{concurrentStrikerCount == '...' ? <div class="w-full max-w-xs rounded-lg h-8 skeleton bg-primary/20"/> : totalStrikerCount}</div>
+              <div class="stat-value text-primary">{concurrentStrikerCount == '...' ? <div class="w-full max-w-xs rounded-lg h-8 skeleton bg-primary/20"/> : concurrentStrikerCount}</div>
             </div>           
             <div class="stat">
               <div class="stat-figure text-secondary">
@@ -37,7 +37,7 @@ try {
                 <p class="text-5xl">💰</p>
               </div>
               <div class="stat-title">Rent withheld</div>
-              <div class="stat-value text-primary">{totalDollarCount == '...' ? <div class="w-full max-w-xs rounded-lg h-8 skeleton bg-primary/20"/> : concurrentStrikerCount}</div>
+              <div class="stat-value text-primary">{totalDollarCount == '...' ? <div class="w-full max-w-xs rounded-lg h-8 skeleton bg-primary/20"/> : `\$${totalDollarCount}`}</div>
               <!-- <div class="stat-desc"></div> -->
             </div>
             
