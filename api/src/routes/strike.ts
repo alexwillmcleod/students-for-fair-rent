@@ -66,6 +66,7 @@ strikeRoutes.post('/create', auth, async (req: Request, res: Response) => {
       start: Date.now(),
       end: newEnd,
       hallOfResidence: req.body.user.hallOfResidence,
+      isAnonymous,
       why,
     }).save();
   } catch (err) {
