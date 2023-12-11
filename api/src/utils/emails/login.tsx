@@ -16,6 +16,7 @@ import {
   Tailwind,
   Text,
 } from 'npm:@react-email/components';
+// @deno-types="npm:@types/react"
 import * as React from 'npm:react';
 
 interface LoginEmailProps {

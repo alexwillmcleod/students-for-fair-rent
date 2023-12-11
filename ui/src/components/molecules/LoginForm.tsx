@@ -43,7 +43,7 @@ export default function LoginForm() {
       <div class="form w-fit flex flex-col gap-4 bg-slate-50 bg-opacity-30 shadow-lg rounded-xl p-4">
         <div class="inline-flex gap-3">
           <h3 class="text-2xl">
-            Join the <strong>Students for Fair Rent Strike</strong> 🤺
+            Get back to the <strong>Students for Fair Rent Strike</strong> 🤺
           </h3>
         </div>
         <hr class="border-accent/40 border-solid border-3 " />

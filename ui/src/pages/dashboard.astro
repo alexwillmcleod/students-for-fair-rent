@@ -20,7 +20,8 @@ const pledges = (await axios.get('http://localhost:3000/api/dashboard')).data;
       ( 
         <>
           <p class="text-lg">Go you! Thanks for striking :)</p>
-          </>
+          <a href="/logout" class="flex font-bold font-display bg-accent bg-opacity-60 shadow-lg  px-6 py-2 text-xl rounded-full">Log Out</a>
+        </>
         ) : 
          (
           <p class="text-lg">You are not signed in</p>
@@ -30,7 +31,7 @@ const pledges = (await axios.get('http://localhost:3000/api/dashboard')).data;
             </div>
             <div class="divider divider-horizontal">or</div>
             <div class="grid h-20 place-items-center">
-              <a href="/join" class="flex font-bold font-display bg-accent bg-opacity-60 shadow-lg  px-6 py-2 text-lg rounded-full">Login</a>
+              <a href="/login" class="flex font-bold font-display bg-accent bg-opacity-60 shadow-lg  px-6 py-2 text-lg rounded-full">Login</a>
             </div>
           </div>
          )

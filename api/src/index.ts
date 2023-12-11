@@ -1,6 +1,6 @@
 // @deno-types="npm:@types/express"
 import express, { Request, Response, Router, json } from 'npm:express';
-import mongoose, { connect } from 'npm:mongoose';
+import mongoose, { connect } from 'npm:mongoose@8.0.3';
 import { User } from './db/models/user.ts';
 import userRoutes from './routes/users.ts';
 import authRoutes from './routes/auth.ts';
