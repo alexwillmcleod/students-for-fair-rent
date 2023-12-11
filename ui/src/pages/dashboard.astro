@@ -4,7 +4,9 @@ import StrikeStats from "@atoms/strike-stats.astro";
 import axios from "axios";
 import Layout from "layouts/layout.astro";
 const isLoggedIn = Astro.cookies.has('authToken');
-const pledges = (await axios.get('http://localhost:3000/api/dashboard')).data;
+const baseUrl = import.meta.env.PUBLIC_API_BASE_URL;
+axios.defaults.baseURL = baseUrl;
+const pledges = (await axios.get('/dashboard')).data;
 ---
 
 <Layout>
