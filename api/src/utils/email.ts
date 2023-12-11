@@ -64,6 +64,7 @@ export async function sendLoginEmail(emailAddress: string) {
     to: emailAddress,
     subject: 'SFR Rent Strike! 🤺',
     content: emailHtml,
+    html: emailHtml,
   };
   await smtpClient.send(mailOptions);
   smtpClient.close();
