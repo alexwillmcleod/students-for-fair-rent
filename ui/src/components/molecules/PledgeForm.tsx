@@ -45,6 +45,7 @@ export default function PledgeForm() {
         '/strike/create',
         {
           numberWeeks: isUntilFurtherNotice() ? undefined : numberWeeks(),
+          why: why(),
         },
         {
           headers: {
@@ -53,7 +54,7 @@ export default function PledgeForm() {
         }
       );
       setIsSuccess(true);
-      location.href = '/index';
+      location.href = '/';
     } catch (err) {
       console.error(err);
       const errorMessage = (err as AxiosError).response?.data;
@@ -79,10 +80,11 @@ export default function PledgeForm() {
         <div class="form-control w-full flex flex-col gap-6">
           <label class="label">
             <span class="label-text text-lg">
-              I pledge to withhold my rent from the University of Auckland for
+              I pledge to withhold my rent from the University of Auckland until
+              further notice
             </span>
           </label>
-          <div class="flex flex-col justify-center">
+          {/* <div class="flex flex-col justify-center">
             <div class="form-control">
               <label class="label cursor-pointer">
                 <span class="label-text">Until Further Notice</span>
@@ -117,7 +119,7 @@ export default function PledgeForm() {
               {numberWeeks() > 1 && <p>{numberWeeks()} Weeks</p>}
               {numberWeeks() == 1 && <p>1 Week</p>}
             </div>
-          </div>
+          </div> */}
           <div>
             <label class="form-control">
               <div class="label">

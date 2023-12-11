@@ -1,11 +1,41 @@
 ---
+import EndPledge from "@molecules/EndPledge";
 import Layout from "../layouts/layout.astro";
 import PledgeForm from '@molecules/PledgeForm';
+import axios from "axios";
+const baseUrl = import.meta.env.PUBLIC_API_BASE_URL; 
+axios.defaults.baseURL = baseUrl;
+const authToken = Astro.cookies.get('authToken');
+if (!authToken) return Astro.redirect('/dashboard');
+
+let isPledged;
+try {
+  isPledged = (await axios.get('/strike/status', {
+    headers: {
+      Authorization: `Bearer ${
+        authToken.value
+      }`
+    } 
+  })).data;
+} catch (err) {
+  console.error(err);
+}
+console.log(`isPledged = ${isPledged}`);
 ---
 
 <Layout>
   <div class="flex flex-col items-center w-full">
-    <PledgeForm client:only />
+  {
+    (isPledged == undefined) ? 
+      <div class="w-1/2 h-40 skeleton bg-primary/20" ></div> 
+    : 
+      (
+        isPledged ? 
+          <EndPledge client:only/> 
+            : 
+          <PledgeForm client:only />
+      )  
+  }
   </div>
 </Layout>
 
