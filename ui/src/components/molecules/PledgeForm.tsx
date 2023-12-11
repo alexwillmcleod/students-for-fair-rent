@@ -54,7 +54,7 @@ export default function PledgeForm() {
         }
       );
       setIsSuccess(true);
-      location.href = '/';
+      location.href = '/dashboard';
     } catch (err) {
       console.error(err);
       const errorMessage = (err as AxiosError).response?.data;
