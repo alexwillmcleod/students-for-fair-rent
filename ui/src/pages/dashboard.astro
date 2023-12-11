@@ -7,7 +7,7 @@ const isLoggedIn = Astro.cookies.has('authToken');
 // const isLoggedIn = true;
 const baseUrl = import.meta.env.PUBLIC_API_BASE_URL;
 axios.defaults.baseURL = baseUrl;
-let pledges = [];
+let pledges;
 try {
   pledges = (await axios.get('/dashboard')).data;
 } catch {
@@ -56,9 +56,10 @@ try {
     <div class="form w-full flex flex-col gap-4 bg-slate-50 bg-opacity-30 shadow-lg rounded-xl p-4 lg:p-8">
       <h2 class="text-2xl font-bold">Pledges:</h2>
       <div class="flex flex-col w-full items-center gap-4 justify-center p-4">
-        {pledges.length > 0 ? pledges.map((element: any) => (
+        {pledges != undefined ? pledges.map((element: any) => (
           <Pledge {...element} />
         )) : <div class="w-full h-40 skeleton bg-primary/20"/>}
+        {pledges.length == 0 && <div class="w-full h-40 flex justify-center items-center">No pledges to show...</div>}
       </div>
     </div>
   </div>
