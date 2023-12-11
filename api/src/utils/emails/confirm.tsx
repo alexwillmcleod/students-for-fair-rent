@@ -16,6 +16,7 @@ import {
   Tailwind,
   Text,
 } from 'npm:@react-email/components';
+import 'npm:@react-email/tailwind';
 import * as React from 'npm:react';
 
 interface ConfirmUserEmailProps {

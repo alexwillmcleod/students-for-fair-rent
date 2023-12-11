@@ -20,7 +20,7 @@ export class UserNotFoundError extends Error {}
 export async function sendLoginEmail(emailAddress: string) {
   await smtpClient.connectTLS({
     hostname: smtpProvider,
-    port: 465,
+    port: 587,
     username: smtpUser,
     password: smtpPass,
   });
