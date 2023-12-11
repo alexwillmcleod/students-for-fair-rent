@@ -10,7 +10,6 @@ import mongoose from 'npm:mongoose';
 import { UserType } from '../db/models/user.ts';
 
 const jwtSecret = Deno.env.get('JWT_SECRET');
-console.log(`jwtSecret = ${jwtSecret}`);
 const ONE_WEEK = 3600000;
 
 const encoder = new TextEncoder();

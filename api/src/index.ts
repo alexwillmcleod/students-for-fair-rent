@@ -1,6 +1,6 @@
 // @deno-types="npm:@types/express"
 import express, { Request, Response, Router, json } from 'npm:express';
-import mongoose, { connect } from 'npm:mongoose@8.0.3';
+import mongoose, { connect } from 'npm:mongoose';
 import { User } from './db/models/user.ts';
 import userRoutes from './routes/users.ts';
 import authRoutes from './routes/auth.ts';
@@ -35,7 +35,7 @@ apiRouter.get('/', maybeAuth, async (req, res) => {
 
 app.use('/api', apiRouter);
 
-const port = Deno.env.get('PORT') || 3000;
-app.listen(port, () => {
+const port = Number.parseInt(Deno.env.get('PORT') || '3000');
+app.listen(port, '0.0.0.0', () => {
   console.log(`Listening on port ${port}`);
 });
