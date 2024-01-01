@@ -4,24 +4,25 @@ module.exports = {
   theme: {
     fontFamily: {
       display: ['Omnes', 'Omnes-Bold'],
-      sans: ['Omnes-Bold', 'Atkinson Hyperlegible'],
+      sans: ['Atkinson Hyperlegible'],
     },
     extend: {
       colors: {
-        'ororke-blue': '#0090C4'
-      }
-    }
+        'ororke-blue': '#0090C4',
+      },
+    },
   },
   variants: {
     extend: {
       backgroundColor: ['hover'],
     },
-  }, 
+  },
   plugins: [require('daisyui')],
   safelist: [
     {
-      "pattern": /(bg|text|border)-(ororke|grafton|waiparuru|towers|blue|green|red|slate)-(blue|green|red|orange|100|200|300|400|500|600|700|800)/
-    }
+      pattern:
+        /(bg|text|border)-(ororke|grafton|waiparuru|towers|blue|green|red|slate)-(blue|green|red|orange|100|200|300|400|500|600|700|800)/,
+    },
   ],
   daisyui: {
     themes: [
