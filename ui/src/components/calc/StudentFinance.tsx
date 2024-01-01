@@ -40,7 +40,7 @@ export default function StudentFinance(props: StudentFinanceProps) {
         <span class="flex flex-col gap-4 items-center">
           <p>How much weekly Student Allowance do you receive for living costs?</p>
           <div class="flex flex-row gap-4">
-            <input type="range" min={0} max={300} value={props.weeklyAllowanceIncome} class="range range-md range-success w-64 md:w-96" onChange={handleChangeStudentAllowance}/> 
+            <input type="range" min={0} max={600} value={props.weeklyAllowanceIncome} class="range range-md range-success w-64 md:w-96" onChange={handleChangeStudentAllowance}/> 
             <p>${props.weeklyAllowanceIncome}</p>
           </div>
         </span>
