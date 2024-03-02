@@ -6,13 +6,14 @@ import Stats from '@molecules/strike/stats.astro';
 let pledges;
 try {
   const res = await axios({
-    url: '/dashboard',
-    baseUrl: import.meta.env.PUBLIC_API_BASE_URL
+    method: 'GET',
+    url: '/dashboard/',
+    baseURL: import.meta.env.PUBLIC_API_BASE_URL
   });
   pledges = res.data; 
-  console.log(`pledges = ${pledges.map(element => JSON.stringify(element))}`)
-} catch {
-
+} catch (err) {
+  console.error(err);
+  pledges = []
 }
 let concurrentStrikerCount;
 let totalDollarCount;
@@ -45,8 +46,8 @@ try {
   class="w-full  rounded-xl flex flex-col gap-4 p-8"
   style="background-image: url('/strike-gradient.png')"
 >
-  <div class="flex flex-col gap-4 justify-center items-center">
-    <a class="p-4 rounded-lg cursor-pointer bg-[#7289da] border-none text-white text-2xl font-strike">Join our Discord</a>
+  <div class="flex flex-col gap-4 justify-center items-center p-2">
+    <p class="text-white text-lg">Join our <a href="https://discord.gg/MZvmbCWKGk" target="_blank" class="p-2 rounded-lg cursor-pointer bg-[#7289da] border-none text-white text-lg font-strike">Discord</a></p>
   </div>
 
 </div>
@@ -56,7 +57,7 @@ try {
         {pledges != undefined ? pledges.map((element: any) => (
           <Pledge {...element} />
         )) : <div class="w-full h-40 skeleton bg-primary/20"/>}
-        {pledges.length == 0 && <div class="w-full h-40 flex justify-center items-center">No pledges to show...</div>}
+        {pledges.length == 0 && <div class="text-white w-full h-40 flex justify-center items-center">No pledges to show...</div>}
       </div>
     </div>
   </div>

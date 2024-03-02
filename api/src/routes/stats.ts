@@ -43,6 +43,14 @@ const getWeeklyRent = (hall: any) => {
 
 const updateCalculations = async () => {
   const totalStrikerCount = (await Strike.distinct('emailAddress')).length;
+  if (totalStrikerCount == 0) {
+    await new Stats({
+      totalStrikerCount: 0,
+      totalDollarCount: 0,
+      concurrentStrikerCount: 0,
+    });
+    return;
+  }
   const concurrentStrikerCount = (
     await Strike.distinct('emailAddress', {
       $or: [
