@@ -9,7 +9,7 @@ import { config } from 'dotenv';
 import axios from 'axios';
 
 config();
-axios.defaults.baseUrl = process.env.API_BASE_URL;
+axios.defaults.baseURL = process.env.PUBLIC_API_BASE_URL;
 
 ---
 
@@ -26,9 +26,12 @@ axios.defaults.baseUrl = process.env.API_BASE_URL;
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Bowlby+One+SC&display=swap');
+
       @tailwind base;
       @tailwind components;
       @tailwind utilities;
+>
       @font-face {
         font-family: 'Omnes';
         src: url('/fonts/Omnes.otf') format('opentype');

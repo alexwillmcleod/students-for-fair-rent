@@ -1,9 +1,28 @@
 import { Schema, model, Types } from 'npm:mongoose';
 
 const strikeSchema = new Schema({
-  user: {
-    type: Types.ObjectId,
+  firstName: {
+    type: String,
+    maxLength: 20,
+    minLength: 2,
+  },
+  lastName: {
+    type: String,
+    maxLength: 20,
+    required: false,
+  },
+  emailAddress: {
+    type: String,
+    unique: true,
+    maxLength: 72,
+    minLength: 4,
+    trim: true,
+    lowercase: true,
     required: true,
+    match: [
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      'Please fill a valid email address',
+    ],
   },
   start: {
     type: Date,
@@ -38,6 +57,11 @@ const strikeSchema = new Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now(),
   },
 });
 

@@ -1,7 +1,6 @@
 // @deno-types="npm:@types/express"
 import { Router, Request, Response } from 'npm:express';
 import { Strike } from '../db/models/strike.ts';
-import { User } from '../db/models/user.ts';
 
 const dashboardRoutes = Router();
 const ONE_WEEK = 604800000;
@@ -24,16 +23,13 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
         },
       })
     ).map(async (element) => {
-      const user = await User.findById(element.user);
       const fullName =
-        element.isAnonymous || !user || !user.firstName
+        element.isAnonymous || !element.firstName
           ? 'Anonymous'
-          : [user.firstName, user.lastName].join(' ');
-      const numberWeeks = element.end
-        ? Math.round(
-            (element.end.getTime() - element.start.getTime()) / ONE_WEEK
-          )
-        : undefined;
+          : element.lastName
+          ? [element.firstName, element.lastName].join(' ')
+          : element.firstName;
+      const numberWeeks = undefined;
       return {
         why: element.why,
         numberWeeks,

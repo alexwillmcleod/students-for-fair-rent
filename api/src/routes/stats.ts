@@ -1,7 +1,7 @@
 // @deno-types="npm:@types/express"
 import { Router, Request, Response } from 'npm:express';
-import { User } from '../db/models/user.ts';
 import { Strike } from '../db/models/strike.ts';
+import { Stats } from '../db/models/stats.ts';
 
 const ONE_WEEK = 604800000;
 const statsRoutes = Router();
@@ -41,43 +41,74 @@ const getWeeklyRent = (hall: any) => {
   }
 };
 
-const getTotalCost = statsRoutes.get(
-  '/',
-  async (req: Request, res: Response) => {
-    const totalStrikerCount = (await Strike.distinct('user')).length;
-    const concurrentStrikerCount = (
-      await Strike.distinct('user', {
-        $or: [
-          {
-            end: {
-              $gt: Date.now(),
-            },
+const updateCalculations = async () => {
+  const totalStrikerCount = (await Strike.distinct('emailAddress')).length;
+  const concurrentStrikerCount = (
+    await Strike.distinct('emailAddress', {
+      $or: [
+        {
+          end: {
+            $gt: Date.now(),
           },
-          { end: { $exists: false } },
-        ],
-        start: {
-          $lt: Date.now(),
         },
+        { end: { $exists: false } },
+      ],
+      start: {
+        $lt: Date.now(),
+      },
+    })
+  ).length;
+  const totalDollarCount = Math.round(
+    (await Strike.find())
+      .map((element) => {
+        let compDate = Date.now();
+        if (element.end && element.end.getTime() < compDate) {
+          compDate = element.end.getTime();
+        }
+        const numberOfMilliseconds = compDate - element.start.getTime();
+        const numberOfWeeks = numberOfMilliseconds / ONE_WEEK;
+        const weeklyRent = getWeeklyRent(element.hallOfResidence) || 0;
+        return weeklyRent * numberOfWeeks;
       })
-    ).length;
-    const totalDollarCount = Math.round(
-      (await Strike.find())
-        .map((element) => {
-          let compDate = Date.now();
-          if (element.end && element.end.getTime() < compDate) {
-            compDate = element.end.getTime();
-          }
-          const numberOfMilliseconds = compDate - element.start.getTime();
-          const numberOfWeeks = numberOfMilliseconds / ONE_WEEK;
-          const weeklyRent = getWeeklyRent(element.hallOfResidence) || 0;
-          return weeklyRent * numberOfWeeks;
-        })
-        .reduce((acc, x) => acc + x)
+      .reduce((acc, x) => acc + x)
+  );
+  await new Stats({
+    totalStrikerCount,
+    totalDollarCount,
+    concurrentStrikerCount,
+  }).save();
+};
+
+statsRoutes.get('/', async (req: Request, res: Response) => {
+  const mostRecentStat = await Stats.findOne({}).sort({
+    calculatedAt: -1,
+  });
+
+  if (mostRecentStat) {
+    // Create a new Date object for the current date and time
+    const currentDate = new Date();
+
+    // Create a new Date object for the date three days ago
+    const threeDaysAgo = new Date();
+    threeDaysAgo.setDate(currentDate.getDate() - 3);
+
+    const yourDate = mostRecentStat.calculatedAt;
+
+    if (yourDate < threeDaysAgo || yourDate > currentDate) {
+      updateCalculations();
+    }
+
+    return res.status(200).send(JSON.stringify(mostRecentStat));
+  } else {
+    updateCalculations();
+    return res.status(200).send(
+      JSON.stringify({
+        totalStrikerCount: 0,
+        totalDollarCount: 0,
+        concurrentStrikerCount: 0,
+      })
     );
-    return res
-      .status(200)
-      .send({ totalStrikerCount, concurrentStrikerCount, totalDollarCount });
   }
-);
+});
 
 export default statsRoutes;
