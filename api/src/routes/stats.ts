@@ -23,10 +23,10 @@ const getWeeklyRent = (hall: any) => {
     case '55 Symonds': {
       return 450;
     }
-    case 'Te Tirohanga o te Toangaroa': {
+    case 'Te Tirohanga o te Tōangaroa': {
       return 320;
     }
-    case 'Waiparuru': {
+    case 'Waipārūrū': {
       return 510;
     }
     case 'Grafton': {
@@ -37,6 +37,10 @@ const getWeeklyRent = (hall: any) => {
     }
     case "O'Rorke": {
       return 470;
+    }
+    default: {
+      // If this is broken just choose this random number
+      return 450;
     }
   }
 };
