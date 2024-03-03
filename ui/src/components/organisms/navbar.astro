@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+const isLoggedIn = Astro.cookies.has("authToken");
+---
+<div class="px-4 py-4 lg:px-12 lg:py-6">
+  <div class="navbar bg-slate-50 bg-opacity-30 shadow-lg px-6 py-4 lg:px-12 lg:py-4 rounded-full">
+    <div class="flex-1 lg:flex-none">
+      <a href="/" class="text-3xl font-bold">
+        <Image width="192" height="4" class="hidden lg:flex " src="/images/navbar-logo-with-text.png" alt="Students for Fair Rent Logo"/>
+        <Image width="48" height="4" class="flex lg:hidden" src="/images/navbar-logo-without-text.png" alt="Students for Fair Rent Logo"/>
+      </a>
+    </div> 
+    <div class="hidden lg:flex flex-row justify-center w-full">
+      <ul class="flex flex-row  justify-center items-center gap-8">
+        <li><a href="/mission">Mission</a></li> 
+        <li><a href="/team">Our Team</a></li> 
+        <li><a href="/calculator">Calculator</a></li> 
+        <!-- <li><a href="/quiz">Quiz</a></li>  -->
+        <li><a href="/Press release 15_09_23.pdf" target="_blank">Press Release</a></li> 
+        <li><a href="https://docs.google.com/document/d/1RAuRSbyZ0m9CrRGfzZnH7PN5KVXQD-s0k9z6YLyLV8g/edit" target="_blank">Data Sheet</a></li> 
+      </ul>
+    </div>
+    <div class="flex justify-end items-center">
+      
+      <div class="flex lg:hidden dropdown dropdown-bottom">
+        <label tabindex="0" class="btn btn-ghost rounded-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></label>
+        <ul class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a href="/mission">Mission</a></li> 
+          <li><a href="/team">Our Team</a></li> 
+          <li><a href="/calculator">Calculator</a></li> 
+          <!-- <li><a href="/quiz">Quiz</a></li>  -->
+          <li><a href="/Press release 15_09_23.pdf" target="_blank">Press Release</a></li> 
+          <li><a href="https://docs.google.com/document/d/1RAuRSbyZ0m9CrRGfzZnH7PN5KVXQD-s0k9z6YLyLV8g/edit" target="_blank">Data Sheet</a></li> 
+        </ul>
+      </div>
+      <a href="/strike" class="flex font-bold font-display bg-accent bg-opacity-60 shadow-lg  px-12 py-4 text-xl rounded-full">Strike</a>
+    </div>
+  </div>
+</div>

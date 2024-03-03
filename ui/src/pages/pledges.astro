@@ -1,0 +1,65 @@
+---
+import Layout from 'layouts/layout.astro';
+import Pledge from '@atoms/pledge.astro';
+import axios from 'axios';
+import Stats from '@molecules/strike/stats.astro';
+let pledges;
+try {
+  const res = await axios({
+    method: 'GET',
+    url: '/dashboard/',
+    baseURL: import.meta.env.PUBLIC_API_BASE_URL
+  });
+  pledges = res.data; 
+} catch (err) {
+  console.error(err);
+  pledges = []
+}
+let concurrentStrikerCount;
+let totalDollarCount;
+try {
+  const res = await axios({
+    method: 'get',
+    url: '/stats/',
+    baseURL: import.meta.env.PUBLIC_API_BASE_URL
+  });
+  concurrentStrikerCount = res.data.concurrentStrikerCount;
+  totalDollarCount = res.data.totalDollarCount;
+} catch {}
+---
+<Layout>
+  <div class="p-12 w-full flex flex-col gap-4 ">
+    <p class="font-strike text-3xl text-[#272727]">Strike for Fair Rent</p>
+{ concurrentStrikerCount > 10 && 
+<div
+  class="w-full  rounded-xl flex flex-col gap-4 p-8"
+  style="background-image: url('/strike-gradient.png')"
+>
+  <div class="flex flex-col gap-4 justify-center items-center">
+    <p class="text-white text-2xl">{concurrentStrikerCount} Students are Striking</p>
+  </div>
+  <div class="flex flex-col justify-center items-center gap-8">
+    <p class="text-white text-2xl">We have taken back <strong>${totalDollarCount}</strong> from the university</p>
+  </div>
+</div>
+}
+<div
+  class="w-full  rounded-xl flex flex-col gap-4 p-8"
+  style="background-image: url('/strike-gradient.png')"
+>
+  <div class="flex flex-col gap-4 justify-center items-center p-2">
+    <p class="text-white text-lg">Join our <a href="https://discord.gg/MZvmbCWKGk" target="_blank" class="p-2 rounded-lg cursor-pointer bg-[#7289da] border-none text-white text-lg font-strike">Discord</a></p>
+  </div>
+
+</div>
+    <div class="form w-full flex flex-col gap-4 bg-slate-50 bg-opacity-30 shadow-lg rounded-xl p-4 lg:p-8" style="background-image: url('/strike-gradient.png')">
+      <h2 class="text-2xl text-white font-strike">Pledges:</h2>
+      <div class="flex flex-col w-full items-center gap-4 justify-center p-4">
+        {pledges != undefined ? pledges.map((element: any) => (
+          <Pledge {...element} />
+        )) : <div class="w-full h-40 skeleton bg-primary/20"/>}
+        {pledges.length == 0 && <div class="text-white w-full h-40 flex justify-center items-center">No pledges to show...</div>}
+      </div>
+    </div>
+  </div>
+</Layout>

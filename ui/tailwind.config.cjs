@@ -5,6 +5,7 @@ module.exports = {
     fontFamily: {
       display: ['Omnes', 'Omnes-Bold'],
       sans: ['Atkinson Hyperlegible'],
+      strike: ['Bowlby One SC'],
     },
     extend: {
       colors: {

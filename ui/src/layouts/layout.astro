@@ -1,10 +1,16 @@
 ---
-import Navbar from "../components/navbar.astro"
-import Footer from "../components/footer.astro";
-import NotificationTray from '../components/NotificationTray';
+import Navbar from "@organisms/navbar.astro"
+import Footer from "@organisms/footer.astro";
+import NotificationTray from '../components/organisms/NotificationTray';
 import PressRelease from '/Press release 31_08_23.pdf';
 import { Image } from 'astro:assets';
 import { ViewTransitions } from "astro:transitions";
+import { config } from 'dotenv';
+import axios from 'axios';
+
+config();
+axios.defaults.baseURL = process.env.PUBLIC_API_BASE_URL;
+
 ---
 
 <html lang="en">
@@ -20,9 +26,12 @@ import { ViewTransitions } from "astro:transitions";
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Bowlby+One+SC&display=swap');
+
       @tailwind base;
       @tailwind components;
       @tailwind utilities;
+>
       @font-face {
         font-family: 'Omnes';
         src: url('/fonts/Omnes.otf') format('opentype');
@@ -61,7 +70,7 @@ import { ViewTransitions } from "astro:transitions";
   </head>
   <body class="flex flex-col bg-cover bg-no-repeat overflow-x-hidden min-h-screen" style="background-image: url('/images/sfr-background.png')">
     <Navbar />
-    <article class="flex-1">
+    <article class="flex-1 h-full">
       <slot />
     </article>
     <div class="min-w-full">

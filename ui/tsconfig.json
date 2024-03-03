@@ -4,6 +4,12 @@
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "resolveJsonModule": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "@molecules/*": ["components/molecules/*"],
+      "@organisms/*": ["components/organisms/*"],
+      "@atoms/*": ["components/atoms/*"]
+    }
   }
 }

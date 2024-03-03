@@ -1,0 +1,12 @@
+---
+import Stats from "@molecules/strike/stats.astro";
+import Layout from "../layouts/layout.astro";
+import StrikeForm from "@molecules/strike/StrikeForm";
+---
+
+<Layout>
+  <div class="flex flex-col justify-center items-center w-full p-12 gap-4">
+    <Stats />
+    <StrikeForm client:only />
+  </div>
+</Layout>
