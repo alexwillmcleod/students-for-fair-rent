@@ -1,10 +1,10 @@
 import { createSignal } from 'solid-js';
-import SelectYear from '../molecules/CalculatorSelectYear';
-import Introduction from '../molecules/CalculatorIntroduction';
+import SelectYear from '@molecules/CalculatorSelectYear';
+import Introduction from '@molecules/CalculatorIntroduction';
 import EnterWeeklyIncome from '@molecules/CalculatorEnterWeeklyIncome';
 import StudentFinance from '@molecules/CalculatorStudentFinance';
 import Results from '@molecules/CalculatorResults';
-import SelectResidence from '../molecules/CalculatorSelectResidence';
+import SelectResidence from '@molecules/CalculatorSelectResidence';
 
 export type Residence =
   | "O'Rorke"
@@ -36,58 +36,37 @@ export default function Calculator() {
       residence: undefined,
     });
 
-  const setIsFirstYear = (newValue: boolean) => {
+  const handleChange = (name: string, newValue: any) => {
     setCalculatorInformation({
       ...calculatorInformation(),
-      residence: undefined,
-      isFirstYear: newValue,
+      [name]: newValue,
     });
   };
-
-  const setWeeklyIncome = (newValue: number) => {
-    setCalculatorInformation({
-      ...calculatorInformation(),
-      weeklyIncome: newValue,
-    });
-  };
-  const setWeeklyAllowanceIncome = (newValue: number) => {
-    setCalculatorInformation({
-      ...calculatorInformation(),
-      weeklyAllowanceIncome: newValue,
-    });
-  };
-
-  const setWeeklyLoanIncome = (newValue: number) => {
-    setCalculatorInformation({
-      ...calculatorInformation(),
-      weeklyLoanIncome: newValue,
-    });
-  };
-  const setResidence = (newValue: Residence) => {
-    setCalculatorInformation({
-      ...calculatorInformation(),
-      residence: newValue,
-    });
-  };
-
   const stepArray = [
     <Introduction />,
     <SelectYear
-      setIsFirstYear={setIsFirstYear}
+      setIsFirstYear={(newValue) => {
+        handleChange('isFirstYear', newValue);
+        handleChange('residence', undefined);
+      }}
       isFirstYear={calculatorInformation().isFirstYear}
     />,
     <SelectResidence
       isFirstYear={calculatorInformation().isFirstYear!}
-      setResidence={setResidence}
+      setResidence={(newValue) => handleChange('residence', newValue)}
       residence={calculatorInformation().residence}
     />,
     <EnterWeeklyIncome
-      setWeeklyIncome={setWeeklyIncome}
+      setWeeklyIncome={(newValue) => handleChange('weeklyIncome', newValue)}
       weeklyIncome={calculatorInformation().weeklyIncome}
     />,
     <StudentFinance
-      setWeeklyAllowanceIncome={setWeeklyAllowanceIncome}
-      setWeeklyLoanIncome={setWeeklyLoanIncome}
+      setWeeklyAllowanceIncome={(newValue) =>
+        handleChange('weeklyAllowanceIncome', newValue)
+      }
+      setWeeklyLoanIncome={(newValue) =>
+        handleChange('weeklyLoanIncome', newValue)
+      }
       weeklyAllowanceIncome={calculatorInformation().weeklyAllowanceIncome}
       weeklyLoanIncome={calculatorInformation().weeklyLoanIncome}
     />,

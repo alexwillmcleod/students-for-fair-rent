@@ -6,6 +6,7 @@ import CreatePledgeForm from './CreatePledgeForm';
 import axios from 'axios';
 import ExistingError from './ExistingError';
 import { navigate } from 'astro:transitions/client';
+import InformationForm from './InformationForm';
 
 const strikeDataSchema = z.object({
   firstName: z.string().min(2),
@@ -79,9 +80,10 @@ export default function StrikeForm() {
     });
   };
 
-  const [step, setStep] = createSignal<string>('createUser');
+  const [step, setStep] = createSignal<string>('information');
 
   const steps: Record<string, JSX.Element> = {
+    information: <InformationForm />,
     createUser: (
       <CreateUserForm
         handleChange={handleChange}
@@ -100,6 +102,10 @@ export default function StrikeForm() {
   };
 
   const onSubmit = async () => {
+    if (step() == 'information') {
+      setStep('createUser');
+      return;
+    }
     const result = strikeDataSchema.safeParse(strikeData());
     if (!result.success) {
       setErrors(result.error.format());

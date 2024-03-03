@@ -6,6 +6,7 @@ module.exports = {
       display: ['Omnes', 'Omnes-Bold'],
       sans: ['Atkinson Hyperlegible'],
       strike: ['Bowlby One SC'],
+      // strike: ['Fortnite'],
     },
     extend: {
       colors: {
