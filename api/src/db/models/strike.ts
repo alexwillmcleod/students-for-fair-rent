@@ -46,11 +46,11 @@ const strikeSchema = new Schema({
       "O'Rorke",
       'Grafton',
       'University Hall Towers',
-      'Waiparuru',
+      'Waipārūrū',
       'Carlaw Park Stuart McCutcheon House',
       'Carlaw Park Nicholls',
       '55 Symonds',
-      'Te Tirohanga o te Toangaroa',
+      'Te Tirohanga o te Tōangaroa',
     ],
   },
   isAnonymous: {
