@@ -29,7 +29,10 @@ const allPosts = await Astro.glob('../pages/posts/*.md*');
               <h3 class="uppercase font-strike text-white text-3xl text-center">Waipapa Taumata Rau</h3>
               <h4 class="font-sans text-white text-2xl text-center">for fair rent now!</h4>
             </div>
-            <a href="/strike" class="uppercase bg-[#e1e1e1] p-8  rounded-xl font-strike text-4xl text-[#272627] shadow-xl">Pledge</a>
+            <div class="flex flex-col gap-2 justify-center items-center">
+              <a href="/strike" class="uppercase bg-[#e1e1e1] p-8  rounded-xl font-strike text-4xl text-[#272627] shadow-xl">Pledge</a>
+              <a href="/info" class="text-xl text-blue-100 underline">Learn more</a>
+            </div>
           </div>
         </div>
       </div>

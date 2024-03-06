@@ -8,7 +8,6 @@ export default function InformationForm() {
       <a
         class="text-blue-100 underline text-xl"
         href="/info"
-        target="_blank"
       >
         Learn more about striking
       </a>
