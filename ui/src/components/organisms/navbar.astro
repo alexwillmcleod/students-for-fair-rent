@@ -2,12 +2,12 @@
 import { Image } from "astro:assets";
 const isLoggedIn = Astro.cookies.has("authToken");
 ---
-<div class="px-4 py-4 lg:px-12 lg:py-6">
-  <div class="navbar bg-slate-50 bg-opacity-30 shadow-lg px-6 py-4 lg:px-12 lg:py-4 rounded-full">
+<div class="px-4 py-4 xl:px-12 xl:py-6">
+  <div class="navbar bg-slate-50 bg-opacity-30 shadow-lg px-6 py-4 xl:px-12 xl:py-4 rounded-full">
     <div class="flex-1 lg:flex-none">
       <a href="/" class="text-3xl font-bold">
-        <Image width="192" height="4" class="hidden lg:flex " src="/images/navbar-logo-with-text.png" alt="Students for Fair Rent Logo"/>
-        <Image width="48" height="4" class="flex lg:hidden" src="/images/navbar-logo-without-text.png" alt="Students for Fair Rent Logo"/>
+        <Image width="192" height="4" class="hidden xl:flex " src="/images/navbar-logo-with-text.png" alt="Students for Fair Rent Logo"/>
+        <Image width="48" height="4" class="flex xl:hidden" src="/images/navbar-logo-without-text.png" alt="Students for Fair Rent Logo"/>
       </a>
     </div> 
     <div class="hidden lg:flex flex-row justify-center w-full">
