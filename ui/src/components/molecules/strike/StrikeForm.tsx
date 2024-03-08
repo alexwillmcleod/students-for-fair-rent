@@ -7,21 +7,22 @@ import axios from 'axios';
 import ExistingError from './ExistingError';
 import { navigate } from 'astro:transitions/client';
 import InformationForm from './InformationForm';
+import { ResidenceEnum, type Residence } from '@organisms/Calculator';
 
 const strikeDataSchema = z.object({
-  firstName: z.string().min(2),
+  firstName: z.string().min(2, 'First Name must be at least 2 characters long'),
   lastName: z.string().optional(),
   emailAddress: z.string().email(),
-  hallOfResidence: z.enum([
-    "O'Rorke",
-    'Waipārūrū',
-    'University Hall Towers',
-    'Grafton',
-    'Carlaw Park Stuart McCutcheon House',
-    'Carlaw Park Nicholls',
-    'Te Tirohanga o te Tōangaroa',
-    '55 Symonds',
-  ]),
+  hallOfResidence: z.nativeEnum(ResidenceEnum, {
+    errorMap: (issue, ctx) => {
+      console.log(
+        `issue = ${JSON.stringify(issue)}, ctx = ${JSON.stringify(ctx)}`
+      );
+      return {
+        message: 'Please select a Hall of Residence',
+      };
+    },
+  }),
   pledge: z
     .object({
       text: z.string().max(500),
@@ -29,14 +30,23 @@ const strikeDataSchema = z.object({
     })
     .optional(),
 });
-export type StrikeData = z.infer<typeof strikeDataSchema>;
+export type StrikeData = {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  hallOfResidence: Residence | 'Unselected';
+  pledge: {
+    text: string;
+    isAnonymous: boolean;
+  };
+};
 
 export default function StrikeForm() {
   const [strikeData, setStrikeData] = createSignal<StrikeData>({
     firstName: '',
     lastName: '',
     emailAddress: '',
-    hallOfResidence: "O'Rorke",
+    hallOfResidence: 'Unselected',
     pledge: {
       text: '',
       isAnonymous: false,

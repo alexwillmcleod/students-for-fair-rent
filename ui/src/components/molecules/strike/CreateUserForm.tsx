@@ -94,6 +94,9 @@ export default function CreateUserForm({
           value={strikeData().hallOfResidence}
           direction="up"
         />
+        <p class="text-white w-full text-center">
+          {(errors && errors() && errors().hallOfResidence?._errors) || ''}
+        </p>
       </div>
     </>
   );

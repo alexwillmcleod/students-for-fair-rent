@@ -6,15 +6,18 @@ import StudentFinance from '@molecules/CalculatorStudentFinance';
 import Results from '@molecules/CalculatorResults';
 import SelectResidence from '@molecules/CalculatorSelectResidence';
 
-export type Residence =
-  | "O'Rorke"
-  | 'Waipārūrū'
-  | 'University Hall Towers'
-  | 'Grafton'
-  | 'Carlaw Park Stuart McCutcheon House'
-  | 'Carlaw Park Nicholls'
-  | 'Te Tirohanga o te Tōangaroa'
-  | '55 Symonds';
+export enum ResidenceEnum {
+  "O'Rorke" = "O'Rorke",
+  'Waipārūrū' = 'Waipārūrū',
+  'University Hall Towers' = 'University Hall Towers',
+  'Grafton' = 'Grafton',
+  'Carlaw Park Stuart McCutcheon House' = 'Carlaw Park Stuart McCutcheon House',
+  'Carlaw Park Nicholls' = 'Carlaw Park Nicholls',
+  'Te Tirohanga o te Tōangaroa' = 'Te Tirohanga o te Tōangaroa',
+  '55 Symonds' = '55 Symonds',
+}
+
+export type Residence = keyof typeof ResidenceEnum;
 
 export interface CalculatorInformation {
   isFirstYear?: boolean;

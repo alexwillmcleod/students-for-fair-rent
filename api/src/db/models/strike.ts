@@ -1,5 +1,18 @@
 import { Schema, model, Types } from 'npm:mongoose';
 
+export enum ResidenceEnum {
+  "O'Rorke" = "O'Rorke",
+  'Waipārūrū' = 'Waipārūrū',
+  'University Hall Towers' = 'University Hall Towers',
+  'Grafton' = 'Grafton',
+  'Carlaw Park Stuart McCutcheon House' = 'Carlaw Park Stuart McCutcheon House',
+  'Carlaw Park Nicholls' = 'Carlaw Park Nicholls',
+  'Te Tirohanga o te Tōangaroa' = 'Te Tirohanga o te Tōangaroa',
+  '55 Symonds' = '55 Symonds',
+}
+
+export type Residence = keyof typeof ResidenceEnum;
+
 const strikeSchema = new Schema({
   firstName: {
     type: String,
@@ -42,16 +55,7 @@ const strikeSchema = new Schema({
   hallOfResidence: {
     type: String,
     required: true,
-    enum: [
-      "O'Rorke",
-      'Grafton',
-      'University Hall Towers',
-      'Waipārūrū',
-      'Carlaw Park Stuart McCutcheon House',
-      'Carlaw Park Nicholls',
-      '55 Symonds',
-      'Te Tirohanga o te Tōangaroa',
-    ],
+    enum: ResidenceEnum,
   },
   isAnonymous: {
     type: Boolean,
