@@ -13,6 +13,7 @@ const isLoggedIn = Astro.cookies.has("authToken");
     <div class="hidden lg:flex flex-row justify-center w-full">
       <ul class="flex flex-row  justify-center items-center gap-8">
         <li><a href="/mission">Mission</a></li> 
+        <li><a href="/info">Resources</a></li> 
         <li><a href="/team">Our Team</a></li> 
         <li><a href="/calculator">Calculator</a></li> 
         <!-- <li><a href="/quiz">Quiz</a></li>  -->
@@ -26,6 +27,7 @@ const isLoggedIn = Astro.cookies.has("authToken");
         <label tabindex="0" class="btn btn-ghost rounded-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg></label>
         <ul class="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><a href="/mission">Mission</a></li> 
+          <li><a href="/info">Resources</a></li> 
           <li><a href="/team">Our Team</a></li> 
           <li><a href="/calculator">Calculator</a></li> 
           <!-- <li><a href="/quiz">Quiz</a></li>  -->

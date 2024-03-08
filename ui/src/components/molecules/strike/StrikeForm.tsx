@@ -58,6 +58,9 @@ export default function StrikeForm() {
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
+    try {
+      localStorage.setItem(name, value);
+    } catch {}
     setStrikeData((prevData: any) => ({
       ...prevData,
       [name]: value,

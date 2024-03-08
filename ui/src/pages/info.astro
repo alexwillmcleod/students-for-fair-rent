@@ -63,6 +63,60 @@ import Layout from "../layouts/layout.astro";
         </div>
       </div>
     </div> 
+
+        <div class="flex flex-col p-8 justify-left items-left w-full gap-4">
+          <h3 class="text-3xl font-bold font-display">Striking 🤺 Resources</h3>
+          <a
+            class="rounded-xl flex flex-row justify-left items-center gap-4 py-4 px-8 w-full  bg-base-100/50"
+            href="https://discord.gg/MZvmbCWKGk"
+            target="_blank"
+          >
+            <p class="text-xl">Join our Discord</p>
+          </a>
+          <a
+            class="rounded-xl flex flex-row justify-left items-center gap-4 py-4 px-8 w-full bg-base-100/50"
+            href="https://cab.org.nz"
+            target="_blank"
+          >
+            <p class="text-xl ">Citizens Advice Bureau</p>
+          </a>
+          <a
+            class="rounded-xl flex flex-row justify-left items-center gap-4 py-4 px-8 w-full bg-base-100/50"
+            href="https://youthlaw.co.nz/"
+            target="_blank"
+          >
+            <p class="text-xl">YouthLaw</p>
+          </a>
+          <button
+            onclick="emailTemplateModal.showModal()"
+            class="rounded-xl flex flex-row justify-left items-center gap-4 py-4 px-8 w-full  bg-base-100/50"
+          >
+            <p class="text-xl">View our Email Template</p>
+          </button>
+        </div>
+
+     </div>
+      <dialog id="emailTemplateModal" class="modal">
+        <div class="modal-box">
+          <h3 class="font-bold text-lg">Email Template</h3>
+          <p class="py-4">
+            Hello, Accommodation Team,
+            <br />
+            <br />
+            I'm writing to notify you that I will be participating in the Students for Fair Rent strikes (see https://sfr.org.nz).
+            I will be actively choosing to withold rent until the University of Auckland accommodation team has negotatied a successful agreement with the Students for Fair Rent team on my behalf.
+            <br />
+            <br />           
+            Ngā Mihi,
+            <br />
+            <p id="first_name">[Your First Name]</p>
+          </p>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    </div> 
    </div>
   </div>
 </Layout>
