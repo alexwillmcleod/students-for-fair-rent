@@ -156,7 +156,7 @@ interface StepIndicatorProps {
 
 function StepIndicator(props: StepIndicatorProps) {
   return (
-    <ul class="steps hidden md:flex">
+    <ul class="steps fill-accent hidden md:flex">
       {props.stepTitles.map((title: string, index: number) => (
         <li class={`step ${props.step >= index ? 'step-primary' : ''}`}>
           {title}

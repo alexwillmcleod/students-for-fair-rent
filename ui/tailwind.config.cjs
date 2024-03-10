@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       colors: {
         'ororke-blue': '#0090C4',
+        primary: '#1B1B25',
       },
     },
   },
