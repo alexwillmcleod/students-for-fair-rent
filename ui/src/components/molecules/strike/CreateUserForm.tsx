@@ -67,7 +67,7 @@ export default function CreateUserForm({
         errors={errors}
       />
       <TextInput
-        textLabel="Last Name (Optional)"
+        textLabel="Last Name"
         name="lastName"
         onChange={handleChange}
         data={strikeData}

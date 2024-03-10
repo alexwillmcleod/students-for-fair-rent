@@ -11,7 +11,7 @@ import { ResidenceEnum, type Residence } from '@organisms/Calculator';
 
 const strikeDataSchema = z.object({
   firstName: z.string().min(2, 'First Name must be at least 2 characters long'),
-  lastName: z.string().optional(),
+  lastName: z.string().min(2, 'Last Name must be at least 2 characters long'),
   emailAddress: z.string().email(),
   hallOfResidence: z.nativeEnum(ResidenceEnum, {
     errorMap: (issue, ctx) => {

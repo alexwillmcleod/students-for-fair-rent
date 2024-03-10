@@ -33,7 +33,6 @@ export default function Results(props: CalculatorInformation) {
   });
 
   const totalWeeks = createMemo(() => (props.isFirstYear ? 38 : 42));
-
   const annualCost = createMemo(() => weeklyRent() * totalWeeks());
   const weeklyIncome = createMemo(
     () =>

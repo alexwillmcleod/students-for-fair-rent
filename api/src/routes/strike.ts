@@ -1,7 +1,8 @@
 // @deno-types="npm:@types/express"
 import { Router, Request, Response } from 'npm:express';
 import mongoose from 'npm:mongoose';
-import { Strike } from '../db/models/strike.ts';
+import { ResidenceEnum, Strike } from '../db/models/strike.ts';
+import { z } from 'zod';
 
 const ONE_WEEK = 604800000;
 const strikeRoutes = Router();
@@ -45,14 +46,21 @@ strikeRoutes.get('/status', async (req: Request, res: Response) => {
 });
 
 strikeRoutes.post('/create', async (req: Request, res: Response) => {
-  const {
-    firstName,
-    lastName,
-    emailAddress,
-    hallOfResidence,
-    why,
-    isAnonymous,
-  } = req.body;
+  const StrikeSchema = z.object({
+    firstName: z.string().min(2).max(20),
+    lastName: z.string().min(2).max(20),
+    emailAddress: z.string().email(),
+    hallOfResidence: z.nativeEnum(ResidenceEnum),
+    why: z.string().max(500).optional(),
+    isAnonymous: z.boolean(),
+  });
+  type Strike = z.infer<typeof StrikeSchema>;
+
+  const result = StrikeSchema.safeParse(req.body);
+  if (!result.success) {
+    return res.status(400).send(result.error.issues[0].message);
+  }
+  const { emailAddress } = result.data;
 
   let newEnd: Date | undefined = undefined;
   // if (numberWeeks) {
@@ -69,14 +77,9 @@ strikeRoutes.post('/create', async (req: Request, res: Response) => {
 
   try {
     await new Strike({
-      firstName,
-      lastName,
-      emailAddress,
+      ...result.data,
       start: Date.now(),
       end: newEnd,
-      hallOfResidence,
-      isAnonymous,
-      why,
     }).save();
   } catch (err) {
     console.error(err);

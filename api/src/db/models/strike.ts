@@ -18,11 +18,13 @@ const strikeSchema = new Schema({
     type: String,
     maxLength: 20,
     minLength: 2,
+    required: true,
   },
   lastName: {
     type: String,
     maxLength: 20,
-    required: false,
+    minLength: 2,
+    required: true,
   },
   emailAddress: {
     type: String,
