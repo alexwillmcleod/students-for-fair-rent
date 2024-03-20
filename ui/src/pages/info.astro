@@ -1,11 +1,47 @@
 ---
 import Layout from "../layouts/layout.astro";
+import axios from "axios";
+let pledges;
+try {
+  const res = await axios({
+    method: 'GET',
+    url: '/dashboard/',
+    baseURL: import.meta.env.PUBLIC_API_BASE_URL
+  });
+  pledges = res.data; 
+} catch (err) {
+  console.error(err);
+  pledges = []
+}
+let concurrentStrikerCount;
+let totalDollarCount;
+try {
+  const res = await axios({
+    method: 'get',
+    url: '/stats/',
+    baseURL: import.meta.env.PUBLIC_API_BASE_URL
+  });
+  concurrentStrikerCount = res.data.concurrentStrikerCount;
+  totalDollarCount = res.data.totalDollarCount;
+} catch {}
 ---
 
 <Layout>
+  <div class="px-8">
+{   
+<div
+  class="w-full  rounded-xl flex flex-col gap-4 p-8"
+  style="background-image: url('/strike-gradient.png')"
+>
+  <div class="flex flex-col gap-4 justify-center items-center">
+    <p class="text-white text-2xl">{concurrentStrikerCount} Students are Striking</p>
+  </div>
+  <div class="flex flex-col justify-center items-center gap-8">
+    <p class="text-white text-2xl">We have taken back <strong>${totalDollarCount}</strong> from the university</p>
+  </div>
+</div>
+}
   <div class="flex flex-col gap-4 py-12">
-    <div  class="hero">
-      <div class="hero-content flex-col justify-center items-start text-left w-full p-8">
         <h3 class="text-3xl font-bold font-display">Striking 🤺 Information</h3>
         <p class="text-2xl">Frequently Asked Questions</p>
         <div class="collapse collapse-arrow bg-base-100">
@@ -62,9 +98,8 @@ import Layout from "../layouts/layout.astro";
           <a href="/strike" class="uppercase bg-[#e1e1e1] p-4  rounded-xl font-strike text-2xl text-[#272627] shadow-xl">Pledge</a>
         </div>
       </div>
-    </div> 
 
-        <div class="flex flex-col p-8 justify-left items-left w-full gap-4">
+        <div class="flex flex-col justify-left items-left w-full gap-4">
           <h3 class="text-3xl font-bold font-display">Striking 🤺 Resources</h3>
           <a
             class="rounded-xl flex flex-row justify-left items-center gap-4 py-4 px-8 w-full  bg-base-100/50"
@@ -99,6 +134,7 @@ import Layout from "../layouts/layout.astro";
       <dialog id="emailTemplateModal" class="modal">
         <div class="modal-box">
           <h3 class="font-bold text-lg">Email Template</h3>
+          <p>To: accom@auckland.ac.nz</p>
           <p class="py-4 bg-base-100/90">
             Hello, Accommodation Team,
             <br />
@@ -116,8 +152,6 @@ import Layout from "../layouts/layout.astro";
           <button>close</button>
         </form>
       </dialog>
-    </div> 
-   </div>
   </div>
 </Layout>
 
