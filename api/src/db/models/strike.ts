@@ -50,7 +50,6 @@ const strikeSchema = new Schema({
   },
   why: {
     type: String,
-    minLength: 4,
     maxLength: 500,
     required: false,
   },

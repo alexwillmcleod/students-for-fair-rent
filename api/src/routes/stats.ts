@@ -92,7 +92,7 @@ const updateCalculations = async () => {
 };
 
 statsRoutes.get('/', async (req: Request, res: Response) => {
-  const mostRecentStat = await Stats.findOne({}).sort({
+  let mostRecentStat = await Stats.findOne({}).sort({
     calculatedAt: -1,
   });
 
@@ -109,7 +109,23 @@ statsRoutes.get('/', async (req: Request, res: Response) => {
     if (yourDate < threeDaysAgo || yourDate > currentDate) {
       updateCalculations();
     }
+    const concurrentStrikerCount = (
+      await Strike.distinct('emailAddress', {
+        $or: [
+          {
+            end: {
+              $gt: Date.now(),
+            },
+          },
+          { end: { $exists: false } },
+        ],
+        start: {
+          $lt: Date.now(),
+        },
+      })
+    ).length;
 
+    mostRecentStat.concurrentStrikerCount = concurrentStrikerCount;
     return res.status(200).send(JSON.stringify(mostRecentStat));
   } else {
     updateCalculations();
