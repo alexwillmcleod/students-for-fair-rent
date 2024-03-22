@@ -86,7 +86,7 @@ const updateCalculations = async () => {
   );
   await new Stats({
     totalStrikerCount,
-    totalDollarCount,
+    totalDollarCount: 0,
     concurrentStrikerCount,
   }).save();
 };
