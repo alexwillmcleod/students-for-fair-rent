@@ -41,12 +41,12 @@ if (frontmatter.image != undefined && frontmatter.image.url != undefined) {
     }
   </style>
   <div class="p-12 flex flex-col gap-12 justify-center items-center">
-    <div class="flex flex-col justify-center items-center gap-2">
+    <div class="flex w-full flex-col justify-center items-center gap-2">
       <img src={imageUrl} class="w-3/4 h-64 object-cover rounded-xl"/>
-      <h1 class="text-4xl w-3/4 md:text-4xl font-bold font-display text-center">{frontmatter.title}</h1>
+      <h1 class="text-4xl w-3/4 md:text-4xl font-bold font-display text-center" transition:name={frontmatter.slug} transition:persist>{frontmatter.title}</h1>
       <h2 class="text-2xl text-center">{frontmatter.subtitle}</h2>
       <h3 class="text-2xl text-center">Article by <b>{frontmatter.author}</b></h3>
-      <span class="flex flex-row w-full justify-center gap-3"><img src="/images/repost.svg"/> <h3 class="text-2xl text-center w-max">Reposted from <a class="font-bold" href={frontmatter.repostedFrom.href} target="_blank">{frontmatter.repostedFrom.name}</a></h3></span>
+      {frontmatter.repostedFrom != undefined && <span class="flex flex-row w-full justify-center gap-3"><img src="/images/repost.svg"/> <h3 class="text-2xl text-center w-max">Reposted from <a class="font-bold" href={frontmatter.repostedFrom.href} target="_blank">{frontmatter.repostedFrom.name}</a></h3></span>}
       <p class="text-2xl text-center">Published on <b>{new Date(frontmatter.pubDate!).toDateString()}</b></p>
       <button id="shareButton">
         <img src="/images/share.svg" />

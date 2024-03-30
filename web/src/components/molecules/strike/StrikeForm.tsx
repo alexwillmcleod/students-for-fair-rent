@@ -1,5 +1,5 @@
 import Select from '@atoms/Select';
-import { createSignal, type JSX } from 'solid-js';
+import { createMemo, createSignal, type JSX } from 'solid-js';
 import { z } from 'zod';
 import CreateUserForm from './CreateUserForm';
 import CreatePledgeForm from './CreatePledgeForm';
@@ -8,6 +8,7 @@ import ExistingError from './ExistingError';
 import { navigate } from 'astro:transitions/client';
 import InformationForm from './InformationForm';
 import { ResidenceEnum, type Residence } from '@organisms/Calculator';
+import ShareForm from './ShareForm';
 
 const strikeDataSchema = z.object({
   firstName: z.string().min(2, 'First Name must be at least 2 characters long'),
@@ -41,7 +42,7 @@ export type StrikeData = {
   };
 };
 
-export default function StrikeForm() {
+export default function StrikeForm({ url }: { url: string }) {
   const [strikeData, setStrikeData] = createSignal<StrikeData>({
     firstName: '',
     lastName: '',
@@ -111,6 +112,7 @@ export default function StrikeForm() {
         errors={errors}
       />
     ),
+    shareForm: <ShareForm url={url} />,
     alreadyStriking: <ExistingError />,
   };
 
@@ -155,9 +157,20 @@ export default function StrikeForm() {
         setStep('alreadyStriking');
       }
     }
-    navigate('/pledges');
+    if (step() == 'shareForm') {
+      navigate('/pledges');
+      return;
+    }
+    setStep('shareForm');
     setIsLoading(false);
   };
+
+  const stepNumber = createMemo(() => {
+    if (step() == 'information') return 0;
+    if (step() == 'createUser') return 1;
+    if (step() == 'createPledge') return 2;
+    return 2;
+  });
 
   return (
     <div
@@ -167,7 +180,17 @@ export default function StrikeForm() {
       <h1 class="font-strike text-3xl text-[#e1e1e1]">Strike for Fair Rent</h1>
       {steps[step()]}
       <hr />
-      <div class="flex flex-row justify-end">
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-col justify-center items-center">
+          {/* <StepIndicator
+            stepTitles={['Name', 'Why']}
+            step={stepNumber()}
+          /> */}
+          <p class="text-white text-xl">
+            {/* {90 - stepNumber() * 30}s until complete */}
+            Page {stepNumber() + 1} / 3
+          </p>
+        </div>
         <button
           onClick={onSubmit}
           class="bg-[#e1e1e1] w-12 h-12 flex justify-center items-center  rounded-full font-strike font-bold text-2xl text-[#272627] shadow-xl"
@@ -180,5 +203,23 @@ export default function StrikeForm() {
         </button>
       </div>
     </div>
+  );
+}
+
+interface StepIndicatorProps {
+  step: number;
+  stepTitles: string[];
+}
+function StepIndicator(props: StepIndicatorProps) {
+  return (
+    <ul class="steps fill-info hidden md:flex">
+      {props.stepTitles.map((title: string, index: number) => (
+        <li
+          class={`step ${props.step >= index ? 'step-accent' : 'step-white'}`}
+        >
+          <p class="text-white font-sans text-xl">{title}</p>
+        </li>
+      ))}
+    </ul>
   );
 }

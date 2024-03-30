@@ -1,0 +1,93 @@
+---
+title: 'How to Rent Strike'
+layout: ../../layouts/article.astro
+author: 'SFR Team'
+pubDate: 2024-03-31
+image:
+  url: /images/rent-strike.jpg
+tags:
+  [
+    'Politics',
+    'Petition',
+    'Auckland',
+    'Tāmaki Makaurau',
+    'One News',
+    'SFR',
+    'Students for Fair Rent',
+    'University of Auckland',
+    'Waipapa Taumata Rau',
+    'Landlords',
+    'Renters',
+    'Housing Crisis',
+    'Waipārūrū',
+    "O'Rorke",
+    'Grafton',
+    'Carlaw Park',
+    'Parnell',
+  ]
+---
+
+Kia Ora! This is a how-to guide on striking for University of Auckland Accommodation students. On May 1st, Students for Fair Rent will start striking against Waipapa Taumata Rau and witholding rent.
+
+Firstly, disable your automatic payment in your banking app from the 1st of May onwards. If someone else is paying, simply ask them to do so. If you don't have an automatic payment, just don't pay rent.
+
+Next, notify the university that you will not be paying rent until Students for Fair Rent have negotiated better conditions on your behalf. Use this email template:
+
+<div class="flex w-full justify-left items-center">
+  <button
+    onclick="emailTemplateModal.showModal()"
+    class="w-fit rounded-xl flex flex-row justify-left items-center gap-4 py-4 px-8 bg-base-100/50"
+  >
+    <p class="text-lg">View our Email Template</p>
+  </button>
+</div>
+
+Let others know that you are striking. Pledge on <a href="/strike" class="text-blue-400 underline">our striking page</a> if you haven't already. Then reach out to your flat mates and neighbours. Chat with them about what a strike is, try to answer any questions they have using <a href="/info" class="text-blue-400 underline">our resources</a>, and encourage them to get involved.
+
+Finally, join our Discord and get involved with other strikers
+
+<div class="flex w-full justify-left items-center">
+  <a
+    class="rounded-xl flex w-fit flex-row justify-center items-center gap-4 py-4 px-8 bg-base-100/50"
+    href="https://discord.gg/MZvmbCWKGk"
+    target="_blank"
+  >
+    <p class="text-xl flex flex-row gap-2 items-center text-black">
+      Join our Discord
+      <img
+        class="w-5 h-5"
+        src="/external-link.png"
+      />
+    </p>
+  </a>
+</div>
+
+<dialog
+  id="emailTemplateModal"
+  class="modal"
+>
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Email Template</h3>
+    <p>To: accom@auckland.ac.nz</p>
+    <p class="py-4 bg-base-100/90">
+      Hello, Accommodation Team,
+      <br />
+      <br />
+      I'm writing to notify you that I will be participating in the Students for
+      Fair Rent strikes (see https://sfr.org.nz). I will be actively choosing to
+      withold rent until the University of Auckland accommodation team has negotatied
+      a successful agreement with the Students for Fair Rent team on my behalf.
+      <br />
+      <br />
+      Ngā Mihi,
+      <br />
+      <p id="first_name">[Your First Name]</p>
+    </p>
+  </div>
+  <form
+    method="dialog"
+    class="modal-backdrop"
+  >
+    <button>close</button>
+  </form>
+</dialog>
