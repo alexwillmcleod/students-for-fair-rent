@@ -56,17 +56,6 @@ export default function Game() {
   );
   const [assignmentIndex, setAssignmentIndex] = createSignal<number>(1);
   const [awaitingTodos, setAwaitingTodos] = createSignal<Todo[]>([]);
-  createEffect(() => {
-    if (
-      todos().filter((element) => element.title != payRentTitle).length == 0
-    ) {
-      setTimeout(() => {
-        onNextWeek();
-        clearInterval(intervalId());
-        setIntervalId(setInterval(onNextWeek, oneMinute));
-      }, 3000);
-    }
-  });
 
   const createNewAssignment = () => {
     addTodo({
@@ -133,6 +122,7 @@ export default function Game() {
   const endGame = () => {
     // @ts-ignore
     document.getElementById('endModal')?.showModal();
+    clearInterval(intervalId());
   };
 
   // Check if the game is over
@@ -172,27 +162,27 @@ export default function Game() {
     setTotalDebt((prev) => prev + weeklyStudyLink);
   };
 
-  const [awaitTodosInterval, setAwaitTodosInterval] = createSignal<
-    NodeJS.Timeout | undefined
-  >();
+  const startGame = () => {
+    setTimeout(() => {
+      setIntervalId(setInterval(onNextWeek, oneMinute * 0.8));
+      onNextWeek();
+    }, 2000);
+  };
 
   onCleanup(() => {
     clearInterval(intervalId());
-    clearInterval(awaitTodosInterval());
+  });
+
+  createEffect(() => {
+    if (isAnyOpen()) return;
+    if (awaitingTodos().length == 0) return;
+    for (const todo of awaitingTodos()) {
+      setTodos((prev) => [...prev, todo]);
+    }
+    setAwaitingTodos([]);
   });
 
   onMount(() => {
-    setAwaitTodosInterval(
-      setInterval(() => {
-        if (isAnyOpen()) return;
-        if (awaitingTodos().length == 0) return;
-        for (const todo of awaitingTodos()) {
-          setTodos((prev) => [...prev, todo]);
-        }
-        setAwaitingTodos([]);
-      }, 300)
-    );
-
     //@ts-ignore
     document.getElementById('introModal').showModal();
     document.getElementById('endModal')?.addEventListener('close', () => {
@@ -217,6 +207,7 @@ export default function Game() {
             <button
               class=" py-2 px-4 bg-white rounded-xl"
               onClick={() => {
+                startGame();
                 setMoney(money() - depositCost);
                 handleComplete();
               }}
@@ -390,7 +381,7 @@ export default function Game() {
             class="bg-white font-strike text-black px-4 py-2 rounded-xl absolute bottom-5"
             href="/strike"
           >
-            Strike
+            Strike for Fair Rent!
           </a>
         </div>
         <form

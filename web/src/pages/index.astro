@@ -6,20 +6,26 @@ import { Image } from "astro:assets";
 import axios from 'axios';
 import { getImage } from "astro:assets";
 import strikeGradientImage from '../assets/strike-gradient.png';
+console.log("loading inde")
 const optimisedStrikeGradientImage = await getImage({src: strikeGradientImage});
+
+console.log("loading img")
 // import StrikeStats from "@atoms/strike-stats.astro";
 const allPosts = await Astro.glob('../pages/posts/*.md*');
 let concurrentStrikerCount;
 let totalDollarCount;
+console.log(import.meta.env.PUBLIC_API_BASE_URL);
 try {
   const res = await axios({
     method: 'get',
     url: '/stats/',
     baseURL: import.meta.env.PUBLIC_API_BASE_URL
   });
+  console.log(res);
   concurrentStrikerCount = res.data.concurrentStrikerCount;
   totalDollarCount = res.data.totalDollarCount;
 } catch {}
+console.log(concurrentStrikerCount)
 // 
 
 // const baseUrl = import.meta.env.PUBLIC_API_BASE_URL;
