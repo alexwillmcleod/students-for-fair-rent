@@ -164,7 +164,7 @@ export default function Game() {
 
   const startGame = () => {
     setTimeout(() => {
-      setIntervalId(setInterval(onNextWeek, oneMinute * 0.8));
+      setIntervalId(setInterval(onNextWeek, oneMinute * 0.65));
       onNextWeek();
     }, 2000);
   };

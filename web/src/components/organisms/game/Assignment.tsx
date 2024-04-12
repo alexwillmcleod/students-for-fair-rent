@@ -124,6 +124,7 @@ const MathAssignment = ({
         <input
           id="answer-input"
           class="rounded-xl p-2"
+          type="number"
           value={userAnswerValue()}
           onChange={(e: any) => {
             setUserAnswerValue(e.target.value);
