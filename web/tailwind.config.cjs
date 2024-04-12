@@ -5,7 +5,7 @@ module.exports = {
     fontFamily: {
       display: ['Omnes', 'Omnes-Bold'],
       sans: ['Atkinson Hyperlegible'],
-      strike: ['Bowlby One SC'],
+      strike: ['Dela Gothic One'],
       // strike: ['Fortnite'],
     },
     extend: {
