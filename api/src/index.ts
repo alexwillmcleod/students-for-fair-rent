@@ -2,6 +2,7 @@
 import express, { Request, Response, Router, json } from 'npm:express';
 import mongoose, { connect } from 'npm:mongoose';
 import strikeRoutes from './routes/strike.ts';
+import gameRoutes from './routes/game.ts';
 import statsRoutes from './routes/stats.ts';
 import dashboardRoutes from './routes/dashboard.ts';
 import 'https://deno.land/std@0.208.0/dotenv/load.ts';
@@ -19,6 +20,7 @@ const apiRouter = Router();
 apiRouter.use('/strike', strikeRoutes);
 apiRouter.use('/stats', statsRoutes);
 apiRouter.use('/dashboard', dashboardRoutes);
+apiRouter.use('/game', gameRoutes);
 app.use('/api', apiRouter);
 
 const port = Number.parseInt(Deno.env.get('PORT') || '3000');

@@ -25,6 +25,9 @@ try {
   });
   concurrentStrikerCount = res.data.concurrentStrikerCount;
   totalDollarCount = res.data.totalDollarCount;
+if (concurrentStrikerCount < 50) {
+    concurrentStrikerCount = undefined;
+  } 
 } catch {}
 ---
 <Layout>
@@ -37,7 +40,7 @@ try {
   style="background-image: url('/strike-gradient.png')"
 >
   <div class="flex flex-col gap-4 justify-center items-center">
-    <p class="text-white text-2xl">{concurrentStrikerCount} Students are Striking</p>
+    <p class="text-white text-2xl">{concurrentStrikerCount == undefined ? <span>We are</span>: <span>{concurrentStrikerCount} Students</span>} are Striking</p>
   </div>
   <div class="flex flex-col justify-center items-center gap-8">
     <p class="text-white text-2xl">We have taken back <strong>${totalDollarCount}</strong> from the university</p>

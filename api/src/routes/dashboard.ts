@@ -27,7 +27,7 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
         element.isAnonymous || !element.firstName
           ? 'Anonymous'
           : element.lastName
-          ? [element.firstName, element.lastName].join(' ')
+          ? element.firstName // Could also join with last name for full
           : element.firstName;
       const numberWeeks = undefined;
       return {

@@ -7,12 +7,10 @@ app = "sfr-api"
 primary_region = "syd"
 
 [build]
+  dockerfile = "Dockerfile"
 
 [env]
   PORT = "8080"
-
-[processes]
-  app = "run --allow-all ./src/index.ts"
 
 [http_service]
   internal_port = 8080

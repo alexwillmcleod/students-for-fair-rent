@@ -24,6 +24,10 @@ try {
   console.log(res);
   concurrentStrikerCount = res.data.concurrentStrikerCount;
   totalDollarCount = res.data.totalDollarCount;
+  if (concurrentStrikerCount < 50) {
+    concurrentStrikerCount = undefined;
+    totalDollarCount = undefined;
+  } 
 } catch {}
 console.log(concurrentStrikerCount)
 // 
@@ -47,7 +51,7 @@ console.log(concurrentStrikerCount)
           </div>
           <div class="flex flex-col justify-center items-center gap-8">
             <div>
-              <h4 class="font-sans text-white text-2xl text-center"><b>{concurrentStrikerCount}</b> students are striking against</h4>
+              <h4 class="font-sans text-white text-2xl text-center">{concurrentStrikerCount == undefined ? <span>We are</span> : <span><b>{concurrentStrikerCount}</b> students</span>} are striking against</h4>
               <h3 class="font-strike text-white text-3xl text-center">Waipapa Taumata Rau</h3>
               <h4 class="font-sans text-white text-2xl text-center">for fair rent now!</h4>
             </div>
@@ -61,17 +65,10 @@ console.log(concurrentStrikerCount)
     </div>
     <div id="why" class="hero">
       <div class="hero-content flex-col justify-center items-start text-left w-full p-8">
-        <h3 class="text-lg sm:text-3xl font-bold font-display">Our Why</h3>
-        <p class="text-lg sm:text-2xl">We strongly oppose the University's unfair and disproportionate rent increases and urge them to stop exploiting their students by decreasing their rent. The University is a tertiary education institution, not a business, and its students are not consumers or customers. They must prioritise student wellbeing and make the students their focus. We demand that the University of Auckland lower the rent at their student accommodation to ease the cost of living pressures on students. </p>
+        <h3 class="text-lg sm:text-3xl font-bold font-display">Who are we?</h3>
+        <p class="text-lg sm:text-2xl">We are a student-led organisation fighting for safe, secure, and affordable accommodation for students at the University of Auckland. Since our inception in July of last year, we’ve been advocating for fairer rent at student accommodation. We sent in a petition with 1,500 signatures to the University and organised a big rally, working with MPs and candidates across the political aisle in Tāmaki Makaurau.</p>
       </div>
     </div> 
-    <div class="hero">
-      <div class="hero-content relative w-full justify-center items-center">
-        <Image width="1600" height="300" src="/images/signature.svg"  alt="Graphic of a signature"/>
-        <a href="https://chng.it/pTSGNWQGDT"  class="absolute font-bold font-display bg-accent bg-opacity-80 px-12 py-6 shadow-lg text-2xl sm:text-3xl rounded-full" target="_blank">View our Petition</a>
-      </div>
-    </div>
-
     <div class="hero">
       <div class="hero-content flex flex-col w-full justify-center items-start text-left p-8">
         <h3 class="text-lg sm:text-3xl font-bold font-display">Students Thoughts</h3>
@@ -95,6 +92,14 @@ console.log(concurrentStrikerCount)
         </div>
       </div>
     </div>
+        <div class="hero">
+      <div class="hero-content relative w-full justify-center items-center">
+        <Image width="1600" height="300" src="/images/signature.svg"  alt="Graphic of a signature"/>
+        <a href="https://chng.it/pTSGNWQGDT"  class="absolute font-bold font-display bg-accent bg-opacity-80 px-12 py-6 shadow-lg text-2xl sm:text-3xl rounded-full" target="_blank">View our Petition</a>
+      </div>
+    </div>
+
+
   </div>
 </Layout>
 

@@ -10,6 +10,7 @@ import {
 } from 'solid-js';
 import MathAssignment from './Assignment';
 import Work from './Work';
+import axios from 'axios';
 
 interface Todo {
   title: string;
@@ -45,6 +46,7 @@ const hourlyWageAfterTax = 23.15 * 0.9;
 export default function Game() {
   const [week, setWeek] = createSignal<number>(1);
   const [money, setMoney] = createSignal<number>(2500);
+  const [sessionId, setSessionId] = createSignal<string | undefined>();
   const [isAnyOpen, setIsAnyOpen] = createSignal<boolean>(false);
   const [gameLostMessage, setGameLostMessage] = createSignal<
     string | undefined
@@ -119,10 +121,26 @@ export default function Game() {
     });
   };
 
-  const endGame = () => {
+  const endGame = async () => {
     // @ts-ignore
     document.getElementById('endModal')?.showModal();
     clearInterval(intervalId());
+    try {
+      await axios({
+        method: 'patch',
+        url: '/game',
+        data: {
+          sessionId: sessionId(),
+          isGameOver: true,
+          numberWeeks: week(),
+          grade: grade(),
+          money: money(),
+          totalDebt: totalDebt(),
+          lossReason: gameLostMessage(),
+        },
+        baseURL: import.meta.env.PUBLIC_API_BASE_URL,
+      });
+    } catch {}
   };
 
   // Check if the game is over
@@ -150,7 +168,7 @@ export default function Game() {
     setGrade(grade() - 5);
   };
 
-  const onNextWeek = () => {
+  const onNextWeek = async () => {
     setWeek((prev) => prev + 1);
     if (week() > 2) {
       createNewRentCharge();
@@ -160,9 +178,45 @@ export default function Game() {
     // StudyLink money
     setMoney((prev) => prev + weeklyStudyLink);
     setTotalDebt((prev) => prev + weeklyStudyLink);
+    // console.log(
+    //   JSON.stringify({
+    //     data: {
+    //       sessionId: sessionId(),
+    //       isGameOver: false,
+    //       grade: grade(),
+    //       numberOfWeeks: week(),
+    //       totalDebt: totalDebt(),
+    //       money: money(),
+    //     },
+    //   })
+    // );
+    try {
+      await axios({
+        method: 'patch',
+        url: '/game',
+        data: {
+          sessionId: sessionId(),
+          isGameOver: false,
+          numberOfWeeks: week(),
+          grade: grade(),
+          totalDebt: totalDebt(),
+          money: money(),
+        },
+        baseURL: import.meta.env.PUBLIC_API_BASE_URL,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const startGame = () => {
+  const startGame = async () => {
+    const res = await axios({
+      method: 'post',
+      url: '/game',
+      baseURL: import.meta.env.PUBLIC_API_BASE_URL,
+    });
+    const gameId = res.data.game;
+    setSessionId(gameId);
     setTimeout(() => {
       setIntervalId(setInterval(onNextWeek, oneMinute * 0.65));
       onNextWeek();
