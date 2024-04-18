@@ -24,7 +24,7 @@ try {
   console.log(res);
   concurrentStrikerCount = res.data.concurrentStrikerCount;
   totalDollarCount = res.data.totalDollarCount;
-  if (concurrentStrikerCount < 50) {
+  if (concurrentStrikerCount < import.meta.env.MIN_STRIKER_COUNT) {
     concurrentStrikerCount = undefined;
     totalDollarCount = undefined;
   } 
