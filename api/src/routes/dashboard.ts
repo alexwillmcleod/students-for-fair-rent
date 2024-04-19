@@ -27,7 +27,7 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
         },
       })
         .sort({ createdAt: -1 })
-        .limit(50)
+        .limit(25)
     ).map(async (element) => {
       const fullName =
         element.isAnonymous || !element.firstName
