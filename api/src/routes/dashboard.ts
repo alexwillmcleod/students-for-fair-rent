@@ -10,17 +10,10 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
     // Find concurrent
     (
       await Strike.find({
-        $or: [
-          {
-            isAnonymous: {
-              $exists: false,
-            },
-            why: {
-              $exists: true,
-              $ne: '',
-            },
-          },
-        ],
+        why: {
+          $exists: true,
+          $ne: '',
+        },
         $or: [
           {
             end: {
