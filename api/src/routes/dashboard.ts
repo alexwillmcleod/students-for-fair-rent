@@ -27,7 +27,7 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
           $lt: Date.now(),
         },
       })
-        .filter.sort({ createdAt: -1 })
+        .sort({ createdAt: -1 })
         .limit(50)
     ).map(async (element) => {
       const fullName =
