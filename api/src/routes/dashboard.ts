@@ -10,6 +10,11 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
     // Find concurrent
     (
       await Strike.find({
+        isAnonymous: false,
+        why: {
+          $exists: true,
+          $ne: '',
+        },
         $or: [
           {
             end: {
@@ -22,6 +27,8 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
           $lt: Date.now(),
         },
       })
+        .filter.sort({ createdAt: -1 })
+        .limit(50)
     ).map(async (element) => {
       const fullName =
         element.isAnonymous || !element.firstName
