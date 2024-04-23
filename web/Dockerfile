@@ -29,7 +29,7 @@ RUN yarn install --frozen-lockfile --production=false
 # Copy application code
 COPY --link . .
 
-ENV PUBLIC_API_BASE_URL="https://sfr-api.fly.dev/api"
+ENV PUBLIC_API_BASE_URL="https://tech-sfr-api.fly.dev/api"
 
 # Build application
 RUN yarn run build
