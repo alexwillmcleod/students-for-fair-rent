@@ -34,7 +34,7 @@ export default function ShareForm({ url }: { url: string }) {
             <div class="flex flex-col gap-4 justify-center items-center p-2">
               <a
                 class="rounded-xl flex w-full flex-row justify-center items-center gap-4 py-4 px-8 bg-base-100/50"
-                href="https://discord.gg/MZvmbCWKGk"
+                href="https://discord.gg/pxYkG3E3XS"
                 target="_blank"
               >
                 <p class="text-xl flex flex-row gap-2 items-center text-black">
