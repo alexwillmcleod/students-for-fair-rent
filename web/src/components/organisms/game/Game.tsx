@@ -240,7 +240,7 @@ export default function Game() {
     //@ts-ignore
     document.getElementById('introModal').showModal();
     document.getElementById('endModal')?.addEventListener('close', () => {
-      navigate('/strike');
+      navigate('/');
     });
   });
 
@@ -433,9 +433,9 @@ export default function Game() {
           </p>
           <a
             class="bg-white font-strike text-black px-4 py-2 rounded-xl absolute bottom-5"
-            href="/strike"
+            href="/"
           >
-            Strike for Fair Rent!
+            Learn More
           </a>
         </div>
         <form

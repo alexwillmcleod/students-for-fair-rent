@@ -55,21 +55,21 @@ const updateCalculations = async () => {
     });
     return;
   }
-  const concurrentStrikerCount = (
-    await Strike.distinct('emailAddress', {
-      $or: [
-        {
-          end: {
-            $gt: Date.now(),
-          },
-        },
-        { end: { $exists: false } },
-      ],
-      start: {
-        $lt: Date.now(),
-      },
-    })
-  ).length;
+  // const concurrentStrikerCount = (
+  //   await Strike.distinct('emailAddress', {
+  //     $or: [
+  //       {
+  //         end: {
+  //           $gt: Date.now(),
+  //         },
+  //       },
+  //       { end: { $exists: false } },
+  //     ],
+  //     start: {
+  //       $lt: Date.now(),
+  //     },
+  //   })
+  // ).length;
   const totalDollarCount = Math.round(
     (await Strike.find())
       .map((element) => {
@@ -86,8 +86,8 @@ const updateCalculations = async () => {
   );
   await new Stats({
     totalStrikerCount,
-    totalDollarCount: 0,
-    concurrentStrikerCount,
+    totalDollarCount,
+    concurrentStrikerCount: totalStrikerCount,
   }).save();
 };
 
@@ -100,13 +100,13 @@ statsRoutes.get('/', async (req: Request, res: Response) => {
     // Create a new Date object for the current date and time
     const currentDate = new Date();
 
-    // Create a new Date object for the date three days ago
-    const threeDaysAgo = new Date();
-    threeDaysAgo.setDate(currentDate.getDate() - 3);
+    // Create a new Date object for the date half a day ago
+    const halfDayAgo = new Date();
+    halfDayAgo.setDate(currentDate.getDate() - 0.5);
 
     const yourDate = mostRecentStat.calculatedAt;
 
-    if (yourDate < threeDaysAgo || yourDate > currentDate) {
+    if (yourDate < halfDayAgo || yourDate > currentDate) {
       updateCalculations();
     }
     const concurrentStrikerCount = (
@@ -119,9 +119,9 @@ statsRoutes.get('/', async (req: Request, res: Response) => {
           },
           { end: { $exists: false } },
         ],
-        start: {
-          $lt: Date.now(),
-        },
+        // start: {
+        //   $lt: Date.now(),
+        // },
       })
     ).length;
 

@@ -22,9 +22,9 @@ dashboardRoutes.get('/', async (req: Request, res: Response) => {
           },
           { end: { $exists: false } },
         ],
-        start: {
-          $lt: Date.now(),
-        },
+        // start: {
+        //   $lt: Date.now(),
+        // },
       })
         .sort({ createdAt: -1 })
         .limit(25)

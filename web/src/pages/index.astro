@@ -44,24 +44,14 @@ console.log(concurrentStrikerCount)
     <div class="hero">
       <div class="hero-content flex-col justify-center lg:flex-row gap-10 lg:gap-12 w-full p-4 md:p-12">
 
-        <div class="rounded-xl w-full gap-12 p-12 md:gap-0 md:h-96 flex flex-col md:flex-row justify-around" style={`background-image: url('${optimisedStrikeGradientImage.src}')`}>
-          <div class="flex flex-col gap-4 justify-center items-center">
-            <img class="w-32"src="/uoa-logo.png" />
-            <h1 class="font-strike text-white text-5xl text-center">Strike for<br /> Fair Rent</h1>
-          </div>
-          <div class="flex flex-col justify-center items-center gap-8">
-            <div>
-              <h4 class="font-sans text-white text-2xl text-center">{concurrentStrikerCount == undefined ? <span>We are</span> : <span><b>{concurrentStrikerCount}</b> students</span>} are striking against</h4>
-              <h3 class="font-strike text-white text-3xl text-center">Waipapa Taumata Rau</h3>
-              <h4 class="font-sans text-white text-2xl text-center">for fair rent now!</h4>
-            </div>
-            <div class="flex flex-col gap-2 justify-center items-center">
-              <a href="/strike" class="bg-[#e1e1e1] p-8  rounded-xl font-strike text-4xl text-[#272627] shadow-xl">Pledge</a>
-              <a href="/info" class="text-xl text-blue-100 underline">Learn more</a>
-            </div>
-          </div>
+        <div class="hero-content flex-col justify-center lg:flex-row gap-10 lg:gap-12  w-full">
+        <img class="min-w-0 w-full max-w-sm" src="/images/graph-mobile.svg"  alt="Graph of Waiparuru rent prices (lowest option in Waiparuru. Waiparuru is the most expensive hall). 2022 was $435, 2023 was $470 and 2024 will be $510"/>
+        <div class="flex flex-col gap-4 justify-center items-center text-center">
+          <h1 class="text-4xl text-wrap sm:text-5xl font-bold font-display">Accommodation is unaffordable</h1>
+          <h4 class="text-2xl sm:text-2xl font-display">Let's change that</h4>
         </div>
       </div>
+              </div>
     </div>
     <div id="why" class="hero">
       <div class="hero-content flex-col justify-center items-start text-left w-full p-8">
